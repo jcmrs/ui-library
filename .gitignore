@@ -1,0 +1,26 @@
+# UPSTREAM - Local clones of remote repositories
+UPSTREAM/
+
+# Serena MCP configuration
+.serena/
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+
+# Misc
+.DS_Store
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
