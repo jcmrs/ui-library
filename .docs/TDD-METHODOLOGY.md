@@ -86,6 +86,7 @@ npm run test
 ```
 
 **Success Criteria for RED Phase:**
+
 - Tests are written
 - Tests define clear, specific behavior
 - Tests fail for expected reasons (no component yet)
@@ -136,6 +137,7 @@ npm run test
 ```
 
 **Success Criteria for GREEN Phase:**
+
 - All tests pass
 - Code is simple and direct
 - No premature optimization
@@ -236,6 +238,7 @@ npm run test
 ```
 
 **Success Criteria for REFACTOR Phase:**
+
 - All tests still pass
 - Code is cleaner and more maintainable
 - Documentation is enhanced
@@ -294,6 +297,7 @@ export function Button(props: ButtonProps) {
 Create `button.patterns.md` with comprehensive usage guidance.
 
 **Success Criteria for DOCUMENT Phase:**
+
 - Inline documentation is comprehensive
 - JSDoc covers all props
 - Examples show common use cases
@@ -313,12 +317,14 @@ Create `button.patterns.md` with comprehensive usage guidance.
 
 **Prompt:**
 "Create a new destructive button variant for the Button component. It should:
+
 - Be red colored (error-500)
 - Have hover state (error-600)
 - Follow the same pattern as primary/secondary
 - Include tests for the new variant"
 
 **Expected Result:**
+
 - Claude Code adds `destructive` variant to `variantStyles`
 - Claude Code adds tests for destructive variant
 - All tests pass
@@ -330,6 +336,7 @@ Create `button.patterns.md` with comprehensive usage guidance.
 Run the test with fresh Claude Code instance and record results.
 
 **Success Criteria for VALIDATE Phase:**
+
 - Claude Code successfully completes task
 - Generated code follows patterns
 - Tests pass
@@ -368,6 +375,7 @@ it('renders with primary variant by default', () => {
 ### Test Coverage Requirements
 
 **Minimum Coverage Thresholds:**
+
 - **Statements:** 90%
 - **Branches:** 85%
 - **Functions:** 90%
@@ -388,11 +396,7 @@ export default defineConfig({
         functions: 90,
         lines: 90,
       },
-      exclude: [
-        '**/*.story.tsx',
-        '**/*.test.tsx',
-        '**/index.ts',
-      ],
+      exclude: ['**/*.story.tsx', '**/*.test.tsx', '**/index.ts'],
     },
   },
 });
@@ -406,10 +410,18 @@ Test individual component behavior in isolation.
 
 ```typescript
 describe('Button - Unit Tests', () => {
-  it('renders children correctly', () => { /* ... */ });
-  it('calls onClick when clicked', () => { /* ... */ });
-  it('applies correct variant classes', () => { /* ... */ });
-  it('forwards ref correctly', () => { /* ... */ });
+  it('renders children correctly', () => {
+    /* ... */
+  });
+  it('calls onClick when clicked', () => {
+    /* ... */
+  });
+  it('applies correct variant classes', () => {
+    /* ... */
+  });
+  it('forwards ref correctly', () => {
+    /* ... */
+  });
 });
 ```
 
@@ -419,9 +431,15 @@ Test component interactions.
 
 ```typescript
 describe('ButtonGroup - Integration Tests', () => {
-  it('renders multiple buttons correctly', () => { /* ... */ });
-  it('applies group spacing', () => { /* ... */ });
-  it('handles keyboard navigation between buttons', () => { /* ... */ });
+  it('renders multiple buttons correctly', () => {
+    /* ... */
+  });
+  it('applies group spacing', () => {
+    /* ... */
+  });
+  it('handles keyboard navigation between buttons', () => {
+    /* ... */
+  });
 });
 ```
 
@@ -509,6 +527,7 @@ export * from '@testing-library/react';
 ### Base Components (Primitives)
 
 **TDD Cycle Focus:**
+
 - Props validation
 - Variant rendering
 - State handling
@@ -547,6 +566,7 @@ describe('Input', () => {
 ### Application Components (Complex)
 
 **TDD Cycle Focus:**
+
 - Composition correctness
 - State management
 - Data flow
@@ -581,6 +601,7 @@ describe('Modal', () => {
 ### Layout Components
 
 **TDD Cycle Focus:**
+
 - Grid/flexbox behavior
 - Responsive breakpoints
 - Slot rendering
@@ -614,6 +635,7 @@ describe('DashboardLayout', () => {
 ### Page Templates
 
 **TDD Cycle Focus:**
+
 - Complete page rendering
 - Component integration
 - User workflows
@@ -650,6 +672,7 @@ describe('SimpleDashboard Template', () => {
 ### ❌ Testing Implementation Details
 
 **Bad:**
+
 ```typescript
 // Testing internal state (implementation detail)
 it('sets isOpen state to true', () => {
@@ -660,6 +683,7 @@ it('sets isOpen state to true', () => {
 ```
 
 **Good:**
+
 ```typescript
 // Testing user-observable behavior
 it('shows modal when opened', () => {
@@ -673,6 +697,7 @@ it('shows modal when opened', () => {
 ### ❌ Testing Styles Directly
 
 **Bad:**
+
 ```typescript
 // Testing exact CSS values
 it('has correct padding', () => {
@@ -683,6 +708,7 @@ it('has correct padding', () => {
 ```
 
 **Good:**
+
 ```typescript
 // Testing class application (more stable)
 it('applies size classes correctly', () => {
@@ -695,6 +721,7 @@ it('applies size classes correctly', () => {
 ### ❌ Snapshot Testing as Primary Test
 
 **Bad:**
+
 ```typescript
 // Snapshot test as only test
 it('renders correctly', () => {
@@ -704,6 +731,7 @@ it('renders correctly', () => {
 ```
 
 **Good:**
+
 ```typescript
 // Specific behavior tests
 it('renders button with text content', () => {
@@ -720,6 +748,7 @@ it('applies primary variant styles', () => {
 ### ❌ Not Testing Edge Cases
 
 **Bad:**
+
 ```typescript
 // Only testing happy path
 it('renders button', () => {
@@ -729,6 +758,7 @@ it('renders button', () => {
 ```
 
 **Good:**
+
 ```typescript
 // Testing edge cases
 describe('Button edge cases', () => {

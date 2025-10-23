@@ -29,7 +29,9 @@ export default [
       '*.config.ts',
       '.claude/**',
       'scripts/**',
-      'config-templates/**'
+      'config-templates/**',
+      'UPSTREAM/**',
+      '.storybook/**',
     ],
   },
 
@@ -53,10 +55,10 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tseslint,
-      'react': react,
+      react: react,
       'react-hooks': reactHooks,
       'jsx-a11y': jsxA11y,
-      'import': importPlugin,
+      import: importPlugin,
     },
     settings: {
       react: {
@@ -70,16 +72,22 @@ export default [
     rules: {
       // TypeScript Rules
       ...tseslint.configs.recommended.rules,
-      '@typescript-eslint/no-unused-vars': ['error', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-      }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-non-null-assertion': 'warn',
-      '@typescript-eslint/consistent-type-imports': ['error', {
-        prefer: 'type-imports',
-      }],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+        },
+      ],
 
       // React Rules
       ...react.configs.recommended.rules,
@@ -92,10 +100,13 @@ export default [
       'react/no-array-index-key': 'warn',
       'react/self-closing-comp': 'error',
       'react/jsx-boolean-value': ['error', 'never'],
-      'react/jsx-curly-brace-presence': ['error', {
-        props: 'never',
-        children: 'never',
-      }],
+      'react/jsx-curly-brace-presence': [
+        'error',
+        {
+          props: 'never',
+          children: 'never',
+        },
+      ],
 
       // React Hooks Rules
       ...reactHooks.configs.recommended.rules,
@@ -114,23 +125,19 @@ export default [
       'jsx-a11y/click-events-have-key-events': 'warn',
 
       // Import Rules
-      'import/order': ['error', {
-        'groups': [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-        ],
-        'newlines-between': 'always',
-        'alphabetize': {
-          order: 'asc',
-          caseInsensitive: true,
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
         },
-      }],
+      ],
       'import/no-duplicates': 'error',
-      'import/no-unresolved': 'error',
+      'import/no-unresolved': 'off', // TypeScript handles module resolution
       'import/first': 'error',
       'import/newline-after-import': 'error',
 

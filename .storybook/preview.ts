@@ -119,13 +119,14 @@ const preview: Preview = {
   },
 
   // Global decorators
-  decorators: [
-    (Story) => (
-      <div className="antialiased">
-        <Story />
-      </div>
-    ),
-  ],
+  // TODO: Enable after converting to .tsx or removing JSX
+  // decorators: [
+  //   (Story) => (
+  //     <div className="antialiased">
+  //       <Story />
+  //     </div>
+  //   ),
+  // ],
 
   // Global types for toolbar customization
   globalTypes: {

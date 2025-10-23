@@ -1,0 +1,12 @@
+/**
+ * {{COMPONENT_NAME}} - Barrel Export
+ *
+ * This file re-exports the component and its types for easy importing.
+ * Consumers can import from the component directory:
+ *
+ * @example
+ * import { {{COMPONENT_NAME}} } from '@/components/{{CATEGORY}}/{{COMPONENT_NAME}}';
+ */
+
+export { {{COMPONENT_NAME}} } from './{{COMPONENT_NAME}}';
+export type { {{COMPONENT_NAME}}Props } from './{{COMPONENT_NAME}}';

@@ -1,0 +1,263 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "component": "{{COMPONENT_NAME}}",
+  "category": "{{CATEGORY}}",
+  "version": "1.0.0",
+  "created": "{{DATE}}",
+  "validation": {
+    "files": {
+      "required": [
+        {
+          "path": "src/components/{{CATEGORY}}/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}.tsx",
+          "description": "Main component implementation",
+          "status": "pending"
+        },
+        {
+          "path": "src/components/{{CATEGORY}}/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}.story.tsx",
+          "description": "Storybook stories",
+          "status": "pending"
+        },
+        {
+          "path": "src/components/{{CATEGORY}}/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}.test.tsx",
+          "description": "Component tests",
+          "status": "pending"
+        },
+        {
+          "path": "src/components/{{CATEGORY}}/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}.patterns.md",
+          "description": "Usage patterns documentation",
+          "status": "pending"
+        },
+        {
+          "path": "src/components/{{CATEGORY}}/{{COMPONENT_NAME}}/index.ts",
+          "description": "Export barrel file",
+          "status": "pending"
+        }
+      ],
+      "optional": [
+        {
+          "path": "src/components/{{CATEGORY}}/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}.types.ts",
+          "description": "Complex type definitions (if needed)"
+        },
+        {
+          "path": "src/components/{{CATEGORY}}/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}.utils.ts",
+          "description": "Component-specific utilities"
+        }
+      ]
+    },
+    "implementation": {
+      "required": [
+        {
+          "check": "TypeScript strict mode compliance",
+          "description": "No type errors, all props typed",
+          "status": "pending"
+        },
+        {
+          "check": "Props interface exported",
+          "description": "{{COMPONENT_NAME}}Props interface is exported",
+          "status": "pending"
+        },
+        {
+          "check": "JSDoc comments on props",
+          "description": "All props have JSDoc with examples",
+          "status": "pending"
+        },
+        {
+          "check": "ForwardRef implementation",
+          "description": "Component uses React.forwardRef if accepting ref",
+          "status": "pending"
+        },
+        {
+          "check": "DisplayName set",
+          "description": "Component.displayName set for DevTools",
+          "status": "pending"
+        },
+        {
+          "check": "clsx for className merging",
+          "description": "Uses clsx() for conditional classes",
+          "status": "pending"
+        },
+        {
+          "check": "Tailwind CSS styling",
+          "description": "Uses Tailwind utility classes, no inline styles",
+          "status": "pending"
+        },
+        {
+          "check": "data-testid support",
+          "description": "Accepts and applies data-testid prop",
+          "status": "pending"
+        }
+      ]
+    },
+    "storybook": {
+      "required": [
+        {
+          "check": "Default story",
+          "description": "Has a Default story showing basic usage",
+          "status": "pending"
+        },
+        {
+          "check": "All variants story",
+          "description": "AllVariants story showing all component states",
+          "status": "pending"
+        },
+        {
+          "check": "Interactive story",
+          "description": "Interactive story with Storybook Controls",
+          "status": "pending"
+        },
+        {
+          "check": "Accessibility addon",
+          "description": "a11y addon configured in parameters",
+          "status": "pending"
+        },
+        {
+          "check": "argTypes documented",
+          "description": "All props have argTypes with descriptions",
+          "status": "pending"
+        },
+        {
+          "check": "Stories render without errors",
+          "description": "All stories load in Storybook",
+          "status": "pending"
+        }
+      ]
+    },
+    "testing": {
+      "required": [
+        {
+          "check": "Basic rendering tests",
+          "description": "Tests for render without crash, children, className",
+          "status": "pending"
+        },
+        {
+          "check": "Accessibility tests",
+          "description": "Tests for semantic HTML, keyboard navigation",
+          "status": "pending"
+        },
+        {
+          "check": "Interaction tests",
+          "description": "Tests for user interactions",
+          "status": "pending"
+        },
+        {
+          "check": "Edge case tests",
+          "description": "Tests for empty children, long content, etc.",
+          "status": "pending"
+        },
+        {
+          "check": "Test coverage >= 90%",
+          "description": "90% or higher line coverage",
+          "status": "pending"
+        },
+        {
+          "check": "All tests pass",
+          "description": "npm test succeeds without errors",
+          "status": "pending"
+        }
+      ]
+    },
+    "accessibility": {
+      "required": [
+        {
+          "check": "Semantic HTML",
+          "description": "Uses appropriate HTML elements",
+          "status": "pending"
+        },
+        {
+          "check": "Keyboard navigation",
+          "description": "Fully accessible via keyboard",
+          "status": "pending"
+        },
+        {
+          "check": "ARIA attributes",
+          "description": "Proper ARIA labels/roles where needed",
+          "status": "pending"
+        },
+        {
+          "check": "Color contrast WCAG AA",
+          "description": "Text meets 4.5:1 contrast ratio",
+          "status": "pending"
+        },
+        {
+          "check": "Focus indicators",
+          "description": "Visible focus states on interactive elements",
+          "status": "pending"
+        },
+        {
+          "check": "Screen reader tested",
+          "description": "Verified with screen reader",
+          "status": "pending"
+        }
+      ]
+    },
+    "documentation": {
+      "required": [
+        {
+          "check": "Component description",
+          "description": "Clear description of what component does",
+          "status": "pending"
+        },
+        {
+          "check": "Usage examples",
+          "description": "At least 3 usage examples in patterns.md",
+          "status": "pending"
+        },
+        {
+          "check": "Composition examples",
+          "description": "Examples of composing with other components",
+          "status": "pending"
+        },
+        {
+          "check": "Do's and Don'ts",
+          "description": "Clear guidelines for proper usage",
+          "status": "pending"
+        },
+        {
+          "check": "AI usage guidance",
+          "description": "Specific guidance for AI code generation",
+          "status": "pending"
+        },
+        {
+          "check": "Troubleshooting section",
+          "description": "Common issues and solutions",
+          "status": "pending"
+        }
+      ]
+    },
+    "quality": {
+      "required": [
+        {
+          "check": "TypeScript type-check passes",
+          "description": "npm run type-check succeeds",
+          "status": "pending"
+        },
+        {
+          "check": "ESLint passes",
+          "description": "npm run lint succeeds",
+          "status": "pending"
+        },
+        {
+          "check": "Prettier formatted",
+          "description": "npm run prettier succeeds",
+          "status": "pending"
+        },
+        {
+          "check": "No console.log statements",
+          "description": "No debugging code in production",
+          "status": "pending"
+        },
+        {
+          "check": "No TODO comments",
+          "description": "All TODOs resolved",
+          "status": "pending"
+        }
+      ]
+    }
+  },
+  "completion": {
+    "total_checks": 0,
+    "completed_checks": 0,
+    "percentage": 0,
+    "last_updated": "{{DATE}}"
+  }
+}

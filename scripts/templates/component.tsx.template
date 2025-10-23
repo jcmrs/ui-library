@@ -1,0 +1,94 @@
+/**
+ * {{COMPONENT_NAME}} Component
+ *
+ * @category {{CATEGORY}}
+ * @description [Add component description here - explain what this component does and when to use it]
+ *
+ * @example
+ * ```tsx
+ * <{{COMPONENT_NAME}}>
+ *   [Add usage example]
+ * </{{COMPONENT_NAME}}>
+ * ```
+ */
+
+import React from 'react';
+import { clsx } from 'clsx';
+
+/**
+ * Props for the {{COMPONENT_NAME}} component
+ *
+ * AI USAGE GUIDANCE:
+ * - All props are explicitly typed for clarity
+ * - Optional props have default values
+ * - Extend this interface for variants
+ */
+export interface {{COMPONENT_NAME}}Props {
+  /**
+   * Child elements to render inside the component
+   * @example <{{COMPONENT_NAME}}>Content here</{{COMPONENT_NAME}}>
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Additional CSS classes to apply
+   * @example className="custom-class"
+   */
+  className?: string;
+
+  /**
+   * Test ID for automated testing
+   * @example data-testid="my-component"
+   */
+  'data-testid'?: string;
+}
+
+/**
+ * {{COMPONENT_NAME}} component implementation
+ *
+ * IMPLEMENTATION NOTES:
+ * - Uses clsx for conditional className merging
+ * - Follows React Aria patterns for accessibility
+ * - Uses Tailwind CSS utility classes for styling
+ * - Provides semantic HTML structure
+ *
+ * @param props - Component props
+ * @returns Rendered component
+ */
+export const {{COMPONENT_NAME}} = React.forwardRef<
+  HTMLDivElement,
+  {{COMPONENT_NAME}}Props
+>(({ children, className, 'data-testid': testId, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={clsx(
+        // Base styles - default appearance
+        'relative',
+
+        // Spacing - internal padding
+        'p-4',
+
+        // Typography - text appearance
+        'text-base',
+
+        // Colors - background and text
+        'bg-white text-gray-900',
+
+        // Borders and shadows
+        'border border-gray-200',
+        'rounded-lg',
+
+        // Additional custom classes
+        className
+      )}
+      data-testid={testId}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
+
+// Display name for React DevTools
+{{COMPONENT_NAME}}.displayName = '{{COMPONENT_NAME}}';

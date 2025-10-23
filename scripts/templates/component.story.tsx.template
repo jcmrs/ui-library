@@ -1,0 +1,129 @@
+/**
+ * Storybook Stories for {{COMPONENT_NAME}}
+ *
+ * This file demonstrates all variants and states of the {{COMPONENT_NAME}} component.
+ * Use Storybook to visually develop and test the component.
+ *
+ * Run: npm run storybook
+ */
+
+import type { Meta, StoryObj } from '@storybook/react';
+import { {{COMPONENT_NAME}} } from './{{COMPONENT_NAME}}';
+
+/**
+ * Component metadata for Storybook
+ *
+ * - title: Location in Storybook sidebar
+ * - component: The component to render
+ * - tags: Storybook features to enable
+ * - argTypes: Controls for interactive props
+ */
+const meta = {
+  title: '{{CATEGORY}}/{{COMPONENT_NAME}}',
+  component: {{COMPONENT_NAME}},
+  tags: ['autodocs'],
+  argTypes: {
+    children: {
+      control: 'text',
+      description: 'Content to display inside the component',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes',
+    },
+  },
+  parameters: {
+    // Accessibility addon configuration
+    a11y: {
+      config: {
+        rules: [
+          {
+            // Ensure color contrast meets WCAG AA
+            id: 'color-contrast',
+            enabled: true,
+          },
+          {
+            // Ensure proper heading hierarchy
+            id: 'heading-order',
+            enabled: true,
+          },
+        ],
+      },
+    },
+  },
+} satisfies Meta<typeof {{COMPONENT_NAME}}>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+/**
+ * Default story - basic usage
+ *
+ * This is the most common way to use the component.
+ * It demonstrates the default appearance with minimal props.
+ */
+export const Default: Story = {
+  args: {
+    children: 'Default {{COMPONENT_NAME}}',
+  },
+};
+
+/**
+ * With Custom Content
+ *
+ * Demonstrates how to use the component with different content types.
+ */
+export const WithCustomContent: Story = {
+  args: {
+    children: (
+      <div>
+        <h3 className="text-lg font-semibold mb-2">Custom Content</h3>
+        <p className="text-gray-600">
+          This shows how the component handles rich content.
+        </p>
+      </div>
+    ),
+  },
+};
+
+/**
+ * With Custom Styling
+ *
+ * Demonstrates how to apply custom Tailwind classes to modify appearance.
+ */
+export const WithCustomStyling: Story = {
+  args: {
+    children: 'Custom Styled Component',
+    className: 'bg-blue-50 border-blue-200 text-blue-900',
+  },
+};
+
+/**
+ * Interactive Example
+ *
+ * Allows Storybook Controls to interactively modify props.
+ * Use the Controls panel to experiment with different values.
+ */
+export const Interactive: Story = {
+  args: {
+    children: 'Interactive Example - Try the Controls panel!',
+  },
+};
+
+/**
+ * All Variants
+ *
+ * Shows all component variants side-by-side for visual comparison.
+ * Useful for design review and visual regression testing.
+ */
+export const AllVariants: Story = {
+  render: () => (
+    <div className="space-y-4">
+      <{{COMPONENT_NAME}}>Default Variant</{{COMPONENT_NAME}}>
+      <{{COMPONENT_NAME}} className="bg-blue-50 border-blue-200">
+        Custom Variant
+      </{{COMPONENT_NAME}}>
+      {/* Add more variants here as you develop them */}
+    </div>
+  ),
+};

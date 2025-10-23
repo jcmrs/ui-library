@@ -13,17 +13,14 @@ import type { StorybookConfig } from '@storybook/react-vite';
  */
 const config: StorybookConfig = {
   // Story files location
-  stories: [
-    '../src/**/*.mdx',
-    '../src/**/*.stories.@(js|jsx|ts|tsx)',
-  ],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
 
   // Addons for enhanced functionality
   addons: [
-    '@storybook/addon-essentials',     // Docs, controls, actions, backgrounds, etc.
-    '@storybook/addon-interactions',   // Interactive testing
-    '@storybook/addon-links',          // Link between stories
-    '@storybook/addon-a11y',           // Accessibility testing (WCAG 2.1 AA)
+    '@storybook/addon-essentials', // Docs, controls, actions, backgrounds, etc.
+    '@storybook/addon-interactions', // Interactive testing
+    '@storybook/addon-links', // Link between stories
+    '@storybook/addon-a11y', // Accessibility testing (WCAG 2.1 AA)
   ],
 
   // Framework configuration

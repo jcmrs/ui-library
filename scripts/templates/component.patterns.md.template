@@ -1,0 +1,283 @@
+# {{COMPONENT_NAME}} Usage Patterns
+
+This document provides AI-friendly usage patterns, composition examples, and best practices for the {{COMPONENT_NAME}} component.
+
+---
+
+## Basic Usage
+
+### Minimal Example
+
+The simplest way to use {{COMPONENT_NAME}}:
+
+```tsx
+import { {{COMPONENT_NAME}} } from '@/components/{{CATEGORY}}/{{COMPONENT_NAME}}';
+
+export function Example() {
+  return (
+    <{{COMPONENT_NAME}}>
+      Basic content
+    </{{COMPONENT_NAME}}>
+  );
+}
+```
+
+### With All Props
+
+Example showing all available props:
+
+```tsx
+<{{COMPONENT_NAME}}
+  className="custom-class"
+  data-testid="my-component"
+>
+  Content with all props
+</{{COMPONENT_NAME}}>
+```
+
+---
+
+## Common Patterns
+
+### Pattern 1: [Pattern Name]
+
+**Use Case:** When to use this pattern
+
+**Example:**
+
+```tsx
+<{{COMPONENT_NAME}} className="specific-styling">
+  [Example content]
+</{{COMPONENT_NAME}}>
+```
+
+**Why This Works:** Explanation of the pattern
+
+---
+
+### Pattern 2: [Another Pattern]
+
+**Use Case:** Different scenario
+
+**Example:**
+
+```tsx
+<{{COMPONENT_NAME}}>
+  <NestedComponent />
+</{{COMPONENT_NAME}}>
+```
+
+**Why This Works:** Explanation
+
+---
+
+## Composition Examples
+
+### With Other Components
+
+How {{COMPONENT_NAME}} composes with other library components:
+
+```tsx
+import { {{COMPONENT_NAME}} } from '@/components/{{CATEGORY}}/{{COMPONENT_NAME}}';
+import { Button } from '@/components/base/Button';
+
+export function ComposedExample() {
+  return (
+    <{{COMPONENT_NAME}}>
+      <h2>Heading</h2>
+      <p>Description text</p>
+      <Button variant="primary">Action</Button>
+    </{{COMPONENT_NAME}}>
+  );
+}
+```
+
+### In Layouts
+
+Using {{COMPONENT_NAME}} in common layouts:
+
+```tsx
+<div className="container mx-auto">
+  <div className="grid grid-cols-3 gap-4">
+    <{{COMPONENT_NAME}}>Item 1</{{COMPONENT_NAME}}>
+    <{{COMPONENT_NAME}}>Item 2</{{COMPONENT_NAME}}>
+    <{{COMPONENT_NAME}}>Item 3</{{COMPONENT_NAME}}>
+  </div>
+</div>
+```
+
+---
+
+## Styling Customization
+
+### Using Tailwind Classes
+
+Apply custom Tailwind utilities:
+
+```tsx
+<{{COMPONENT_NAME}} className="bg-blue-50 border-blue-200 shadow-lg">
+  Custom styled content
+</{{COMPONENT_NAME}}>
+```
+
+### Common Customizations
+
+| Use Case | className | Result |
+|----------|-----------|--------|
+| Highlight | `bg-yellow-100 border-yellow-300` | Yellow highlight |
+| Danger | `bg-red-50 border-red-200` | Red warning style |
+| Success | `bg-green-50 border-green-200` | Green success style |
+
+---
+
+## Accessibility Guidelines
+
+### Keyboard Navigation
+
+- **Tab**: [Describe tab behavior]
+- **Enter**: [Describe enter behavior]
+- **Escape**: [Describe escape behavior]
+
+### Screen Reader Support
+
+The component announces:
+- [What gets announced]
+- [How interactions are communicated]
+
+### ARIA Attributes
+
+[List ARIA attributes used and why]
+
+---
+
+## Performance Considerations
+
+### When to Use
+
+✅ **Do use** {{COMPONENT_NAME}} when:
+- [Scenario 1]
+- [Scenario 2]
+
+❌ **Don't use** when:
+- [Alternative scenario 1]
+- [Alternative scenario 2]
+
+### Optimization Tips
+
+1. **Memoization**: [When to use React.memo]
+2. **Lazy Loading**: [When to lazy load]
+3. **Bundle Size**: [Impact on bundle]
+
+---
+
+## Do's and Don'ts
+
+### ✅ Do
+
+- **Do** use semantic children content
+- **Do** provide descriptive text for accessibility
+- **Do** test keyboard navigation
+- **Do** use appropriate variants for context
+- **Do** follow established Tailwind patterns
+
+### ❌ Don't
+
+- **Don't** override core semantic structure
+- **Don't** skip accessibility attributes
+- **Don't** use inline styles (use className instead)
+- **Don't** nest components incorrectly
+- **Don't** ignore prop type errors
+
+---
+
+## AI Usage Guidance
+
+### For Claude Code
+
+When implementing with {{COMPONENT_NAME}}:
+
+1. **Import First**: Always import from the correct path
+   ```tsx
+   import { {{COMPONENT_NAME}} } from '@/components/{{CATEGORY}}/{{COMPONENT_NAME}}';
+   ```
+
+2. **Use TypeScript**: Leverage the typed props interface
+   ```tsx
+   const props: {{COMPONENT_NAME}}Props = {
+     children: 'Content',
+     className: 'custom-class'
+   };
+   ```
+
+3. **Reference Examples**: Copy from "Common Patterns" section above
+
+4. **Test Accessibility**: Always include keyboard and screen reader tests
+
+5. **Validate Variants**: Use Storybook to verify visual appearance
+
+### Common Mistakes to Avoid
+
+1. **Missing Import**: Always import the component
+2. **Wrong Props**: Check {{COMPONENT_NAME}}Props interface
+3. **Invalid Children**: Ensure children type matches
+4. **className Overrides**: Don't fight base styles
+5. **Accessibility**: Don't skip ARIA attributes
+
+---
+
+## Related Components
+
+- **[Related Component 1]**: [When to use instead]
+- **[Related Component 2]**: [How they work together]
+
+---
+
+## Examples in Production
+
+### Dashboard Card
+
+```tsx
+<{{COMPONENT_NAME}} className="max-w-md">
+  <h3 className="text-lg font-semibold mb-2">Stats Overview</h3>
+  <p className="text-gray-600">Key metrics for today</p>
+</{{COMPONENT_NAME}}>
+```
+
+### Form Section
+
+```tsx
+<{{COMPONENT_NAME}} className="space-y-4">
+  <label>Field Label</label>
+  <input type="text" />
+  <Button>Submit</Button>
+</{{COMPONENT_NAME}}>
+```
+
+---
+
+## Troubleshooting
+
+### Issue: [Common Problem]
+
+**Symptom:** [What you see]
+
+**Cause:** [Why it happens]
+
+**Solution:**
+```tsx
+[Fixed code example]
+```
+
+---
+
+## Version History
+
+| Version | Changes |
+|---------|---------|
+| 1.0.0 | Initial implementation |
+
+---
+
+**Last Updated:** [Date]
+**Component Version:** 1.0.0
+**Maintained by:** [Author]

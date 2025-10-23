@@ -33,17 +33,20 @@ Session state management maintains context across Claude Code conversations, git
 ### Claude Code Limitations
 
 **No Persistent Memory:**
+
 - Each conversation is independent
 - No memory of previous sessions
 - Cannot remember what was being worked on
 - Cannot remember where code was left off
 
 **No Mental Model:**
+
 - Cannot visualize project structure
 - Cannot understand phase/task relationships
 - Cannot infer next steps from context
 
 **Pattern Matching Only:**
+
 - Can read current state from files
 - Cannot remember past state
 - Cannot deduce trajectory
@@ -51,6 +54,7 @@ Session state management maintains context across Claude Code conversations, git
 ### Solution: External State Tracking
 
 Session state files provide:
+
 - **Context Persistence** - Know what phase/task is current
 - **Progress Tracking** - Which tasks are complete
 - **Recovery Points** - Where to resume after interruption
@@ -77,6 +81,7 @@ Session state files provide:
 ### File Purposes
 
 **session-state.json**
+
 - Current phase and task
 - Working branch
 - Last checkpoint
@@ -84,6 +89,7 @@ Session state files provide:
 - Updated by: All workflow scripts
 
 **progress.json**
+
 - Task completion status
 - Phase completion status
 - Task start/end times
@@ -91,18 +97,21 @@ Session state files provide:
 - Updated by: complete-task.sh, complete-phase.sh
 
 **checkpoints.json**
+
 - Checkpoint metadata
 - Checkpoint tags and commits
 - Recovery point information
 - Updated by: complete-task.sh, complete-phase.sh
 
 **incidents.log**
+
 - Recovery operations log
 - Failure scenarios encountered
 - Recovery procedures used
 - Updated by: Recovery scripts, human interventions
 
 **session-history/**
+
 - Snapshots of session-state.json over time
 - One file per hour (while active)
 - Retention: 30 days
@@ -168,32 +177,32 @@ Session state files provide:
 
 **Field Descriptions:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `schema_version` | string | Yes | Schema version for compatibility |
-| `project.name` | string | Yes | Project identifier |
-| `project.version` | string | Yes | Project version |
-| `project.remote_url` | string | Yes | GitHub repository URL |
-| `current.phase` | string | Yes | Current phase number |
-| `current.phase_name` | string | Yes | Human-readable phase name |
-| `current.task` | string | Yes | Current task ID (X.Y.Z format) |
-| `current.task_name` | string | Yes | Human-readable task name |
-| `current.working_branch` | string | Yes | Current git branch |
-| `current.base_branch` | string | Yes | Base branch (usually develop) |
-| `timing.phase_start` | ISO8601 | Yes | When current phase started |
-| `timing.task_start` | ISO8601 | Yes | When current task started |
-| `timing.last_activity` | ISO8601 | Yes | Last file modification time |
-| `timing.last_sync` | ISO8601 | Yes | Last remote sync time |
-| `checkpoint.tag` | string | Yes | Last checkpoint git tag |
-| `checkpoint.commit` | string | Yes | Last checkpoint commit hash |
-| `checkpoint.timestamp` | ISO8601 | Yes | When checkpoint was created |
-| `checkpoint.message` | string | Yes | Checkpoint description |
-| `progress.tasks_completed` | array | Yes | List of completed task IDs |
-| `progress.tasks_total` | integer | Yes | Total tasks in current phase |
-| `progress.completion_percentage` | integer | Yes | Phase completion (0-100) |
-| `progress.estimated_completion` | ISO8601 | No | Estimated phase completion |
-| `git_state.*` | various | Yes | Current git repository state |
-| `metadata.*` | various | Yes | State file metadata |
+| Field                            | Type    | Required | Description                      |
+| -------------------------------- | ------- | -------- | -------------------------------- |
+| `schema_version`                 | string  | Yes      | Schema version for compatibility |
+| `project.name`                   | string  | Yes      | Project identifier               |
+| `project.version`                | string  | Yes      | Project version                  |
+| `project.remote_url`             | string  | Yes      | GitHub repository URL            |
+| `current.phase`                  | string  | Yes      | Current phase number             |
+| `current.phase_name`             | string  | Yes      | Human-readable phase name        |
+| `current.task`                   | string  | Yes      | Current task ID (X.Y.Z format)   |
+| `current.task_name`              | string  | Yes      | Human-readable task name         |
+| `current.working_branch`         | string  | Yes      | Current git branch               |
+| `current.base_branch`            | string  | Yes      | Base branch (usually develop)    |
+| `timing.phase_start`             | ISO8601 | Yes      | When current phase started       |
+| `timing.task_start`              | ISO8601 | Yes      | When current task started        |
+| `timing.last_activity`           | ISO8601 | Yes      | Last file modification time      |
+| `timing.last_sync`               | ISO8601 | Yes      | Last remote sync time            |
+| `checkpoint.tag`                 | string  | Yes      | Last checkpoint git tag          |
+| `checkpoint.commit`              | string  | Yes      | Last checkpoint commit hash      |
+| `checkpoint.timestamp`           | ISO8601 | Yes      | When checkpoint was created      |
+| `checkpoint.message`             | string  | Yes      | Checkpoint description           |
+| `progress.tasks_completed`       | array   | Yes      | List of completed task IDs       |
+| `progress.tasks_total`           | integer | Yes      | Total tasks in current phase     |
+| `progress.completion_percentage` | integer | Yes      | Phase completion (0-100)         |
+| `progress.estimated_completion`  | ISO8601 | No       | Estimated phase completion       |
+| `git_state.*`                    | various | Yes      | Current git repository state     |
+| `metadata.*`                     | various | Yes      | State file metadata              |
 
 ---
 
@@ -363,6 +372,7 @@ Session state files provide:
 **When:** Project initialization or Phase 1.0 setup
 
 **How:**
+
 ```bash
 # Automatically created by start-phase.sh
 ./scripts/git-workflow/start-phase.sh 1
@@ -398,12 +408,12 @@ EOF
 
 All workflow scripts update state automatically:
 
-| Script | Updates | Fields Modified |
-|--------|---------|----------------|
-| `start-phase.sh` | Session state | phase, phase_name, working_branch, phase_start |
-| `complete-task.sh` | Session + Progress | task, task_name, checkpoint, tasks_completed |
-| `complete-phase.sh` | Session + Progress | base_branch, phase status, completion_date |
-| `sync-with-remote.sh` | Session state | last_sync, git_state.* |
+| Script                | Updates            | Fields Modified                                |
+| --------------------- | ------------------ | ---------------------------------------------- |
+| `start-phase.sh`      | Session state      | phase, phase_name, working_branch, phase_start |
+| `complete-task.sh`    | Session + Progress | task, task_name, checkpoint, tasks_completed   |
+| `complete-phase.sh`   | Session + Progress | base_branch, phase status, completion_date     |
+| `sync-with-remote.sh` | Session state      | last_sync, git_state.\*                        |
 
 **Example Update Flow:**
 
@@ -436,6 +446,7 @@ echo "$STATE" | jq '.' > .claude/session-state.json
 **Frequency:** Hourly (when changes exist)
 
 **Mechanism:**
+
 ```bash
 # Automated by monitoring script
 # Runs every hour via cron or background process
@@ -449,6 +460,7 @@ find .claude/session-history -name "*.json" -mtime +30 -delete
 ```
 
 **Retention Policy:**
+
 - Hourly snapshots: 30 days
 - Daily snapshots: 1 year
 - Phase completion snapshots: Indefinite
@@ -460,6 +472,7 @@ find .claude/session-history -name "*.json" -mtime +30 -delete
 ### Read State
 
 **From Scripts:**
+
 ```bash
 #!/bin/bash
 
@@ -478,6 +491,7 @@ fi
 ```
 
 **From JavaScript/TypeScript:**
+
 ```typescript
 import fs from 'fs';
 import path from 'path';
@@ -512,6 +526,7 @@ console.log(`Current task: ${state.current.task}`);
 ### Update State
 
 **Atomic Updates (Recommended):**
+
 ```bash
 #!/bin/bash
 
@@ -529,6 +544,7 @@ mv .claude/session-state.json.tmp .claude/session-state.json
 ```
 
 **Transaction Pattern:**
+
 ```bash
 #!/bin/bash
 
@@ -552,6 +568,7 @@ fi
 ### Validate State
 
 **Schema Validation:**
+
 ```bash
 #!/bin/bash
 
@@ -581,6 +598,7 @@ echo "State validation passed"
 ```
 
 **Content Validation:**
+
 ```bash
 #!/bin/bash
 
@@ -612,11 +630,13 @@ fi
 ### Corrupt State File
 
 **Symptoms:**
+
 - JSON syntax errors
 - Missing required fields
 - File not found
 
 **Recovery:**
+
 ```bash
 ./scripts/recovery/restore-session-state.sh
 ```
@@ -628,11 +648,13 @@ See [DISASTER-RECOVERY.md](DISASTER-RECOVERY.md#s2-lost-session-context) for det
 ### State Drift (Out of Sync with Git)
 
 **Symptoms:**
+
 - State says phase 1, but on develop branch
 - State says task 1.1.2, but task 1.1.3 commits exist
 - Checkpoint tag doesn't match state
 
 **Detection:**
+
 ```bash
 # Compare state with git reality
 STATE_BRANCH=$(jq -r '.current.working_branch' .claude/session-state.json)
@@ -646,6 +668,7 @@ fi
 ```
 
 **Recovery:**
+
 ```bash
 # Option 1: Trust git, update state
 ./scripts/recovery/restore-session-state.sh
@@ -661,6 +684,7 @@ git checkout $(jq -r '.current.working_branch' .claude/session-state.json)
 ### For Scripts
 
 1. **Always validate before reading:**
+
 ```bash
 if [ ! -f .claude/session-state.json ]; then
   echo "ERROR: Session state not found"
@@ -674,6 +698,7 @@ fi
 ```
 
 2. **Use atomic writes:**
+
 ```bash
 # Write to temp file first
 echo "$NEW_STATE" | jq '.' > .claude/session-state.json.tmp
@@ -683,12 +708,14 @@ mv .claude/session-state.json.tmp .claude/session-state.json
 ```
 
 3. **Update timestamps:**
+
 ```bash
 STATE=$(jq '.timing.last_activity = "'$(date -Iseconds)'"' \
           .claude/session-state.json)
 ```
 
 4. **Update metadata:**
+
 ```bash
 STATE=$(jq '.metadata.last_updated_by = "'$(basename $0)'"' \
           .claude/session-state.json)
@@ -718,9 +745,9 @@ STATE=$(jq '.metadata.last_updated_by = "'$(basename $0)'"' \
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | 2025-01-23 | Initial session state documentation |
+| Version | Date       | Changes                             |
+| ------- | ---------- | ----------------------------------- |
+| 1.0.0   | 2025-01-23 | Initial session state documentation |
 
 ---
 

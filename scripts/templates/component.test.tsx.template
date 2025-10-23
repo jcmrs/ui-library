@@ -1,0 +1,169 @@
+/**
+ * Tests for {{COMPONENT_NAME}}
+ *
+ * This test suite ensures the component behaves correctly:
+ * - Renders without errors
+ * - Meets accessibility standards (WCAG 2.1 AA)
+ * - Handles user interactions properly
+ * - Responds to prop changes correctly
+ *
+ * Run: npm test
+ */
+
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+import { {{COMPONENT_NAME}} } from './{{COMPONENT_NAME}}';
+
+describe('{{COMPONENT_NAME}}', () => {
+  /**
+   * Basic Rendering Tests
+   *
+   * These tests ensure the component renders correctly with various props.
+   */
+  describe('Rendering', () => {
+    it('renders without crashing', () => {
+      render(<{{COMPONENT_NAME}}>Test Content</{{COMPONENT_NAME}}>);
+      expect(screen.getByText('Test Content')).toBeInTheDocument();
+    });
+
+    it('renders children correctly', () => {
+      const content = 'Custom child content';
+      render(<{{COMPONENT_NAME}}>{content}</{{COMPONENT_NAME}}>);
+      expect(screen.getByText(content)).toBeInTheDocument();
+    });
+
+    it('applies custom className', () => {
+      const customClass = 'custom-test-class';
+      render(
+        <{{COMPONENT_NAME}} className={customClass} data-testid="component">
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+      const element = screen.getByTestId('component');
+      expect(element).toHaveClass(customClass);
+    });
+
+    it('applies data-testid attribute', () => {
+      const testId = 'my-component';
+      render(
+        <{{COMPONENT_NAME}} data-testid={testId}>Content</{{COMPONENT_NAME}}>
+      );
+      expect(screen.getByTestId(testId)).toBeInTheDocument();
+    });
+  });
+
+  /**
+   * Accessibility Tests
+   *
+   * These tests ensure WCAG 2.1 AA compliance:
+   * - Proper semantic HTML
+   * - Keyboard navigation
+   * - Screen reader support
+   * - Focus management
+   */
+  describe('Accessibility', () => {
+    it('has proper semantic structure', () => {
+      render(
+        <{{COMPONENT_NAME}} data-testid="component">
+          Accessible Content
+        </{{COMPONENT_NAME}}>
+      );
+      const element = screen.getByTestId('component');
+
+      // Verify semantic HTML element is used
+      expect(element.tagName).toBe('DIV'); // Update based on actual semantic element
+    });
+
+    it('is keyboard accessible', async () => {
+      const user = userEvent.setup();
+      render(
+        <{{COMPONENT_NAME}} data-testid="component">
+          Keyboard Test
+        </{{COMPONENT_NAME}}>
+      );
+
+      // Test keyboard navigation
+      // Add specific keyboard interaction tests here
+      // Example: await user.tab();
+    });
+
+    // Add more accessibility tests as needed:
+    // - Screen reader announcements
+    // - ARIA attributes
+    // - Focus indicators
+    // - Color contrast (automated via Storybook a11y addon)
+  });
+
+  /**
+   * Interaction Tests
+   *
+   * These tests verify the component responds correctly to user interactions.
+   */
+  describe('Interactions', () => {
+    it('handles user interactions correctly', async () => {
+      const user = userEvent.setup();
+      render(
+        <{{COMPONENT_NAME}} data-testid="component">
+          Interactive Content
+        </{{COMPONENT_NAME}}>
+      );
+
+      // Add interaction tests here
+      // Example: await user.click(screen.getByRole('button'));
+    });
+
+    // Add more interaction tests:
+    // - Click events
+    // - Hover states
+    // - Focus/blur events
+    // - Form submissions
+  });
+
+  /**
+   * State and Props Tests
+   *
+   * These tests ensure the component updates correctly when props change.
+   */
+  describe('State and Props', () => {
+    it('updates when props change', () => {
+      const { rerender } = render(
+        <{{COMPONENT_NAME}}>Initial Content</{{COMPONENT_NAME}}>
+      );
+      expect(screen.getByText('Initial Content')).toBeInTheDocument();
+
+      rerender(<{{COMPONENT_NAME}}>Updated Content</{{COMPONENT_NAME}}>);
+      expect(screen.getByText('Updated Content')).toBeInTheDocument();
+      expect(screen.queryByText('Initial Content')).not.toBeInTheDocument();
+    });
+
+    // Add more state/props tests:
+    // - Conditional rendering
+    // - Dynamic class application
+    // - Variant switching
+  });
+
+  /**
+   * Edge Cases
+   *
+   * These tests ensure the component handles edge cases gracefully.
+   */
+  describe('Edge Cases', () => {
+    it('handles empty children', () => {
+      render(<{{COMPONENT_NAME}} />);
+      expect(screen.queryByTestId('component')).toBeTruthy();
+    });
+
+    it('handles very long content', () => {
+      const longContent = 'A'.repeat(1000);
+      render(<{{COMPONENT_NAME}}>{longContent}</{{COMPONENT_NAME}}>);
+      expect(screen.getByText(longContent)).toBeInTheDocument();
+    });
+
+    // Add more edge case tests:
+    // - Null/undefined props
+    // - Special characters
+    // - XSS prevention
+  });
+});

@@ -6,13 +6,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import {
-  SessionState,
-  ProgressData,
-  CheckpointsData,
-  CheckpointEntry,
-  StateUpdate,
-} from './types';
+import { SessionState, ProgressData, CheckpointsData, CheckpointEntry, StateUpdate } from './types';
 import { readSessionState, readProgressData, readCheckpointsData } from './reader';
 
 /**
@@ -34,7 +28,9 @@ export function writeSessionState(
     const json = JSON.stringify(state, null, 2);
     fs.writeFileSync(filePath, json + '\n', 'utf-8');
   } catch (error) {
-    throw new Error(`Failed to write session state: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `Failed to write session state: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
@@ -145,10 +141,7 @@ export function updateCheckpoint(
 /**
  * Add completed task
  */
-export function addCompletedTask(
-  taskId: string,
-  filePath: string = SESSION_STATE_FILE
-): void {
+export function addCompletedTask(taskId: string, filePath: string = SESSION_STATE_FILE): void {
   const state = readSessionState(filePath);
 
   if (!state.progress.tasks_completed.includes(taskId)) {
@@ -182,10 +175,7 @@ export function updateGitState(
 /**
  * Update metadata updater info
  */
-export function updateMetadata(
-  updatedBy: string,
-  filePath: string = SESSION_STATE_FILE
-): void {
+export function updateMetadata(updatedBy: string, filePath: string = SESSION_STATE_FILE): void {
   const state = readSessionState(filePath);
   state.metadata.last_updated_by = updatedBy;
   state.metadata.last_updated_at = new Date().toISOString();
@@ -195,15 +185,14 @@ export function updateMetadata(
 /**
  * Write progress data
  */
-export function writeProgressData(
-  data: ProgressData,
-  filePath: string = PROGRESS_FILE
-): void {
+export function writeProgressData(data: ProgressData, filePath: string = PROGRESS_FILE): void {
   try {
     const json = JSON.stringify(data, null, 2);
     fs.writeFileSync(filePath, json + '\n', 'utf-8');
   } catch (error) {
-    throw new Error(`Failed to write progress data: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `Failed to write progress data: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
@@ -218,7 +207,9 @@ export function writeCheckpointsData(
     const json = JSON.stringify(data, null, 2);
     fs.writeFileSync(filePath, json + '\n', 'utf-8');
   } catch (error) {
-    throw new Error(`Failed to write checkpoints data: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `Failed to write checkpoints data: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
