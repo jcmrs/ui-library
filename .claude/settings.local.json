@@ -28,7 +28,8 @@
       "Bash(git commit -m \"$(cat <<''EOF''\ndocs: Add Phase 1.0 automation infrastructure documentation\n\nAdded comprehensive documentation suite for git workflow automation,\ndisaster recovery, and session state management - foundational\nrequirements identified through multi-role analysis.\n\nNew Documentation:\n- .docs/GIT-WORKFLOW.md - Automated git workflow for Claude Code\n- .docs/DISASTER-RECOVERY.md - Recovery procedures for all failure scenarios\n- .docs/SESSION-STATE.md - Session state management and persistence\n- .docs/ADR.md - Architecture decision records (12 decisions)\n\nUpdated Documentation:\n- .docs/ROADMAP.md - Added Phase 1.0 before Phase 1.1\n- .docs/TASKS.md - Added Phase 1.0 task breakdown (14 tasks)\n\nProject Files:\n- .gitignore - Standard ignores for Node.js, IDE, dependencies\n- CLAUDE.md - Project instructions for Claude Code\n\nContext:\nMulti-role analysis (DevOps, AI Systems, SRE, DX, Recovery Specialist)\nrevealed automation is not a feature but foundational requirement.\nClaude Code cannot maintain git/process discipline manually.\n\nPhase 1.0 provides:\n- Zero git knowledge required by Claude Code\n- Automatic checkpointing after each task\n- Session state persistence across conversations\n- One-command recovery from failures\n- Remote backup synchronization\n\nStatus: Documentation complete, implementation next\nEOF\n)\")",
       "Bash(bash:*)",
       "Bash(git commit:*)",
-      "mcp__github__list_pull_requests"
+      "mcp__github__list_pull_requests",
+      "Bash(npm install)"
     ],
     "deny": [],
     "ask": []
