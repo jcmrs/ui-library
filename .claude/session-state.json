@@ -16,17 +16,17 @@
   "timing": {
     "phase_start": "2025-10-23T19:23:34Z",
     "task_start": "2025-10-23T19:23:34Z",
-    "last_activity": "2025-10-23T19:23:34Z",
+    "last_activity": "2025-10-23T19:32:17Z",
     "last_sync": "2025-10-23T19:23:34Z"
   },
   "checkpoint": {
-    "tag": "phase-1.2-start",
-    "commit": "f45f014adfdae919cd35c7cefb9c90873af043c2",
-    "timestamp": "2025-10-23T19:23:34Z",
-    "message": "Phase 1.2 started"
+    "tag": "task-1.2.1-complete",
+    "commit": "14f5954624d58d30e6b9961b3ee30ef6cd1dc040",
+    "timestamp": "2025-10-23T19:32:17Z",
+    "message": "Task 1.2.1 complete"
   },
   "progress": {
-    "tasks_completed": [],
+    "tasks_completed": ["1.2.1"],
     "tasks_total": 0,
     "completion_percentage": 0
   },
@@ -39,7 +39,7 @@
     "working_directory_clean": true
   },
   "metadata": {
-    "last_updated_by": "start-phase.sh",
-    "last_updated_at": "2025-10-23T19:23:34Z"
+    "last_updated_by": "complete-task.sh",
+    "last_updated_at": "2025-10-23T19:32:17Z"
   }
 }
