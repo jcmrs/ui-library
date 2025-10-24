@@ -35,9 +35,10 @@ export default [
     ],
   },
 
-  // TypeScript and React files
+  // TypeScript and React files (excluding test files)
   {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['**/*.{test,spec}.{ts,tsx}'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
@@ -65,8 +66,13 @@ export default [
         version: '19.1',
       },
       'import/resolver': {
-        typescript: true,
-        node: true,
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
       },
     },
     rules: {
@@ -163,12 +169,41 @@ export default [
     },
   },
 
-  // Test files - relaxed rules
+  // Test files - relaxed rules without project-based linting
   {
     files: ['**/*.{test,spec}.{ts,tsx}'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+        // No project option - test files are excluded from tsconfig.json
+      },
+      globals: {
+        React: 'readonly',
+        JSX: 'readonly',
+        HTMLDivElement: 'readonly',
+        HTMLButtonElement: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      react: react,
+    },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       'no-console': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
     },
   },
 ];
