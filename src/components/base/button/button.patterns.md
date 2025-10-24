@@ -14,14 +14,10 @@
 ### Simple Example
 
 ```tsx
-import { Button } from "@/components/base/button";
+import { Button } from '@/components/base/button';
 
 function Example() {
-  return (
-    <Button>
-      Basic content
-    </Button>
-  );
+  return <Button>Basic content</Button>;
 }
 ```
 
@@ -44,9 +40,7 @@ function Example() {
 ### Disabled State
 
 ```tsx
-<Button disabled>
-  Disabled content
-</Button>
+<Button disabled>Disabled content</Button>
 ```
 
 ## Common Patterns
@@ -57,12 +51,8 @@ function Example() {
 function Pattern1Example() {
   return (
     <div className="space-y-4">
-      <Button variant="primary">
-        Primary action
-      </Button>
-      <Button variant="secondary">
-        Secondary action
-      </Button>
+      <Button variant="primary">Primary action</Button>
+      <Button variant="secondary">Secondary action</Button>
     </div>
   );
 }
@@ -77,10 +67,7 @@ function Pattern2Example() {
   const [isDisabled, setIsDisabled] = useState(false);
 
   return (
-    <Button
-      disabled={isDisabled}
-      size="lg"
-    >
+    <Button disabled={isDisabled} size="lg">
       Content
     </Button>
   );
@@ -94,18 +81,14 @@ function Pattern2Example() {
 ### With Other Components
 
 ```tsx
-import { Button } from "@/components/base/button";
+import { Button } from '@/components/base/button';
 // Import other components as needed
 
 function CompositionExample() {
   return (
     <div className="flex gap-4">
-      <Button variant="primary">
-        First
-      </Button>
-      <Button variant="secondary">
-        Second
-      </Button>
+      <Button variant="primary">First</Button>
+      <Button variant="secondary">Second</Button>
     </div>
   );
 }
@@ -117,9 +100,7 @@ function CompositionExample() {
 function FormExample() {
   return (
     <form className="space-y-4">
-      <Button size="md">
-        Form content
-      </Button>
+      <Button size="md">Form content</Button>
     </form>
   );
 }
@@ -128,10 +109,7 @@ function FormExample() {
 ### Responsive Design
 
 ```tsx
-<Button
-  className="w-full sm:w-auto"
-  size="md"
->
+<Button className="w-full sm:w-auto" size="md">
   Responsive content
 </Button>
 ```
@@ -153,10 +131,7 @@ function FormExample() {
 ### ARIA Attributes
 
 ```tsx
-<Button
-  aria-label="Descriptive label"
-  aria-disabled={isDisabled}
->
+<Button aria-label="Descriptive label" aria-disabled={isDisabled}>
   Content
 </Button>
 ```
@@ -189,18 +164,18 @@ When generating code using this component:
 
 ```tsx
 // ✅ Correct - Fully typed
-import type { ButtonProps } from "@/components/base/button";
+import type { ButtonProps } from '@/components/base/button';
 
 const props: ButtonProps = {
-  size: "md",
-  variant: "primary",
+  size: 'md',
+  variant: 'primary',
   disabled: false,
 };
 
 // ❌ Incorrect - No type safety
 const props = {
-  size: "medium", // Wrong value
-  variant: "blue", // Invalid variant
+  size: 'medium', // Wrong value
+  variant: 'blue', // Invalid variant
 };
 ```
 
@@ -210,10 +185,7 @@ const props = {
 // Pattern: Generate component with dynamic content
 function AIGeneratedExample({ content, actionType }: Props) {
   return (
-    <Button
-      variant={actionType === "primary" ? "primary" : "secondary"}
-      size="md"
-    >
+    <Button variant={actionType === 'primary' ? 'primary' : 'secondary'} size="md">
       {content}
     </Button>
   );
@@ -248,12 +220,13 @@ function AIGeneratedExample({ content, actionType }: Props) {
 
 **Cause**: Missing required props or incorrect import
 **Solution**:
+
 ```tsx
 // ✅ Correct
-import { Button } from "@/components/base/button";
+import { Button } from '@/components/base/button';
 
 // ❌ Incorrect
-import Button from "@/components/base/button";
+import Button from '@/components/base/button';
 ```
 
 ### Issue: Styles not applying
@@ -267,7 +240,7 @@ import Button from "@/components/base/button";
 **Solution**: Import and use the `ButtonProps` type
 
 ```tsx
-import type { ButtonProps } from "@/components/base/button";
+import type { ButtonProps } from '@/components/base/button';
 ```
 
 ### Issue: Accessibility violations
@@ -292,6 +265,7 @@ import type { ButtonProps } from "@/components/base/button";
 ## Changelog
 
 ### 2025-10-24 - Initial Creation
+
 - Created base component structure
 - Added all size and variant options
 - Implemented accessibility features

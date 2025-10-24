@@ -7,7 +7,7 @@
 // export * from './components/foundations'; // TODO: Uncomment when foundations are added
 
 // Export base components
-export * from "./components/base";
+export * from './components/base';
 
 // Export application components
 // export * from './components/application'; // TODO: Uncomment when application components are added

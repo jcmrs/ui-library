@@ -17,8 +17,8 @@
  * @see {@link ./button.patterns.md} for usage patterns
  */
 
-export { Button } from "./button";
-export type { ButtonProps } from "./button";
+export { Button } from './button';
+export type { ButtonProps } from './button';
 
 // Export styles for advanced customization (optional)
-export { styles as ButtonStyles } from "./button";
+export { styles as ButtonStyles } from './button';

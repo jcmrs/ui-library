@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from './button';
 
 /**
  * Button component stories
@@ -15,42 +16,42 @@ import { Button } from "./button";
  */
 
 const meta = {
-  title: "base/Button",
+  title: 'base/Button',
   component: Button,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     // Accessibility addon configuration
     a11y: {
       config: {
         rules: [
-          { id: "color-contrast", enabled: true },
-          { id: "heading-order", enabled: true },
-          { id: "label", enabled: true },
-          { id: "landmark-one-main", enabled: true },
-          { id: "region", enabled: true },
+          { id: 'color-contrast', enabled: true },
+          { id: 'heading-order', enabled: true },
+          { id: 'label', enabled: true },
+          { id: 'landmark-one-main', enabled: true },
+          { id: 'region', enabled: true },
         ],
       },
     },
   },
   argTypes: {
     size: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl"],
-      description: "Size variant of the component",
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl'],
+      description: 'Size variant of the component',
     },
     variant: {
-      control: "select",
-      options: ["primary", "secondary"],
-      description: "Visual variant of the component",
+      control: 'select',
+      options: ['primary', 'secondary'],
+      description: 'Visual variant of the component',
     },
     disabled: {
-      control: "boolean",
-      description: "Whether the component is disabled",
+      control: 'boolean',
+      description: 'Whether the component is disabled',
     },
     className: {
-      control: "text",
-      description: "Additional CSS classes",
+      control: 'text',
+      description: 'Additional CSS classes',
     },
   },
 } satisfies Meta<typeof Button>;
@@ -65,9 +66,9 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   args: {
-    children: "Default Button",
-    size: "md",
-    variant: "primary",
+    children: 'Default Button',
+    size: 'md',
+    variant: 'primary',
     disabled: false,
   },
 };
@@ -79,7 +80,7 @@ export const Default: Story = {
  */
 export const AllSizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex flex-col items-start gap-4">
       <Button size="sm">Small (sm)</Button>
       <Button size="md">Medium (md)</Button>
       <Button size="lg">Large (lg)</Button>
@@ -95,7 +96,7 @@ export const AllSizes: Story = {
  */
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex flex-col items-start gap-4">
       <Button variant="primary">Primary Variant</Button>
       <Button variant="secondary">Secondary Variant</Button>
     </div>
@@ -109,7 +110,7 @@ export const AllVariants: Story = {
  */
 export const Disabled: Story = {
   args: {
-    children: "Disabled Button",
+    children: 'Disabled Button',
     disabled: true,
   },
 };
@@ -121,8 +122,8 @@ export const Disabled: Story = {
  */
 export const WithCustomStyling: Story = {
   args: {
-    children: "Custom Styled",
-    className: "shadow-lg border-2 border-purple-500",
+    children: 'Custom Styled',
+    className: 'shadow-lg border-2 border-purple-500',
   },
 };
 
@@ -137,9 +138,9 @@ export const WithCustomStyling: Story = {
  */
 export const Interactive: Story = {
   args: {
-    children: "Interactive Button",
-    size: "md",
-    variant: "primary",
+    children: 'Interactive Button',
+    size: 'md',
+    variant: 'primary',
     disabled: false,
   },
 };
@@ -152,7 +153,7 @@ export const Interactive: Story = {
  */
 export const AccessibilityTest: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex flex-col items-start gap-4">
       <Button>Normal State</Button>
       <Button disabled>Disabled State</Button>
       <Button size="sm">Small Size</Button>
