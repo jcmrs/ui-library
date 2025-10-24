@@ -44,7 +44,9 @@
       "Read(//c/Users/jcmei/.claude/**)",
       "Bash(git ls-tree:*)",
       "Bash(npx husky init)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)"
     ],
     "deny": [],
     "ask": []
