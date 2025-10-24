@@ -5,6 +5,10 @@
 # Enforces quality standards before allowing commits
 # See ADR-011 for rationale
 
+# IMPORTANT: Auto-staging is DISABLED by default
+# Uncomment the line below to enable auto-staging of modified files
+# .husky/pre-commit-auto-stage
+
 echo "🔍 Running pre-commit quality gates..."
 
 # 1. TypeScript type checking

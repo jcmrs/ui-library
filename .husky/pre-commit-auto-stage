@@ -1,0 +1,52 @@
+#!/usr/bin/env sh
+# Auto-staging hook
+# Automatically stages modified files before commit
+# Excludes sensitive files and lock files
+
+# Get list of modified files (not staged)
+MODIFIED=$(git diff --name-only)
+
+if [ -z "$MODIFIED" ]; then
+  # No unstaged changes
+  exit 0
+fi
+
+echo "📦 Auto-staging modified files..."
+
+# Files to exclude from auto-staging
+EXCLUDE_PATTERNS=(
+  "\.env"
+  "\.env\."
+  "credentials"
+  "secrets"
+  "\.key$"
+  "\.pem$"
+  "package-lock\.json"
+  "bun\.lockb"
+  "yarn\.lock"
+  "pnpm-lock\.yaml"
+  "\.log$"
+  "\.tmp$"
+)
+
+# Stage files one by one, checking exclusions
+for file in $MODIFIED; do
+  SKIP=false
+
+  # Check if file matches any exclusion pattern
+  for pattern in "${EXCLUDE_PATTERNS[@]}"; do
+    if echo "$file" | grep -qE "$pattern"; then
+      echo "  ⊘ Skipped: $file (excluded pattern)"
+      SKIP=true
+      break
+    fi
+  done
+
+  # Stage if not excluded
+  if [ "$SKIP" = false ]; then
+    git add "$file"
+    echo "  ✓ Staged: $file"
+  fi
+done
+
+echo "✅ Auto-staging complete"
