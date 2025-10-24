@@ -70,6 +70,7 @@ This makes all 63 plugins available but **does not load any agents or tools** in
 #### Step 2: Install Essential Plugins
 
 **For Full-Stack Development:**
+
 ```bash
 /plugin install python-development          # Python with 5 specialized skills
 /plugin install javascript-typescript       # JS/TS with 4 specialized skills
@@ -79,6 +80,7 @@ This makes all 63 plugins available but **does not load any agents or tools** in
 ```
 
 **For Infrastructure & Operations:**
+
 ```bash
 /plugin install kubernetes-operations       # K8s with 4 deployment skills
 /plugin install cloud-infrastructure        # AWS/Azure/GCP with 4 cloud skills
@@ -87,6 +89,7 @@ This makes all 63 plugins available but **does not load any agents or tools** in
 ```
 
 **For Security & Quality:**
+
 ```bash
 /plugin install security-scanning           # SAST with security skill
 /plugin install code-review-ai             # AI-powered code review
@@ -111,6 +114,7 @@ Try a complete full-stack feature:
 ```
 
 This coordinates 7+ agents:
+
 1. backend-architect (API design)
 2. database-architect (schema design)
 3. frontend-developer (UI components)
@@ -199,6 +203,7 @@ wshobson/agents/
 ### Component Breakdown
 
 **Framework Inventory:**
+
 - 63 plugins organized in 23 categories
 - 85 specialized agents (47 Haiku, 38 Sonnet)
 - 47 agent skills with progressive disclosure
@@ -214,12 +219,14 @@ wshobson/agents/
 **Definition**: Plugins are isolated, single-purpose packages that contain agents, commands, and skills.
 
 **Characteristics:**
+
 - **Granular**: Each plugin has one focused purpose
 - **Composable**: Mix and match for complex workflows
 - **Token-efficient**: Load only what you need
 - **Isolated**: Clear boundaries, independent updates
 
 **Example:**
+
 ```bash
 # Install python development plugin
 /plugin install python-development
@@ -236,6 +243,7 @@ wshobson/agents/
 **Definition**: Agents are specialized AI assistants with deep domain expertise.
 
 **Types:**
+
 - **Architecture Agents**: Design systems and make technology decisions
 - **Language Agents**: Provide programming language expertise
 - **Infrastructure Agents**: Handle deployment, operations, and cloud
@@ -244,10 +252,12 @@ wshobson/agents/
 - **Business Agents**: Handle documentation, marketing, support
 
 **Model Assignment:**
+
 - **Haiku (47 agents)**: Fast execution, deterministic tasks
 - **Sonnet (38 agents)**: Complex reasoning, architecture
 
 **Invocation:**
+
 ```bash
 # Natural language
 "Use backend-architect to design the authentication API"
@@ -261,12 +271,12 @@ wshobson/agents/
 **Definition**: Skills are modular knowledge packages that extend agent capabilities with progressive disclosure.
 
 **Architecture:**
+
 ```yaml
 ---
 name: skill-name
 description: What the skill does. Use when [activation trigger].
 ---
-
 # Skill content with three tiers:
 # 1. Metadata (frontmatter) - always loaded
 # 2. Instructions - loaded when activated
@@ -274,11 +284,13 @@ description: What the skill does. Use when [activation trigger].
 ```
 
 **Progressive Disclosure:**
+
 1. **Metadata**: Name and activation criteria (~50 tokens)
 2. **Instructions**: Core guidance and patterns (~500 tokens)
 3. **Resources**: Examples and templates (~2000 tokens)
 
 **Activation:**
+
 ```
 User: "Set up Kubernetes deployment with Helm"
 → Activates: helm-chart-scaffolding, k8s-manifest-generator
@@ -292,11 +304,13 @@ User: "Build RAG system for document Q&A"
 **Definition**: Commands are tools and workflows accessible via slash commands.
 
 **Format:**
+
 ```bash
 /plugin-name:command-name [arguments]
 ```
 
 **Categories:**
+
 - **Scaffolding**: Project generation (python-scaffold, typescript-scaffold)
 - **Testing**: Test generation (test-generate, tdd-cycle)
 - **Security**: Security scanning (security-sast, security-hardening)
@@ -304,6 +318,7 @@ User: "Build RAG system for document Q&A"
 - **Utilities**: Code refactoring, documentation, debugging
 
 **Example:**
+
 ```bash
 # Python project scaffolding
 /python-development:python-scaffold fastapi-microservice
@@ -320,6 +335,7 @@ User: "Build RAG system for document Q&A"
 **Definition**: Orchestrators coordinate multiple agents in predefined sequences for complex operations.
 
 **Patterns:**
+
 ```
 Planning (Sonnet) → Execution (Haiku) → Review (Sonnet)
 
@@ -340,6 +356,7 @@ observability-engineer (Haiku) → monitoring setup
 ```
 
 **Available Orchestrators:**
+
 - full-stack-feature
 - ml-pipeline
 - incident-response
@@ -356,198 +373,198 @@ observability-engineer (Haiku) → monitoring setup
 
 #### Core Architecture
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **backend-architect** | opus | backend-development | RESTful API design, microservice boundaries, database schemas | Designing backend APIs, service architectures, or data models |
-| **frontend-developer** | sonnet | multi-platform-apps | React components, responsive layouts, client-side state management | Building UI components, implementing responsive designs |
-| **graphql-architect** | opus | backend-development | GraphQL schemas, resolvers, federation architecture | Designing GraphQL APIs, implementing schema federation |
-| **architect-reviewer** | opus | comprehensive-review | Architectural consistency analysis and pattern validation | Reviewing code for architectural patterns and consistency |
-| **cloud-architect** | opus | cloud-infrastructure | AWS/Azure/GCP infrastructure design and cost optimization | Designing cloud infrastructure, optimizing costs |
-| **hybrid-cloud-architect** | opus | cloud-infrastructure | Multi-cloud strategies across cloud and on-premises environments | Planning hybrid cloud architectures |
-| **kubernetes-architect** | opus | kubernetes-operations | Cloud-native infrastructure with Kubernetes and GitOps | Designing K8s deployments, implementing GitOps |
+| Agent                      | Model  | Plugin                | Description                                                        | Use When                                                      |
+| -------------------------- | ------ | --------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- |
+| **backend-architect**      | opus   | backend-development   | RESTful API design, microservice boundaries, database schemas      | Designing backend APIs, service architectures, or data models |
+| **frontend-developer**     | sonnet | multi-platform-apps   | React components, responsive layouts, client-side state management | Building UI components, implementing responsive designs       |
+| **graphql-architect**      | opus   | backend-development   | GraphQL schemas, resolvers, federation architecture                | Designing GraphQL APIs, implementing schema federation        |
+| **architect-reviewer**     | opus   | comprehensive-review  | Architectural consistency analysis and pattern validation          | Reviewing code for architectural patterns and consistency     |
+| **cloud-architect**        | opus   | cloud-infrastructure  | AWS/Azure/GCP infrastructure design and cost optimization          | Designing cloud infrastructure, optimizing costs              |
+| **hybrid-cloud-architect** | opus   | cloud-infrastructure  | Multi-cloud strategies across cloud and on-premises environments   | Planning hybrid cloud architectures                           |
+| **kubernetes-architect**   | opus   | kubernetes-operations | Cloud-native infrastructure with Kubernetes and GitOps             | Designing K8s deployments, implementing GitOps                |
 
 #### UI/UX & Mobile
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **ui-ux-designer** | sonnet | multi-platform-apps | Interface design, wireframes, design systems | Creating UI/UX designs, design systems |
-| **ui-visual-validator** | sonnet | accessibility-compliance | Visual regression testing and UI verification | Validating UI changes, accessibility compliance |
-| **mobile-developer** | sonnet | multi-platform-apps | React Native and Flutter application development | Building cross-platform mobile apps |
-| **ios-developer** | sonnet | multi-platform-apps | Native iOS development with Swift/SwiftUI | Developing native iOS applications |
-| **flutter-expert** | sonnet | multi-platform-apps | Advanced Flutter development with state management | Building Flutter apps with complex state |
+| Agent                   | Model  | Plugin                   | Description                                        | Use When                                        |
+| ----------------------- | ------ | ------------------------ | -------------------------------------------------- | ----------------------------------------------- |
+| **ui-ux-designer**      | sonnet | multi-platform-apps      | Interface design, wireframes, design systems       | Creating UI/UX designs, design systems          |
+| **ui-visual-validator** | sonnet | accessibility-compliance | Visual regression testing and UI verification      | Validating UI changes, accessibility compliance |
+| **mobile-developer**    | sonnet | multi-platform-apps      | React Native and Flutter application development   | Building cross-platform mobile apps             |
+| **ios-developer**       | sonnet | multi-platform-apps      | Native iOS development with Swift/SwiftUI          | Developing native iOS applications              |
+| **flutter-expert**      | sonnet | multi-platform-apps      | Advanced Flutter development with state management | Building Flutter apps with complex state        |
 
 ### Programming Languages (20 agents)
 
 #### Systems & Low-Level
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **c-pro** | sonnet | systems-programming | System programming with memory management and OS interfaces | Writing C code, system-level programming |
-| **cpp-pro** | sonnet | systems-programming | Modern C++ with RAII, smart pointers, STL algorithms | Writing modern C++ code |
-| **rust-pro** | sonnet | systems-programming | Memory-safe systems programming with ownership patterns | Developing Rust applications |
-| **golang-pro** | sonnet | systems-programming | Concurrent programming with goroutines and channels | Building Go services, concurrent systems |
+| Agent          | Model  | Plugin              | Description                                                 | Use When                                 |
+| -------------- | ------ | ------------------- | ----------------------------------------------------------- | ---------------------------------------- |
+| **c-pro**      | sonnet | systems-programming | System programming with memory management and OS interfaces | Writing C code, system-level programming |
+| **cpp-pro**    | sonnet | systems-programming | Modern C++ with RAII, smart pointers, STL algorithms        | Writing modern C++ code                  |
+| **rust-pro**   | sonnet | systems-programming | Memory-safe systems programming with ownership patterns     | Developing Rust applications             |
+| **golang-pro** | sonnet | systems-programming | Concurrent programming with goroutines and channels         | Building Go services, concurrent systems |
 
 #### Web & Application
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **javascript-pro** | sonnet | javascript-typescript | Modern JavaScript with ES6+, async patterns, Node.js | Writing JavaScript code |
-| **typescript-pro** | sonnet | javascript-typescript | Advanced TypeScript with type systems and generics | Developing TypeScript applications |
-| **python-pro** | sonnet | python-development | Python development with advanced features and optimization | Writing Python code |
-| **ruby-pro** | sonnet | web-scripting | Ruby with metaprogramming, Rails patterns, gem development | Developing Ruby applications |
-| **php-pro** | sonnet | web-scripting | Modern PHP with frameworks and performance optimization | Writing PHP code |
+| Agent              | Model  | Plugin                | Description                                                | Use When                           |
+| ------------------ | ------ | --------------------- | ---------------------------------------------------------- | ---------------------------------- |
+| **javascript-pro** | sonnet | javascript-typescript | Modern JavaScript with ES6+, async patterns, Node.js       | Writing JavaScript code            |
+| **typescript-pro** | sonnet | javascript-typescript | Advanced TypeScript with type systems and generics         | Developing TypeScript applications |
+| **python-pro**     | sonnet | python-development    | Python development with advanced features and optimization | Writing Python code                |
+| **ruby-pro**       | sonnet | web-scripting         | Ruby with metaprogramming, Rails patterns, gem development | Developing Ruby applications       |
+| **php-pro**        | sonnet | web-scripting         | Modern PHP with frameworks and performance optimization    | Writing PHP code                   |
 
 #### Enterprise & JVM
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **java-pro** | sonnet | jvm-languages | Modern Java with streams, concurrency, JVM optimization | Developing Java applications |
-| **scala-pro** | sonnet | jvm-languages | Enterprise Scala with functional programming and distributed systems | Writing Scala code |
-| **csharp-pro** | sonnet | jvm-languages | C# development with .NET frameworks and patterns | Developing C# applications |
+| Agent          | Model  | Plugin        | Description                                                          | Use When                     |
+| -------------- | ------ | ------------- | -------------------------------------------------------------------- | ---------------------------- |
+| **java-pro**   | sonnet | jvm-languages | Modern Java with streams, concurrency, JVM optimization              | Developing Java applications |
+| **scala-pro**  | sonnet | jvm-languages | Enterprise Scala with functional programming and distributed systems | Writing Scala code           |
+| **csharp-pro** | sonnet | jvm-languages | C# development with .NET frameworks and patterns                     | Developing C# applications   |
 
 #### Specialized Platforms
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **elixir-pro** | sonnet | functional-programming | Elixir with OTP patterns and Phoenix frameworks | Building Elixir applications |
-| **django-pro** | sonnet | api-scaffolding | Django development with ORM and async views | Creating Django projects |
-| **fastapi-pro** | sonnet | api-scaffolding | FastAPI with async patterns and Pydantic | Building FastAPI applications |
-| **unity-developer** | sonnet | game-development | Unity game development and optimization | Developing Unity games |
-| **minecraft-bukkit-pro** | sonnet | game-development | Minecraft server plugin development | Creating Minecraft plugins |
-| **sql-pro** | sonnet | database-design | Complex SQL queries and database optimization | Writing SQL queries, optimizing databases |
-| **arm-cortex-expert** | sonnet | arm-cortex-microcontrollers | ARM Cortex-M firmware and peripheral driver development | Developing ARM Cortex firmware |
+| Agent                    | Model  | Plugin                      | Description                                             | Use When                                  |
+| ------------------------ | ------ | --------------------------- | ------------------------------------------------------- | ----------------------------------------- |
+| **elixir-pro**           | sonnet | functional-programming      | Elixir with OTP patterns and Phoenix frameworks         | Building Elixir applications              |
+| **django-pro**           | sonnet | api-scaffolding             | Django development with ORM and async views             | Creating Django projects                  |
+| **fastapi-pro**          | sonnet | api-scaffolding             | FastAPI with async patterns and Pydantic                | Building FastAPI applications             |
+| **unity-developer**      | sonnet | game-development            | Unity game development and optimization                 | Developing Unity games                    |
+| **minecraft-bukkit-pro** | sonnet | game-development            | Minecraft server plugin development                     | Creating Minecraft plugins                |
+| **sql-pro**              | sonnet | database-design             | Complex SQL queries and database optimization           | Writing SQL queries, optimizing databases |
+| **arm-cortex-expert**    | sonnet | arm-cortex-microcontrollers | ARM Cortex-M firmware and peripheral driver development | Developing ARM Cortex firmware            |
 
 ### Infrastructure & Operations (12 agents)
 
 #### DevOps & Deployment
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **devops-troubleshooter** | sonnet | incident-response | Production debugging, log analysis, deployment troubleshooting | Debugging production issues |
-| **deployment-engineer** | sonnet | cloud-infrastructure | CI/CD pipelines, containerization, cloud deployments | Setting up CI/CD, deploying applications |
-| **terraform-specialist** | sonnet | cloud-infrastructure | Infrastructure as Code with Terraform modules and state management | Writing Terraform configurations |
-| **dx-optimizer** | sonnet | team-collaboration | Developer experience optimization and tooling improvements | Improving developer workflows |
+| Agent                     | Model  | Plugin               | Description                                                        | Use When                                 |
+| ------------------------- | ------ | -------------------- | ------------------------------------------------------------------ | ---------------------------------------- |
+| **devops-troubleshooter** | sonnet | incident-response    | Production debugging, log analysis, deployment troubleshooting     | Debugging production issues              |
+| **deployment-engineer**   | sonnet | cloud-infrastructure | CI/CD pipelines, containerization, cloud deployments               | Setting up CI/CD, deploying applications |
+| **terraform-specialist**  | sonnet | cloud-infrastructure | Infrastructure as Code with Terraform modules and state management | Writing Terraform configurations         |
+| **dx-optimizer**          | sonnet | team-collaboration   | Developer experience optimization and tooling improvements         | Improving developer workflows            |
 
 #### Database Management
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **database-optimizer** | sonnet | observability-monitoring | Query optimization, index design, migration strategies | Optimizing database performance |
-| **database-admin** | sonnet | database-migrations | Database operations, backup, replication, monitoring | Managing database operations |
-| **database-architect** | opus | database-design | Database design from scratch, technology selection, schema modeling | Designing database schemas |
+| Agent                  | Model  | Plugin                   | Description                                                         | Use When                        |
+| ---------------------- | ------ | ------------------------ | ------------------------------------------------------------------- | ------------------------------- |
+| **database-optimizer** | sonnet | observability-monitoring | Query optimization, index design, migration strategies              | Optimizing database performance |
+| **database-admin**     | sonnet | database-migrations      | Database operations, backup, replication, monitoring                | Managing database operations    |
+| **database-architect** | opus   | database-design          | Database design from scratch, technology selection, schema modeling | Designing database schemas      |
 
 #### Incident Response & Network
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **incident-responder** | opus | incident-response | Production incident management and resolution | Handling production incidents |
-| **network-engineer** | sonnet | observability-monitoring | Network debugging, load balancing, traffic analysis | Debugging network issues |
+| Agent                  | Model  | Plugin                   | Description                                         | Use When                      |
+| ---------------------- | ------ | ------------------------ | --------------------------------------------------- | ----------------------------- |
+| **incident-responder** | opus   | incident-response        | Production incident management and resolution       | Handling production incidents |
+| **network-engineer**   | sonnet | observability-monitoring | Network debugging, load balancing, traffic analysis | Debugging network issues      |
 
 ### Quality Assurance & Security (13 agents)
 
 #### Code Quality & Review
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **code-reviewer** | opus | comprehensive-review | Code review with security focus and production reliability | Reviewing code changes |
-| **security-auditor** | opus | comprehensive-review | Vulnerability assessment and OWASP compliance | Performing security audits |
-| **backend-security-coder** | opus | data-validation-suite | Secure backend coding practices, API security implementation | Implementing backend security |
-| **frontend-security-coder** | opus | frontend-mobile-security | XSS prevention, CSP implementation, client-side security | Implementing frontend security |
-| **mobile-security-coder** | opus | frontend-mobile-security | Mobile security patterns, WebView security, biometric auth | Securing mobile applications |
+| Agent                       | Model | Plugin                   | Description                                                  | Use When                       |
+| --------------------------- | ----- | ------------------------ | ------------------------------------------------------------ | ------------------------------ |
+| **code-reviewer**           | opus  | comprehensive-review     | Code review with security focus and production reliability   | Reviewing code changes         |
+| **security-auditor**        | opus  | comprehensive-review     | Vulnerability assessment and OWASP compliance                | Performing security audits     |
+| **backend-security-coder**  | opus  | data-validation-suite    | Secure backend coding practices, API security implementation | Implementing backend security  |
+| **frontend-security-coder** | opus  | frontend-mobile-security | XSS prevention, CSP implementation, client-side security     | Implementing frontend security |
+| **mobile-security-coder**   | opus  | frontend-mobile-security | Mobile security patterns, WebView security, biometric auth   | Securing mobile applications   |
 
 #### Testing & Debugging
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **test-automator** | sonnet | codebase-cleanup | Comprehensive test suite creation (unit, integration, e2e) | Generating tests |
-| **tdd-orchestrator** | sonnet | backend-development | Test-Driven Development methodology guidance | Following TDD practices |
-| **debugger** | sonnet | error-debugging | Error resolution and test failure analysis | Debugging errors |
-| **error-detective** | sonnet | error-debugging | Log analysis and error pattern recognition | Analyzing error logs |
+| Agent                | Model  | Plugin              | Description                                                | Use When                |
+| -------------------- | ------ | ------------------- | ---------------------------------------------------------- | ----------------------- |
+| **test-automator**   | sonnet | codebase-cleanup    | Comprehensive test suite creation (unit, integration, e2e) | Generating tests        |
+| **tdd-orchestrator** | sonnet | backend-development | Test-Driven Development methodology guidance               | Following TDD practices |
+| **debugger**         | sonnet | error-debugging     | Error resolution and test failure analysis                 | Debugging errors        |
+| **error-detective**  | sonnet | error-debugging     | Log analysis and error pattern recognition                 | Analyzing error logs    |
 
 #### Performance & Observability
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **performance-engineer** | opus | observability-monitoring | Application profiling and optimization | Optimizing application performance |
-| **observability-engineer** | opus | observability-monitoring | Production monitoring, distributed tracing, SLI/SLO management | Setting up observability |
-| **search-specialist** | haiku | content-marketing | Advanced web research and information synthesis | Researching information |
+| Agent                      | Model | Plugin                   | Description                                                    | Use When                           |
+| -------------------------- | ----- | ------------------------ | -------------------------------------------------------------- | ---------------------------------- |
+| **performance-engineer**   | opus  | observability-monitoring | Application profiling and optimization                         | Optimizing application performance |
+| **observability-engineer** | opus  | observability-monitoring | Production monitoring, distributed tracing, SLI/SLO management | Setting up observability           |
+| **search-specialist**      | haiku | content-marketing        | Advanced web research and information synthesis                | Researching information            |
 
 ### Data & AI (8 agents)
 
 #### Data Engineering & Analytics
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **data-scientist** | opus | machine-learning-ops | Data analysis, SQL queries, BigQuery operations | Analyzing data |
-| **data-engineer** | sonnet | data-engineering | ETL pipelines, data warehouses, streaming architectures | Building data pipelines |
+| Agent              | Model  | Plugin               | Description                                             | Use When                |
+| ------------------ | ------ | -------------------- | ------------------------------------------------------- | ----------------------- |
+| **data-scientist** | opus   | machine-learning-ops | Data analysis, SQL queries, BigQuery operations         | Analyzing data          |
+| **data-engineer**  | sonnet | data-engineering     | ETL pipelines, data warehouses, streaming architectures | Building data pipelines |
 
 #### Machine Learning & AI
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **ai-engineer** | opus | llm-application-dev | LLM applications, RAG systems, prompt pipelines | Building LLM applications |
-| **ml-engineer** | opus | machine-learning-ops | ML pipelines, model serving, feature engineering | Developing ML pipelines |
-| **mlops-engineer** | opus | machine-learning-ops | ML infrastructure, experiment tracking, model registries | Setting up MLOps infrastructure |
-| **prompt-engineer** | opus | llm-application-dev | LLM prompt optimization and engineering | Optimizing LLM prompts |
+| Agent               | Model | Plugin               | Description                                              | Use When                        |
+| ------------------- | ----- | -------------------- | -------------------------------------------------------- | ------------------------------- |
+| **ai-engineer**     | opus  | llm-application-dev  | LLM applications, RAG systems, prompt pipelines          | Building LLM applications       |
+| **ml-engineer**     | opus  | machine-learning-ops | ML pipelines, model serving, feature engineering         | Developing ML pipelines         |
+| **mlops-engineer**  | opus  | machine-learning-ops | ML infrastructure, experiment tracking, model registries | Setting up MLOps infrastructure |
+| **prompt-engineer** | opus  | llm-application-dev  | LLM prompt optimization and engineering                  | Optimizing LLM prompts          |
 
 ### Documentation & Technical Writing (6 agents)
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **docs-architect** | opus | code-documentation | Comprehensive technical documentation generation | Creating technical documentation |
-| **api-documenter** | sonnet | api-testing-observability | OpenAPI/Swagger specifications and developer docs | Documenting APIs |
-| **reference-builder** | haiku | documentation-generation | Technical references and API documentation | Building reference documentation |
-| **tutorial-engineer** | sonnet | code-documentation | Step-by-step tutorials and educational content | Creating tutorials |
-| **mermaid-expert** | sonnet | documentation-generation | Diagram creation (flowcharts, sequences, ERDs) | Creating diagrams |
+| Agent                 | Model  | Plugin                    | Description                                       | Use When                         |
+| --------------------- | ------ | ------------------------- | ------------------------------------------------- | -------------------------------- |
+| **docs-architect**    | opus   | code-documentation        | Comprehensive technical documentation generation  | Creating technical documentation |
+| **api-documenter**    | sonnet | api-testing-observability | OpenAPI/Swagger specifications and developer docs | Documenting APIs                 |
+| **reference-builder** | haiku  | documentation-generation  | Technical references and API documentation        | Building reference documentation |
+| **tutorial-engineer** | sonnet | code-documentation        | Step-by-step tutorials and educational content    | Creating tutorials               |
+| **mermaid-expert**    | sonnet | documentation-generation  | Diagram creation (flowcharts, sequences, ERDs)    | Creating diagrams                |
 
 ### Business & Operations (11 agents)
 
 #### Business Analysis & Finance
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **business-analyst** | sonnet | business-analytics | Metrics analysis, reporting, KPI tracking | Analyzing business metrics |
-| **quant-analyst** | opus | quantitative-trading | Financial modeling, trading strategies, market analysis | Building trading strategies |
-| **risk-manager** | sonnet | quantitative-trading | Portfolio risk monitoring and management | Managing financial risk |
+| Agent                | Model  | Plugin               | Description                                             | Use When                    |
+| -------------------- | ------ | -------------------- | ------------------------------------------------------- | --------------------------- |
+| **business-analyst** | sonnet | business-analytics   | Metrics analysis, reporting, KPI tracking               | Analyzing business metrics  |
+| **quant-analyst**    | opus   | quantitative-trading | Financial modeling, trading strategies, market analysis | Building trading strategies |
+| **risk-manager**     | sonnet | quantitative-trading | Portfolio risk monitoring and management                | Managing financial risk     |
 
 #### Marketing & Sales
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **content-marketer** | sonnet | content-marketing | Blog posts, social media, email campaigns | Creating marketing content |
-| **sales-automator** | haiku | customer-sales-automation | Cold emails, follow-ups, proposal generation | Automating sales workflows |
+| Agent                | Model  | Plugin                    | Description                                  | Use When                   |
+| -------------------- | ------ | ------------------------- | -------------------------------------------- | -------------------------- |
+| **content-marketer** | sonnet | content-marketing         | Blog posts, social media, email campaigns    | Creating marketing content |
+| **sales-automator**  | haiku  | customer-sales-automation | Cold emails, follow-ups, proposal generation | Automating sales workflows |
 
 #### Support & Legal
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **customer-support** | sonnet | customer-sales-automation | Support tickets, FAQ responses, customer communication | Handling customer support |
-| **hr-pro** | opus | hr-legal-compliance | HR operations, policies, employee relations | Managing HR processes |
-| **legal-advisor** | opus | hr-legal-compliance | Privacy policies, terms of service, legal documentation | Creating legal documents |
+| Agent                | Model  | Plugin                    | Description                                             | Use When                  |
+| -------------------- | ------ | ------------------------- | ------------------------------------------------------- | ------------------------- |
+| **customer-support** | sonnet | customer-sales-automation | Support tickets, FAQ responses, customer communication  | Handling customer support |
+| **hr-pro**           | opus   | hr-legal-compliance       | HR operations, policies, employee relations             | Managing HR processes     |
+| **legal-advisor**    | opus   | hr-legal-compliance       | Privacy policies, terms of service, legal documentation | Creating legal documents  |
 
 ### SEO & Content Optimization (10 agents)
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **seo-content-auditor** | sonnet | seo-content-creation | Content quality analysis, E-E-A-T signals assessment | Auditing SEO content |
-| **seo-meta-optimizer** | haiku | seo-technical-optimization | Meta title and description optimization | Optimizing meta tags |
-| **seo-keyword-strategist** | haiku | seo-technical-optimization | Keyword analysis and semantic variations | Developing keyword strategy |
-| **seo-structure-architect** | haiku | seo-technical-optimization | Content structure and schema markup | Structuring content for SEO |
-| **seo-snippet-hunter** | haiku | seo-technical-optimization | Featured snippet formatting | Optimizing for featured snippets |
-| **seo-content-refresher** | haiku | seo-analysis-monitoring | Content freshness analysis | Refreshing existing content |
-| **seo-cannibalization-detector** | haiku | seo-analysis-monitoring | Keyword overlap detection | Detecting content cannibalization |
-| **seo-authority-builder** | sonnet | seo-analysis-monitoring | E-E-A-T signal analysis | Building content authority |
-| **seo-content-writer** | sonnet | seo-content-creation | SEO-optimized content creation | Writing SEO content |
-| **seo-content-planner** | haiku | seo-content-creation | Content planning and topic clusters | Planning content strategy |
+| Agent                            | Model  | Plugin                     | Description                                          | Use When                          |
+| -------------------------------- | ------ | -------------------------- | ---------------------------------------------------- | --------------------------------- |
+| **seo-content-auditor**          | sonnet | seo-content-creation       | Content quality analysis, E-E-A-T signals assessment | Auditing SEO content              |
+| **seo-meta-optimizer**           | haiku  | seo-technical-optimization | Meta title and description optimization              | Optimizing meta tags              |
+| **seo-keyword-strategist**       | haiku  | seo-technical-optimization | Keyword analysis and semantic variations             | Developing keyword strategy       |
+| **seo-structure-architect**      | haiku  | seo-technical-optimization | Content structure and schema markup                  | Structuring content for SEO       |
+| **seo-snippet-hunter**           | haiku  | seo-technical-optimization | Featured snippet formatting                          | Optimizing for featured snippets  |
+| **seo-content-refresher**        | haiku  | seo-analysis-monitoring    | Content freshness analysis                           | Refreshing existing content       |
+| **seo-cannibalization-detector** | haiku  | seo-analysis-monitoring    | Keyword overlap detection                            | Detecting content cannibalization |
+| **seo-authority-builder**        | sonnet | seo-analysis-monitoring    | E-E-A-T signal analysis                              | Building content authority        |
+| **seo-content-writer**           | sonnet | seo-content-creation       | SEO-optimized content creation                       | Writing SEO content               |
+| **seo-content-planner**          | haiku  | seo-content-creation       | Content planning and topic clusters                  | Planning content strategy         |
 
 ### Specialized Domains (5 agents)
 
-| Agent | Model | Plugin | Description | Use When |
-|-------|-------|--------|-------------|----------|
-| **blockchain-developer** | sonnet | blockchain-web3 | Web3 apps, smart contracts, DeFi protocols | Developing blockchain applications |
-| **payment-integration** | sonnet | payment-processing | Payment processor integration (Stripe, PayPal) | Integrating payment systems |
-| **legacy-modernizer** | sonnet | framework-migration | Legacy code refactoring and modernization | Modernizing legacy code |
-| **context-manager** | haiku | agent-orchestration | Multi-agent context management | Managing multi-agent contexts |
+| Agent                    | Model  | Plugin              | Description                                    | Use When                           |
+| ------------------------ | ------ | ------------------- | ---------------------------------------------- | ---------------------------------- |
+| **blockchain-developer** | sonnet | blockchain-web3     | Web3 apps, smart contracts, DeFi protocols     | Developing blockchain applications |
+| **payment-integration**  | sonnet | payment-processing  | Payment processor integration (Stripe, PayPal) | Integrating payment systems        |
+| **legacy-modernizer**    | sonnet | framework-migration | Legacy code refactoring and modernization      | Modernizing legacy code            |
+| **context-manager**      | haiku  | agent-orchestration | Multi-agent context management                 | Managing multi-agent contexts      |
 
 ---
 
@@ -558,6 +575,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Kubernetes Operations (4 skills)
 
 **k8s-manifest-generator**
+
 - **Description**: Create production-ready Kubernetes manifests for Deployments, Services, ConfigMaps, and Secrets
 - **Use When**: Setting up Kubernetes deployments, creating K8s resources
 - **Activation Trigger**: "Kubernetes deployment", "K8s manifest", "create deployment"
@@ -568,6 +586,7 @@ observability-engineer (Haiku) → monitoring setup
   - ConfigMap and Secret management
 
 **helm-chart-scaffolding**
+
 - **Description**: Design, organize, and manage Helm charts for templating and packaging K8s applications
 - **Use When**: Creating Helm charts, templating Kubernetes resources
 - **Activation Trigger**: "Helm chart", "Helm template", "package Kubernetes"
@@ -578,6 +597,7 @@ observability-engineer (Haiku) → monitoring setup
   - Chart dependencies
 
 **gitops-workflow**
+
 - **Description**: Implement GitOps workflows with ArgoCD and Flux for automated, declarative deployments
 - **Use When**: Setting up GitOps, implementing continuous deployment
 - **Activation Trigger**: "GitOps", "ArgoCD", "Flux", "declarative deployment"
@@ -588,6 +608,7 @@ observability-engineer (Haiku) → monitoring setup
   - Automated rollbacks
 
 **k8s-security-policies**
+
 - **Description**: Implement Kubernetes security policies including NetworkPolicy, PodSecurityPolicy, and RBAC
 - **Use When**: Securing Kubernetes clusters, implementing security policies
 - **Activation Trigger**: "K8s security", "NetworkPolicy", "RBAC", "PodSecurityPolicy"
@@ -600,6 +621,7 @@ observability-engineer (Haiku) → monitoring setup
 #### LLM Application Development (4 skills)
 
 **langchain-architecture**
+
 - **Description**: Design LLM applications using LangChain framework with agents, memory, and tool integration
 - **Use When**: Building LangChain applications, implementing AI agents
 - **Activation Trigger**: "LangChain", "LLM agent", "AI agent framework"
@@ -610,6 +632,7 @@ observability-engineer (Haiku) → monitoring setup
   - Chain composition
 
 **prompt-engineering-patterns**
+
 - **Description**: Master advanced prompt engineering techniques for LLM performance and reliability
 - **Use When**: Optimizing LLM prompts, improving AI output quality
 - **Activation Trigger**: "prompt engineering", "optimize prompt", "LLM prompt"
@@ -620,6 +643,7 @@ observability-engineer (Haiku) → monitoring setup
   - Prompt optimization
 
 **rag-implementation**
+
 - **Description**: Build Retrieval-Augmented Generation systems with vector databases and semantic search
 - **Use When**: Building RAG systems, implementing document Q&A
 - **Activation Trigger**: "RAG", "retrieval augmented", "vector database", "semantic search"
@@ -630,6 +654,7 @@ observability-engineer (Haiku) → monitoring setup
   - Retrieval optimization
 
 **llm-evaluation**
+
 - **Description**: Implement comprehensive evaluation strategies with automated metrics and benchmarking
 - **Use When**: Evaluating LLM performance, testing AI applications
 - **Activation Trigger**: "LLM evaluation", "AI testing", "benchmark LLM"
@@ -642,6 +667,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Backend Development (3 skills)
 
 **api-design-principles**
+
 - **Description**: Master REST and GraphQL API design for intuitive, scalable, and maintainable APIs
 - **Use When**: Designing APIs, establishing API standards
 - **Activation Trigger**: "API design", "REST API", "GraphQL schema"
@@ -652,6 +678,7 @@ observability-engineer (Haiku) → monitoring setup
   - Error handling patterns
 
 **architecture-patterns**
+
 - **Description**: Implement Clean Architecture, Hexagonal Architecture, and Domain-Driven Design
 - **Use When**: Architecting complex backend systems, refactoring for maintainability
 - **Activation Trigger**: "clean architecture", "hexagonal architecture", "DDD", "domain-driven design"
@@ -662,6 +689,7 @@ observability-engineer (Haiku) → monitoring setup
   - Bounded contexts
 
 **microservices-patterns**
+
 - **Description**: Design microservices with service boundaries, event-driven communication, and resilience
 - **Use When**: Building microservices, decomposing monoliths
 - **Activation Trigger**: "microservices", "service boundaries", "event-driven"
@@ -674,6 +702,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Blockchain & Web3 (4 skills)
 
 **defi-protocol-templates**
+
 - **Description**: Implement DeFi protocols with templates for staking, AMMs, governance, and lending
 - **Use When**: Building DeFi protocols, implementing smart contracts
 - **Activation Trigger**: "DeFi", "staking", "AMM", "liquidity pool", "governance"
@@ -684,6 +713,7 @@ observability-engineer (Haiku) → monitoring setup
   - Lending protocols
 
 **nft-standards**
+
 - **Description**: Implement NFT standards (ERC-721, ERC-1155) with metadata and marketplace integration
 - **Use When**: Creating NFT collections, implementing NFT functionality
 - **Activation Trigger**: "NFT", "ERC-721", "ERC-1155", "token metadata"
@@ -694,6 +724,7 @@ observability-engineer (Haiku) → monitoring setup
   - Royalty mechanisms
 
 **solidity-security**
+
 - **Description**: Master smart contract security to prevent vulnerabilities and implement secure patterns
 - **Use When**: Auditing smart contracts, implementing security best practices
 - **Activation Trigger**: "smart contract security", "Solidity security", "audit contract"
@@ -704,6 +735,7 @@ observability-engineer (Haiku) → monitoring setup
   - Testing strategies
 
 **web3-testing**
+
 - **Description**: Test smart contracts using Hardhat and Foundry with unit tests and mainnet forking
 - **Use When**: Testing smart contracts, setting up blockchain testing
 - **Activation Trigger**: "smart contract testing", "Hardhat", "Foundry", "mainnet fork"
@@ -716,6 +748,7 @@ observability-engineer (Haiku) → monitoring setup
 #### CI/CD Automation (4 skills)
 
 **deployment-pipeline-design**
+
 - **Description**: Design multi-stage CI/CD pipelines with approval gates and security checks
 - **Use When**: Setting up CI/CD, designing deployment pipelines
 - **Activation Trigger**: "CI/CD pipeline", "deployment pipeline", "continuous deployment"
@@ -726,6 +759,7 @@ observability-engineer (Haiku) → monitoring setup
   - Rollback strategies
 
 **github-actions-templates**
+
 - **Description**: Create production-ready GitHub Actions workflows for testing, building, and deploying
 - **Use When**: Setting up GitHub Actions, automating workflows
 - **Activation Trigger**: "GitHub Actions", "workflow automation", "GHA"
@@ -736,6 +770,7 @@ observability-engineer (Haiku) → monitoring setup
   - Deployment actions
 
 **gitlab-ci-patterns**
+
 - **Description**: Build GitLab CI/CD pipelines with multi-stage workflows and distributed runners
 - **Use When**: Setting up GitLab CI, configuring pipelines
 - **Activation Trigger**: "GitLab CI", ".gitlab-ci.yml", "GitLab pipeline"
@@ -746,6 +781,7 @@ observability-engineer (Haiku) → monitoring setup
   - Deployment stages
 
 **secrets-management**
+
 - **Description**: Implement secure secrets management using Vault, AWS Secrets Manager, or native solutions
 - **Use When**: Managing secrets, implementing secure credential storage
 - **Activation Trigger**: "secrets management", "Vault", "AWS Secrets Manager", "credentials"
@@ -758,6 +794,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Cloud Infrastructure (4 skills)
 
 **terraform-module-library**
+
 - **Description**: Build reusable Terraform modules for AWS, Azure, and GCP infrastructure
 - **Use When**: Writing Terraform, creating reusable IaC modules
 - **Activation Trigger**: "Terraform module", "IaC", "infrastructure as code"
@@ -768,6 +805,7 @@ observability-engineer (Haiku) → monitoring setup
   - Module composition
 
 **multi-cloud-architecture**
+
 - **Description**: Design multi-cloud architectures avoiding vendor lock-in
 - **Use When**: Planning multi-cloud strategy, designing cloud-agnostic systems
 - **Activation Trigger**: "multi-cloud", "cloud agnostic", "vendor lock-in"
@@ -778,6 +816,7 @@ observability-engineer (Haiku) → monitoring setup
   - Disaster recovery
 
 **hybrid-cloud-networking**
+
 - **Description**: Configure secure connectivity between on-premises and cloud platforms
 - **Use When**: Setting up hybrid cloud, connecting on-prem to cloud
 - **Activation Trigger**: "hybrid cloud", "VPN", "Direct Connect", "ExpressRoute"
@@ -788,6 +827,7 @@ observability-engineer (Haiku) → monitoring setup
   - Security groups
 
 **cost-optimization**
+
 - **Description**: Optimize cloud costs through rightsizing, tagging, and reserved instances
 - **Use When**: Reducing cloud costs, optimizing resource usage
 - **Activation Trigger**: "cost optimization", "cloud costs", "rightsizing"
@@ -800,6 +840,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Framework Migration (4 skills)
 
 **react-modernization**
+
 - **Description**: Upgrade React apps, migrate to hooks, and adopt concurrent features
 - **Use When**: Modernizing React applications, upgrading React versions
 - **Activation Trigger**: "React upgrade", "migrate to hooks", "React 18", "concurrent mode"
@@ -810,6 +851,7 @@ observability-engineer (Haiku) → monitoring setup
   - Migration strategies
 
 **angular-migration**
+
 - **Description**: Migrate from AngularJS to Angular using hybrid mode and incremental rewriting
 - **Use When**: Migrating AngularJS applications to Angular
 - **Activation Trigger**: "AngularJS migration", "Angular upgrade", "hybrid mode"
@@ -820,6 +862,7 @@ observability-engineer (Haiku) → monitoring setup
   - Service updates
 
 **database-migration**
+
 - **Description**: Execute database migrations with zero-downtime strategies and transformations
 - **Use When**: Migrating databases, performing schema changes
 - **Activation Trigger**: "database migration", "zero downtime", "schema change"
@@ -830,6 +873,7 @@ observability-engineer (Haiku) → monitoring setup
   - Rollback procedures
 
 **dependency-upgrade**
+
 - **Description**: Manage major dependency upgrades with compatibility analysis and testing
 - **Use When**: Upgrading dependencies, managing breaking changes
 - **Activation Trigger**: "dependency upgrade", "breaking changes", "major version"
@@ -842,6 +886,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Observability & Monitoring (4 skills)
 
 **prometheus-configuration**
+
 - **Description**: Set up Prometheus for comprehensive metric collection and monitoring
 - **Use When**: Setting up Prometheus, configuring monitoring
 - **Activation Trigger**: "Prometheus", "metric collection", "monitoring setup"
@@ -852,6 +897,7 @@ observability-engineer (Haiku) → monitoring setup
   - Recording rules
 
 **grafana-dashboards**
+
 - **Description**: Create production Grafana dashboards for real-time system visualization
 - **Use When**: Creating monitoring dashboards, visualizing metrics
 - **Activation Trigger**: "Grafana", "dashboard", "visualization"
@@ -862,6 +908,7 @@ observability-engineer (Haiku) → monitoring setup
   - Alerting integration
 
 **distributed-tracing**
+
 - **Description**: Implement distributed tracing with Jaeger and Tempo to track requests
 - **Use When**: Implementing tracing, debugging distributed systems
 - **Activation Trigger**: "distributed tracing", "Jaeger", "Tempo", "trace requests"
@@ -872,6 +919,7 @@ observability-engineer (Haiku) → monitoring setup
   - Trace analysis
 
 **slo-implementation**
+
 - **Description**: Define SLIs and SLOs with error budgets and alerting
 - **Use When**: Setting up SLO monitoring, defining reliability targets
 - **Activation Trigger**: "SLO", "SLI", "error budget", "reliability"
@@ -884,6 +932,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Payment Processing (4 skills)
 
 **stripe-integration**
+
 - **Description**: Implement Stripe payment processing for checkout, subscriptions, and webhooks
 - **Use When**: Integrating Stripe, implementing payment processing
 - **Activation Trigger**: "Stripe", "payment processing", "checkout", "subscription"
@@ -894,6 +943,7 @@ observability-engineer (Haiku) → monitoring setup
   - Payment intents
 
 **paypal-integration**
+
 - **Description**: Integrate PayPal payment processing with express checkout and subscriptions
 - **Use When**: Integrating PayPal, implementing alternative payment methods
 - **Activation Trigger**: "PayPal", "express checkout", "PayPal subscription"
@@ -904,6 +954,7 @@ observability-engineer (Haiku) → monitoring setup
   - Refunds and disputes
 
 **pci-compliance**
+
 - **Description**: Implement PCI DSS compliance for secure payment card data handling
 - **Use When**: Implementing payment security, achieving PCI compliance
 - **Activation Trigger**: "PCI DSS", "payment security", "card data"
@@ -914,6 +965,7 @@ observability-engineer (Haiku) → monitoring setup
   - Audit logging
 
 **billing-automation**
+
 - **Description**: Build automated billing systems for recurring payments and invoicing
 - **Use When**: Building billing systems, automating invoicing
 - **Activation Trigger**: "billing automation", "invoicing", "recurring payments"
@@ -926,6 +978,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Python Development (5 skills)
 
 **async-python-patterns**
+
 - **Description**: Master Python asyncio, concurrent programming, and async/await patterns
 - **Use When**: Implementing async Python, building high-performance applications
 - **Activation Trigger**: "Python async", "asyncio", "concurrent", "async/await"
@@ -936,6 +989,7 @@ observability-engineer (Haiku) → monitoring setup
   - Async context managers
 
 **python-testing-patterns**
+
 - **Description**: Implement comprehensive testing with pytest, fixtures, and mocking
 - **Use When**: Writing Python tests, setting up test infrastructure
 - **Activation Trigger**: "pytest", "Python testing", "fixtures", "mocking"
@@ -946,6 +1000,7 @@ observability-engineer (Haiku) → monitoring setup
   - Test organization
 
 **python-packaging**
+
 - **Description**: Create distributable Python packages with proper structure and PyPI publishing
 - **Use When**: Creating Python packages, publishing to PyPI
 - **Activation Trigger**: "Python package", "PyPI", "setup.py", "pyproject.toml"
@@ -956,6 +1011,7 @@ observability-engineer (Haiku) → monitoring setup
   - Version management
 
 **python-performance-optimization**
+
 - **Description**: Profile and optimize Python code using cProfile and performance best practices
 - **Use When**: Optimizing Python code, debugging performance issues
 - **Activation Trigger**: "Python performance", "profiling", "optimization", "cProfile"
@@ -966,6 +1022,7 @@ observability-engineer (Haiku) → monitoring setup
   - Cython integration
 
 **uv-package-manager**
+
 - **Description**: Master the uv package manager for fast dependency management and virtual environments
 - **Use When**: Using uv for Python projects, managing dependencies
 - **Activation Trigger**: "uv", "Python package manager", "fast dependencies"
@@ -978,6 +1035,7 @@ observability-engineer (Haiku) → monitoring setup
 #### JavaScript/TypeScript (4 skills)
 
 **typescript-advanced-types**
+
 - **Description**: Master TypeScript's advanced type system including generics and conditional types
 - **Use When**: Working with complex TypeScript types, type utilities
 - **Activation Trigger**: "TypeScript types", "generics", "conditional types", "type utilities"
@@ -988,6 +1046,7 @@ observability-engineer (Haiku) → monitoring setup
   - Template literal types
 
 **nodejs-backend-patterns**
+
 - **Description**: Build production-ready Node.js services with Express/Fastify and best practices
 - **Use When**: Building Node.js backends, creating APIs
 - **Activation Trigger**: "Node.js backend", "Express", "Fastify", "Node API"
@@ -998,6 +1057,7 @@ observability-engineer (Haiku) → monitoring setup
   - Authentication
 
 **javascript-testing-patterns**
+
 - **Description**: Implement comprehensive testing with Jest, Vitest, and Testing Library
 - **Use When**: Testing JavaScript/TypeScript, setting up test infrastructure
 - **Activation Trigger**: "Jest", "Vitest", "Testing Library", "JavaScript testing"
@@ -1008,6 +1068,7 @@ observability-engineer (Haiku) → monitoring setup
   - Snapshot testing
 
 **modern-javascript-patterns**
+
 - **Description**: Master ES6+ features including async/await, destructuring, and functional programming
 - **Use When**: Writing modern JavaScript, refactoring legacy code
 - **Activation Trigger**: "ES6+", "modern JavaScript", "async/await", "destructuring"
@@ -1020,6 +1081,7 @@ observability-engineer (Haiku) → monitoring setup
 #### API Scaffolding (1 skill)
 
 **fastapi-templates**
+
 - **Description**: Create production-ready FastAPI projects with async patterns and error handling
 - **Use When**: Creating FastAPI projects, setting up API structure
 - **Activation Trigger**: "FastAPI project", "FastAPI template", "API scaffolding"
@@ -1032,6 +1094,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Machine Learning Operations (1 skill)
 
 **ml-pipeline-workflow**
+
 - **Description**: Build end-to-end MLOps pipelines from data preparation through deployment
 - **Use When**: Building ML pipelines, setting up MLOps
 - **Activation Trigger**: "ML pipeline", "MLOps", "model deployment"
@@ -1044,6 +1107,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Security Scanning (1 skill)
 
 **sast-configuration**
+
 - **Description**: Configure Static Application Security Testing tools for vulnerability detection
 - **Use When**: Setting up SAST, configuring security scanning
 - **Activation Trigger**: "SAST", "static analysis", "security scanning"
@@ -1059,33 +1123,34 @@ observability-engineer (Haiku) → monitoring setup
 
 ### Quick Reference Table
 
-| Category | Plugin Count | Notable Plugins |
-|----------|-------------|-----------------|
-| Development | 4 | debugging-toolkit, backend-development, frontend-mobile-development |
-| Documentation | 2 | code-documentation, documentation-generation |
-| Workflows | 3 | git-pr-workflows, full-stack-orchestration, tdd-workflows |
-| Testing | 2 | unit-testing, tdd-workflows |
-| Quality | 3 | code-review-ai, comprehensive-review, performance-testing-review |
-| AI & ML | 4 | llm-application-dev, agent-orchestration, machine-learning-ops |
-| Data | 2 | data-engineering, data-validation-suite |
-| Database | 2 | database-design, database-migrations |
-| Operations | 4 | incident-response, error-diagnostics, distributed-debugging |
-| Performance | 2 | application-performance, database-cloud-optimization |
-| Infrastructure | 5 | kubernetes-operations, cloud-infrastructure, cicd-automation |
-| Security | 4 | security-scanning, security-compliance, backend-api-security |
-| Languages | 7 | python-development, javascript-typescript, systems-programming |
-| Blockchain | 1 | blockchain-web3 |
-| Finance | 1 | quantitative-trading |
-| Payments | 1 | payment-processing |
-| Gaming | 1 | game-development |
-| Marketing | 4 | seo-content-creation, seo-technical-optimization |
-| Business | 3 | business-analytics, hr-legal-compliance |
+| Category       | Plugin Count | Notable Plugins                                                     |
+| -------------- | ------------ | ------------------------------------------------------------------- |
+| Development    | 4            | debugging-toolkit, backend-development, frontend-mobile-development |
+| Documentation  | 2            | code-documentation, documentation-generation                        |
+| Workflows      | 3            | git-pr-workflows, full-stack-orchestration, tdd-workflows           |
+| Testing        | 2            | unit-testing, tdd-workflows                                         |
+| Quality        | 3            | code-review-ai, comprehensive-review, performance-testing-review    |
+| AI & ML        | 4            | llm-application-dev, agent-orchestration, machine-learning-ops      |
+| Data           | 2            | data-engineering, data-validation-suite                             |
+| Database       | 2            | database-design, database-migrations                                |
+| Operations     | 4            | incident-response, error-diagnostics, distributed-debugging         |
+| Performance    | 2            | application-performance, database-cloud-optimization                |
+| Infrastructure | 5            | kubernetes-operations, cloud-infrastructure, cicd-automation        |
+| Security       | 4            | security-scanning, security-compliance, backend-api-security        |
+| Languages      | 7            | python-development, javascript-typescript, systems-programming      |
+| Blockchain     | 1            | blockchain-web3                                                     |
+| Finance        | 1            | quantitative-trading                                                |
+| Payments       | 1            | payment-processing                                                  |
+| Gaming         | 1            | game-development                                                    |
+| Marketing      | 4            | seo-content-creation, seo-technical-optimization                    |
+| Business       | 3            | business-analytics, hr-legal-compliance                             |
 
 ### Detailed Plugin Catalog
 
 #### Development (4 plugins)
 
 **debugging-toolkit**
+
 - **Purpose**: Interactive debugging and DX optimization
 - **Components**:
   - Agents: debugger, dx-optimizer
@@ -1094,6 +1159,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install debugging-toolkit`
 
 **backend-development**
+
 - **Purpose**: Backend API design with GraphQL and TDD
 - **Components**:
   - Agents: backend-architect, graphql-architect, tdd-orchestrator
@@ -1103,6 +1169,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install backend-development`
 
 **frontend-mobile-development**
+
 - **Purpose**: Frontend UI and mobile development
 - **Components**:
   - Agents: frontend-developer, mobile-developer
@@ -1111,6 +1178,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install frontend-mobile-development`
 
 **multi-platform-apps**
+
 - **Purpose**: Cross-platform app coordination (web/iOS/Android)
 - **Components**:
   - Agents: frontend-developer, mobile-developer, ios-developer, flutter-expert, ui-ux-designer
@@ -1121,6 +1189,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Documentation (2 plugins)
 
 **code-documentation**
+
 - **Purpose**: Documentation generation and code explanation
 - **Components**:
   - Agents: docs-architect, tutorial-engineer, code-reviewer
@@ -1129,6 +1198,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install code-documentation`
 
 **documentation-generation**
+
 - **Purpose**: OpenAPI specs, Mermaid diagrams, tutorials
 - **Components**:
   - Agents: reference-builder, mermaid-expert
@@ -1139,6 +1209,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Workflows (3 plugins)
 
 **git-pr-workflows**
+
 - **Purpose**: Git automation and PR enhancement
 - **Components**:
   - Commands: pr-enhance, onboard, git-workflow
@@ -1146,6 +1217,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install git-pr-workflows`
 
 **full-stack-orchestration**
+
 - **Purpose**: End-to-end feature orchestration
 - **Components**:
   - Commands: full-stack-feature
@@ -1153,6 +1225,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install full-stack-orchestration`
 
 **tdd-workflows**
+
 - **Purpose**: Test-driven development methodology
 - **Components**:
   - Commands: tdd-cycle, tdd-red, tdd-green, tdd-refactor
@@ -1162,6 +1235,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Infrastructure (5 plugins)
 
 **kubernetes-operations**
+
 - **Purpose**: K8s manifests and GitOps workflows
 - **Components**:
   - Agents: kubernetes-architect
@@ -1171,6 +1245,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install kubernetes-operations`
 
 **cloud-infrastructure**
+
 - **Purpose**: AWS/Azure/GCP cloud architecture
 - **Components**:
   - Agents: cloud-architect, deployment-engineer, terraform-specialist, network-engineer, hybrid-cloud-architect
@@ -1179,6 +1254,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install cloud-infrastructure`
 
 **cicd-automation**
+
 - **Purpose**: CI/CD pipeline configuration
 - **Components**:
   - Agents: deployment-engineer, terraform-specialist, devops-troubleshooter, kubernetes-architect
@@ -1188,6 +1264,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install cicd-automation`
 
 **deployment-strategies**
+
 - **Purpose**: Deployment patterns and rollback automation
 - **Components**:
   - Agents: deployment-engineer
@@ -1195,6 +1272,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install deployment-strategies`
 
 **deployment-validation**
+
 - **Purpose**: Pre-deployment checks and validation
 - **Components**:
   - Commands: config-validate
@@ -1204,6 +1282,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Security (4 plugins)
 
 **security-scanning**
+
 - **Purpose**: SAST analysis and vulnerability scanning
 - **Components**:
   - Agents: security-auditor
@@ -1213,6 +1292,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install security-scanning`
 
 **security-compliance**
+
 - **Purpose**: SOC2/HIPAA/GDPR compliance
 - **Components**:
   - Commands: compliance-check
@@ -1220,6 +1300,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install security-compliance`
 
 **backend-api-security**
+
 - **Purpose**: API security and authentication
 - **Components**:
   - Agents: backend-security-coder, backend-architect
@@ -1227,6 +1308,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install backend-api-security`
 
 **frontend-mobile-security**
+
 - **Purpose**: XSS/CSRF prevention and mobile security
 - **Components**:
   - Agents: frontend-security-coder, mobile-security-coder
@@ -1237,6 +1319,7 @@ observability-engineer (Haiku) → monitoring setup
 #### Languages (7 plugins)
 
 **python-development**
+
 - **Purpose**: Python 3.12+ with Django/FastAPI
 - **Components**:
   - Agents: python-pro, django-pro, fastapi-pro
@@ -1246,6 +1329,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install python-development`
 
 **javascript-typescript**
+
 - **Purpose**: JavaScript/TypeScript with Node.js
 - **Components**:
   - Agents: javascript-pro, typescript-pro
@@ -1255,6 +1339,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install javascript-typescript`
 
 **systems-programming**
+
 - **Purpose**: Rust, Go, C, C++ for systems development
 - **Components**:
   - Agents: rust-pro, golang-pro, c-pro, cpp-pro
@@ -1263,6 +1348,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install systems-programming`
 
 **jvm-languages**
+
 - **Purpose**: Java, Scala, C# with enterprise patterns
 - **Components**:
   - Agents: java-pro, scala-pro, csharp-pro
@@ -1270,6 +1356,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install jvm-languages`
 
 **web-scripting**
+
 - **Purpose**: PHP and Ruby for web applications
 - **Components**:
   - Agents: php-pro, ruby-pro
@@ -1277,6 +1364,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install web-scripting`
 
 **functional-programming**
+
 - **Purpose**: Elixir with OTP and Phoenix
 - **Components**:
   - Agents: elixir-pro
@@ -1284,6 +1372,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install functional-programming`
 
 **arm-cortex-microcontrollers**
+
 - **Purpose**: ARM Cortex-M firmware and drivers
 - **Components**:
   - Agents: arm-cortex-expert
@@ -1293,6 +1382,7 @@ observability-engineer (Haiku) → monitoring setup
 #### AI & ML (4 plugins)
 
 **llm-application-dev**
+
 - **Purpose**: LLM apps and prompt engineering
 - **Components**:
   - Agents: ai-engineer, prompt-engineer
@@ -1302,6 +1392,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install llm-application-dev`
 
 **machine-learning-ops**
+
 - **Purpose**: ML training pipelines and MLOps
 - **Components**:
   - Agents: ml-engineer, mlops-engineer, data-scientist
@@ -1311,6 +1402,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install machine-learning-ops`
 
 **agent-orchestration**
+
 - **Purpose**: Multi-agent system optimization
 - **Components**:
   - Agents: context-manager
@@ -1319,6 +1411,7 @@ observability-engineer (Haiku) → monitoring setup
 - **Install**: `/plugin install agent-orchestration`
 
 **context-management**
+
 - **Purpose**: Context persistence and restoration
 - **Components**:
   - Agents: context-manager
@@ -1332,123 +1425,123 @@ observability-engineer (Haiku) → monitoring setup
 
 ### Development Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/backend-development:feature-development` | End-to-end backend feature development | `/backend-development:feature-development user authentication` |
-| `/full-stack-orchestration:full-stack-feature` | Complete full-stack feature implementation | `/full-stack-orchestration:full-stack-feature "payment processing"` |
-| `/multi-platform-apps:multi-platform` | Cross-platform app development coordination | `/multi-platform-apps:multi-platform "todo app"` |
-| `/python-development:python-scaffold` | FastAPI/Django project setup | `/python-development:python-scaffold fastapi-microservice` |
-| `/javascript-typescript:typescript-scaffold` | Next.js/React + Vite setup | `/javascript-typescript:typescript-scaffold nextjs-app` |
-| `/systems-programming:rust-project` | Rust project scaffolding | `/systems-programming:rust-project cli-tool` |
+| Command                                        | Description                                 | Example                                                             |
+| ---------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------- |
+| `/backend-development:feature-development`     | End-to-end backend feature development      | `/backend-development:feature-development user authentication`      |
+| `/full-stack-orchestration:full-stack-feature` | Complete full-stack feature implementation  | `/full-stack-orchestration:full-stack-feature "payment processing"` |
+| `/multi-platform-apps:multi-platform`          | Cross-platform app development coordination | `/multi-platform-apps:multi-platform "todo app"`                    |
+| `/python-development:python-scaffold`          | FastAPI/Django project setup                | `/python-development:python-scaffold fastapi-microservice`          |
+| `/javascript-typescript:typescript-scaffold`   | Next.js/React + Vite setup                  | `/javascript-typescript:typescript-scaffold nextjs-app`             |
+| `/systems-programming:rust-project`            | Rust project scaffolding                    | `/systems-programming:rust-project cli-tool`                        |
 
 ### Testing Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/unit-testing:test-generate` | Generate comprehensive unit tests | `/unit-testing:test-generate src/api/users.py` |
-| `/tdd-workflows:tdd-cycle` | Complete TDD red-green-refactor cycle | `/tdd-workflows:tdd-cycle "user registration"` |
-| `/tdd-workflows:tdd-red` | Write failing tests first | `/tdd-workflows:tdd-red "password validation"` |
-| `/tdd-workflows:tdd-green` | Implement code to pass tests | `/tdd-workflows:tdd-green` |
-| `/tdd-workflows:tdd-refactor` | Refactor with passing tests | `/tdd-workflows:tdd-refactor` |
+| Command                       | Description                           | Example                                        |
+| ----------------------------- | ------------------------------------- | ---------------------------------------------- |
+| `/unit-testing:test-generate` | Generate comprehensive unit tests     | `/unit-testing:test-generate src/api/users.py` |
+| `/tdd-workflows:tdd-cycle`    | Complete TDD red-green-refactor cycle | `/tdd-workflows:tdd-cycle "user registration"` |
+| `/tdd-workflows:tdd-red`      | Write failing tests first             | `/tdd-workflows:tdd-red "password validation"` |
+| `/tdd-workflows:tdd-green`    | Implement code to pass tests          | `/tdd-workflows:tdd-green`                     |
+| `/tdd-workflows:tdd-refactor` | Refactor with passing tests           | `/tdd-workflows:tdd-refactor`                  |
 
 ### Security Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/security-scanning:security-hardening` | Comprehensive security hardening | `/security-scanning:security-hardening --level comprehensive` |
-| `/security-scanning:security-sast` | Static application security testing | `/security-scanning:security-sast` |
-| `/security-scanning:security-dependencies` | Dependency vulnerability scanning | `/security-scanning:security-dependencies` |
-| `/security-compliance:compliance-check` | SOC2/HIPAA/GDPR compliance | `/security-compliance:compliance-check SOC2` |
-| `/frontend-mobile-security:xss-scan` | XSS vulnerability scanning | `/frontend-mobile-security:xss-scan` |
+| Command                                    | Description                         | Example                                                       |
+| ------------------------------------------ | ----------------------------------- | ------------------------------------------------------------- |
+| `/security-scanning:security-hardening`    | Comprehensive security hardening    | `/security-scanning:security-hardening --level comprehensive` |
+| `/security-scanning:security-sast`         | Static application security testing | `/security-scanning:security-sast`                            |
+| `/security-scanning:security-dependencies` | Dependency vulnerability scanning   | `/security-scanning:security-dependencies`                    |
+| `/security-compliance:compliance-check`    | SOC2/HIPAA/GDPR compliance          | `/security-compliance:compliance-check SOC2`                  |
+| `/frontend-mobile-security:xss-scan`       | XSS vulnerability scanning          | `/frontend-mobile-security:xss-scan`                          |
 
 ### Infrastructure Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/kubernetes-operations:k8s-deploy` | Kubernetes deployment automation | `/kubernetes-operations:k8s-deploy production` |
-| `/cicd-automation:workflow-automate` | CI/CD pipeline automation | `/cicd-automation:workflow-automate` |
-| `/observability-monitoring:monitor-setup` | Setup monitoring infrastructure | `/observability-monitoring:monitor-setup` |
-| `/observability-monitoring:slo-implement` | Implement SLO/SLI metrics | `/observability-monitoring:slo-implement 99.9` |
-| `/deployment-validation:config-validate` | Pre-deployment validation | `/deployment-validation:config-validate` |
+| Command                                   | Description                      | Example                                        |
+| ----------------------------------------- | -------------------------------- | ---------------------------------------------- |
+| `/kubernetes-operations:k8s-deploy`       | Kubernetes deployment automation | `/kubernetes-operations:k8s-deploy production` |
+| `/cicd-automation:workflow-automate`      | CI/CD pipeline automation        | `/cicd-automation:workflow-automate`           |
+| `/observability-monitoring:monitor-setup` | Setup monitoring infrastructure  | `/observability-monitoring:monitor-setup`      |
+| `/observability-monitoring:slo-implement` | Implement SLO/SLI metrics        | `/observability-monitoring:slo-implement 99.9` |
+| `/deployment-validation:config-validate`  | Pre-deployment validation        | `/deployment-validation:config-validate`       |
 
 ### Code Quality Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/code-review-ai:ai-review` | AI-powered code review | `/code-review-ai:ai-review` |
-| `/comprehensive-review:full-review` | Multi-perspective analysis | `/comprehensive-review:full-review` |
-| `/comprehensive-review:pr-enhance` | Enhance pull requests | `/comprehensive-review:pr-enhance` |
-| `/code-refactoring:refactor-clean` | Code cleanup and refactoring | `/code-refactoring:refactor-clean` |
-| `/code-refactoring:tech-debt` | Technical debt management | `/code-refactoring:tech-debt` |
+| Command                             | Description                  | Example                             |
+| ----------------------------------- | ---------------------------- | ----------------------------------- |
+| `/code-review-ai:ai-review`         | AI-powered code review       | `/code-review-ai:ai-review`         |
+| `/comprehensive-review:full-review` | Multi-perspective analysis   | `/comprehensive-review:full-review` |
+| `/comprehensive-review:pr-enhance`  | Enhance pull requests        | `/comprehensive-review:pr-enhance`  |
+| `/code-refactoring:refactor-clean`  | Code cleanup and refactoring | `/code-refactoring:refactor-clean`  |
+| `/code-refactoring:tech-debt`       | Technical debt management    | `/code-refactoring:tech-debt`       |
 
 ### Debugging Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/debugging-toolkit:smart-debug` | Interactive smart debugging | `/debugging-toolkit:smart-debug "memory leak"` |
+| Command                                | Description                    | Example                                              |
+| -------------------------------------- | ------------------------------ | ---------------------------------------------------- |
+| `/debugging-toolkit:smart-debug`       | Interactive smart debugging    | `/debugging-toolkit:smart-debug "memory leak"`       |
 | `/incident-response:incident-response` | Production incident management | `/incident-response:incident-response "API timeout"` |
-| `/incident-response:smart-fix` | Automated incident resolution | `/incident-response:smart-fix "database connection"` |
-| `/error-debugging:error-analysis` | Deep error analysis | `/error-debugging:error-analysis` |
-| `/error-debugging:error-trace` | Stack trace debugging | `/error-debugging:error-trace` |
-| `/distributed-debugging:debug-trace` | Distributed system tracing | `/distributed-debugging:debug-trace` |
+| `/incident-response:smart-fix`         | Automated incident resolution  | `/incident-response:smart-fix "database connection"` |
+| `/error-debugging:error-analysis`      | Deep error analysis            | `/error-debugging:error-analysis`                    |
+| `/error-debugging:error-trace`         | Stack trace debugging          | `/error-debugging:error-trace`                       |
+| `/distributed-debugging:debug-trace`   | Distributed system tracing     | `/distributed-debugging:debug-trace`                 |
 
 ### Documentation Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/code-documentation:doc-generate` | Generate comprehensive documentation | `/code-documentation:doc-generate` |
-| `/code-documentation:code-explain` | Explain code functionality | `/code-documentation:code-explain src/api/` |
-| `/documentation-generation:doc-generate` | OpenAPI specs, diagrams, tutorials | `/documentation-generation:doc-generate` |
+| Command                                  | Description                          | Example                                     |
+| ---------------------------------------- | ------------------------------------ | ------------------------------------------- |
+| `/code-documentation:doc-generate`       | Generate comprehensive documentation | `/code-documentation:doc-generate`          |
+| `/code-documentation:code-explain`       | Explain code functionality           | `/code-documentation:code-explain src/api/` |
+| `/documentation-generation:doc-generate` | OpenAPI specs, diagrams, tutorials   | `/documentation-generation:doc-generate`    |
 
 ### Data & ML Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/machine-learning-ops:ml-pipeline` | ML training pipeline orchestration | `/machine-learning-ops:ml-pipeline "churn prediction"` |
-| `/data-engineering:data-pipeline` | ETL/ELT pipeline construction | `/data-engineering:data-pipeline "user analytics"` |
-| `/data-engineering:data-driven-feature` | Data-driven feature development | `/data-engineering:data-driven-feature "recommendations"` |
-| `/llm-application-dev:langchain-agent` | LangChain agent development | `/llm-application-dev:langchain-agent "research assistant"` |
-| `/llm-application-dev:ai-assistant` | AI assistant implementation | `/llm-application-dev:ai-assistant "customer support"` |
-| `/llm-application-dev:prompt-optimize` | Prompt engineering optimization | `/llm-application-dev:prompt-optimize` |
+| Command                                 | Description                        | Example                                                     |
+| --------------------------------------- | ---------------------------------- | ----------------------------------------------------------- |
+| `/machine-learning-ops:ml-pipeline`     | ML training pipeline orchestration | `/machine-learning-ops:ml-pipeline "churn prediction"`      |
+| `/data-engineering:data-pipeline`       | ETL/ELT pipeline construction      | `/data-engineering:data-pipeline "user analytics"`          |
+| `/data-engineering:data-driven-feature` | Data-driven feature development    | `/data-engineering:data-driven-feature "recommendations"`   |
+| `/llm-application-dev:langchain-agent`  | LangChain agent development        | `/llm-application-dev:langchain-agent "research assistant"` |
+| `/llm-application-dev:ai-assistant`     | AI assistant implementation        | `/llm-application-dev:ai-assistant "customer support"`      |
+| `/llm-application-dev:prompt-optimize`  | Prompt engineering optimization    | `/llm-application-dev:prompt-optimize`                      |
 
 ### Migration & Maintenance Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/framework-migration:legacy-modernize` | Legacy code modernization | `/framework-migration:legacy-modernize` |
-| `/framework-migration:code-migrate` | Framework migration | `/framework-migration:code-migrate "React 18"` |
-| `/framework-migration:deps-upgrade` | Dependency upgrades | `/framework-migration:deps-upgrade` |
-| `/codebase-cleanup:deps-audit` | Dependency auditing | `/codebase-cleanup:deps-audit` |
-| `/codebase-cleanup:tech-debt` | Technical debt reduction | `/codebase-cleanup:tech-debt` |
+| Command                                 | Description               | Example                                        |
+| --------------------------------------- | ------------------------- | ---------------------------------------------- |
+| `/framework-migration:legacy-modernize` | Legacy code modernization | `/framework-migration:legacy-modernize`        |
+| `/framework-migration:code-migrate`     | Framework migration       | `/framework-migration:code-migrate "React 18"` |
+| `/framework-migration:deps-upgrade`     | Dependency upgrades       | `/framework-migration:deps-upgrade`            |
+| `/codebase-cleanup:deps-audit`          | Dependency auditing       | `/codebase-cleanup:deps-audit`                 |
+| `/codebase-cleanup:tech-debt`           | Technical debt reduction  | `/codebase-cleanup:tech-debt`                  |
 
 ### Git & PR Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/git-pr-workflows:pr-enhance` | Enhance pull request quality | `/git-pr-workflows:pr-enhance` |
-| `/git-pr-workflows:onboard` | Team onboarding automation | `/git-pr-workflows:onboard` |
-| `/git-pr-workflows:git-workflow` | Git workflow automation | `/git-pr-workflows:git-workflow` |
+| Command                          | Description                  | Example                          |
+| -------------------------------- | ---------------------------- | -------------------------------- |
+| `/git-pr-workflows:pr-enhance`   | Enhance pull request quality | `/git-pr-workflows:pr-enhance`   |
+| `/git-pr-workflows:onboard`      | Team onboarding automation   | `/git-pr-workflows:onboard`      |
+| `/git-pr-workflows:git-workflow` | Git workflow automation      | `/git-pr-workflows:git-workflow` |
 
 ### Database Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/database-migrations:sql-migrations` | SQL migration automation | `/database-migrations:sql-migrations` |
-| `/database-migrations:migration-observability` | Migration monitoring | `/database-migrations:migration-observability` |
-| `/database-cloud-optimization:cost-optimize` | Database and cloud optimization | `/database-cloud-optimization:cost-optimize` |
+| Command                                        | Description                     | Example                                        |
+| ---------------------------------------------- | ------------------------------- | ---------------------------------------------- |
+| `/database-migrations:sql-migrations`          | SQL migration automation        | `/database-migrations:sql-migrations`          |
+| `/database-migrations:migration-observability` | Migration monitoring            | `/database-migrations:migration-observability` |
+| `/database-cloud-optimization:cost-optimize`   | Database and cloud optimization | `/database-cloud-optimization:cost-optimize`   |
 
 ### Miscellaneous Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/agent-orchestration:multi-agent-optimize` | Multi-agent optimization | `/agent-orchestration:multi-agent-optimize` |
-| `/agent-orchestration:improve-agent` | Agent improvement workflows | `/agent-orchestration:improve-agent` |
-| `/context-management:context-save` | Save conversation context | `/context-management:context-save` |
-| `/context-management:context-restore` | Restore previous context | `/context-management:context-restore` |
-| `/api-testing-observability:api-mock` | API mocking and testing | `/api-testing-observability:api-mock` |
-| `/accessibility-compliance:accessibility-audit` | WCAG compliance auditing | `/accessibility-compliance:accessibility-audit` |
-| `/performance-testing-review:ai-review` | Performance analysis | `/performance-testing-review:ai-review` |
-| `/application-performance:performance-optimization` | App optimization | `/application-performance:performance-optimization` |
+| Command                                             | Description                 | Example                                             |
+| --------------------------------------------------- | --------------------------- | --------------------------------------------------- |
+| `/agent-orchestration:multi-agent-optimize`         | Multi-agent optimization    | `/agent-orchestration:multi-agent-optimize`         |
+| `/agent-orchestration:improve-agent`                | Agent improvement workflows | `/agent-orchestration:improve-agent`                |
+| `/context-management:context-save`                  | Save conversation context   | `/context-management:context-save`                  |
+| `/context-management:context-restore`               | Restore previous context    | `/context-management:context-restore`               |
+| `/api-testing-observability:api-mock`               | API mocking and testing     | `/api-testing-observability:api-mock`               |
+| `/accessibility-compliance:accessibility-audit`     | WCAG compliance auditing    | `/accessibility-compliance:accessibility-audit`     |
+| `/performance-testing-review:ai-review`             | Performance analysis        | `/performance-testing-review:ai-review`             |
+| `/application-performance:performance-optimization` | App optimization            | `/application-performance:performance-optimization` |
 
 ---
 
@@ -1469,6 +1562,7 @@ Sonnet Agent (Review)
 ```
 
 **Example: API Development**
+
 ```
 backend-architect (Sonnet)
   → Design API architecture, endpoints, data models
@@ -1484,6 +1578,7 @@ code-reviewer (Sonnet)
 ```
 
 **Command:**
+
 ```bash
 /backend-development:feature-development "user authentication API"
 ```
@@ -1519,11 +1614,13 @@ code-reviewer (Sonnet)
 ```
 
 **Command:**
+
 ```bash
 /full-stack-orchestration:full-stack-feature "user dashboard with real-time analytics"
 ```
 
 **What Happens:**
+
 1. Database schema with migrations
 2. Backend API (REST/GraphQL)
 3. Frontend components with state management
@@ -1559,6 +1656,7 @@ code-reviewer (Sonnet)
 ```
 
 **Command:**
+
 ```bash
 /security-scanning:security-hardening --level comprehensive
 ```
@@ -1595,6 +1693,7 @@ code-reviewer (Sonnet)
 ```
 
 **Command:**
+
 ```bash
 /machine-learning-ops:ml-pipeline "customer churn prediction"
 ```
@@ -1629,6 +1728,7 @@ code-reviewer (Sonnet)
 ```
 
 **Command:**
+
 ```bash
 /incident-response:smart-fix "production memory leak in payment service"
 ```
@@ -1705,6 +1805,7 @@ Claude will automatically:
 #### Install by Project Type
 
 **Backend API Project:**
+
 ```bash
 /plugin install backend-development
 /plugin install python-development
@@ -1714,6 +1815,7 @@ Claude will automatically:
 ```
 
 **Full-Stack Application:**
+
 ```bash
 /plugin install full-stack-orchestration
 /plugin install backend-development
@@ -1724,6 +1826,7 @@ Claude will automatically:
 ```
 
 **ML/AI Project:**
+
 ```bash
 /plugin install llm-application-dev
 /plugin install machine-learning-ops
@@ -1733,6 +1836,7 @@ Claude will automatically:
 ```
 
 **Infrastructure Project:**
+
 ```bash
 /plugin install cloud-infrastructure
 /plugin install kubernetes-operations
@@ -1754,6 +1858,7 @@ Claude will automatically:
 ```
 
 **Why:**
+
 - Direct invocation (no reasoning overhead)
 - Structured arguments
 - Predictable workflow
@@ -1774,6 +1879,7 @@ and resilience patterns."
 ```
 
 **Why:**
+
 - Claude reasons about agent selection
 - Adapts to context and requirements
 - Handles ambiguity and edge cases
@@ -1871,6 +1977,7 @@ Leverage the Sonnet → Haiku → Sonnet pattern:
 #### Use Memory for Project Knowledge
 
 Store project-specific information:
+
 - Architecture decisions
 - API conventions
 - Security requirements
@@ -1967,6 +2074,7 @@ Store project-specific information:
 ```
 
 **Benefits:**
+
 - Ensures test coverage
 - Guides implementation
 - Prevents over-engineering
@@ -2128,16 +2236,17 @@ Store project-specific information:
 
 The wshobson framework uses a **two-tier model architecture** for optimal performance and cost efficiency:
 
-| Model | Agent Count | Use Case |
-|-------|-------------|----------|
-| **Haiku 4.5** | 47 agents | Fast execution, deterministic tasks, high throughput |
-| **Sonnet 4.5** | 38 agents | Complex reasoning, architecture, strategic decisions |
+| Model          | Agent Count | Use Case                                             |
+| -------------- | ----------- | ---------------------------------------------------- |
+| **Haiku 4.5**  | 47 agents   | Fast execution, deterministic tasks, high throughput |
+| **Sonnet 4.5** | 38 agents   | Complex reasoning, architecture, strategic decisions |
 
 ### Model Selection Criteria
 
 #### Haiku - Fast Execution & Deterministic Tasks
 
 **Use Haiku when:**
+
 - Generating code from well-defined specifications
 - Creating tests following established patterns
 - Writing documentation with clear templates
@@ -2149,6 +2258,7 @@ The wshobson framework uses a **two-tier model architecture** for optimal perfor
 - Scaffolding projects from templates
 
 **Examples:**
+
 - test-automator: Generate pytest tests
 - deployment-engineer: Deploy to Kubernetes
 - sql-pro: Optimize database queries
@@ -2158,6 +2268,7 @@ The wshobson framework uses a **two-tier model architecture** for optimal perfor
 #### Sonnet - Complex Reasoning & Architecture
 
 **Use Sonnet when:**
+
 - Designing system architecture
 - Making technology selection decisions
 - Performing security audits
@@ -2169,6 +2280,7 @@ The wshobson framework uses a **two-tier model architecture** for optimal perfor
 - Making strategic infrastructure decisions
 
 **Examples:**
+
 - backend-architect: Design API architecture
 - security-auditor: Comprehensive security audit
 - code-reviewer: Architectural code review
@@ -2195,6 +2307,7 @@ Sonnet (Quality Review)
 ```
 
 **Example: API Development**
+
 ```
 backend-architect (Sonnet)
   → Design RESTful API architecture
@@ -2232,6 +2345,7 @@ Haiku (Execute Fixes)
 ```
 
 **Example: Production Incident**
+
 ```
 incident-responder (Opus)
   → Analyze incident: Database connection pool exhaustion
@@ -2272,6 +2386,7 @@ Haiku (Tactical Implementation)
 ```
 
 **Example: Database Architecture**
+
 ```
 database-architect (Opus)
   → Design schema for multi-tenant SaaS
@@ -2372,11 +2487,10 @@ Combined into comprehensive implementation plan
 
 1. **Install Claude Code Extension**
 2. **Configure Plugin Marketplace**
+
    ```json
    {
-     "claude.plugins.marketplaces": [
-       "wshobson/agents"
-     ]
+     "claude.plugins.marketplaces": ["wshobson/agents"]
    }
    ```
 
@@ -2458,6 +2572,7 @@ mkdir -p .claude
 #### Configure Installed Plugins
 
 **.claude/config.json**
+
 ```json
 {
   "plugins": [
@@ -2477,6 +2592,7 @@ mkdir -p .claude
 #### Project-Specific Commands
 
 **.claude/commands/**
+
 ```
 .claude/commands/
 ├── test.sh          # Custom test command
@@ -2485,6 +2601,7 @@ mkdir -p .claude
 ```
 
 **test.sh**
+
 ```bash
 #!/bin/bash
 /unit-testing:test-generate
@@ -2510,6 +2627,7 @@ mkdir -p .claude
 #### Standardize Development Process
 
 1. **Create team plugin bundle**
+
    ```bash
    # Install core plugins for all team members
    /plugin install backend-development
@@ -2520,6 +2638,7 @@ mkdir -p .claude
    ```
 
 2. **Share configuration**
+
    ```bash
    # Commit .claude/config.json to repository
    git add .claude/config.json
@@ -2543,12 +2662,15 @@ mkdir -p .claude
 **Problem:** `/plugin install python-development` returns error
 
 **Solutions:**
+
 1. Verify marketplace is added:
+
    ```bash
    /plugin marketplace add wshobson/agents
    ```
 
 2. Check plugin name spelling:
+
    ```bash
    /plugin  # List available plugins
    ```
@@ -2563,12 +2685,15 @@ mkdir -p .claude
 **Problem:** Agent not responding to natural language
 
 **Solutions:**
+
 1. Use explicit slash command:
+
    ```bash
    /backend-development:feature-development "authentication"
    ```
 
 2. Use agent name in request:
+
    ```
    "Use backend-architect to design authentication API"
    ```
@@ -2583,7 +2708,9 @@ mkdir -p .claude
 **Problem:** Skill activation triggers not working
 
 **Solutions:**
+
 1. Use explicit keywords:
+
    ```
    # Instead of: "Set up K8s"
    "Create Kubernetes deployment with Helm chart"
@@ -2591,6 +2718,7 @@ mkdir -p .claude
    ```
 
 2. Check skill availability:
+
    ```bash
    /plugin install kubernetes-operations  # Includes K8s skills
    ```
@@ -2605,12 +2733,15 @@ mkdir -p .claude
 **Problem:** `/plugin-name:command-name` not recognized
 
 **Solutions:**
+
 1. List available commands:
+
    ```bash
    /plugin
    ```
 
 2. Verify plugin is installed:
+
    ```bash
    /plugin install plugin-name
    ```
@@ -2628,17 +2759,21 @@ mkdir -p .claude
 **Problem:** Agent responses are slow
 
 **Solutions:**
+
 1. Use Haiku-optimized commands for fast operations:
+
    ```bash
    /unit-testing:test-generate  # Uses Haiku
    ```
 
 2. Avoid loading unnecessary plugins:
+
    ```bash
    /plugin uninstall unused-plugin
    ```
 
 3. Use focused commands instead of broad requests:
+
    ```bash
    # Faster
    /backend-development:feature-development "user login"
@@ -2652,7 +2787,9 @@ mkdir -p .claude
 **Problem:** "Context window exceeded" error
 
 **Solutions:**
+
 1. Save and restore context:
+
    ```bash
    /context-management:context-save "current-work"
    # Start new session
@@ -2660,11 +2797,13 @@ mkdir -p .claude
    ```
 
 2. Uninstall unused plugins:
+
    ```bash
    /plugin uninstall rarely-used-plugin
    ```
 
 3. Break large tasks into smaller workflows:
+
    ```bash
    # Instead of one massive command
    /full-stack-orchestration:full-stack-feature "entire application"
@@ -2682,7 +2821,9 @@ mkdir -p .claude
 **Problem:** Code doesn't follow project conventions
 
 **Solutions:**
+
 1. Provide explicit guidelines:
+
    ```
    "Generate FastAPI endpoint following these conventions:
    - Use Pydantic v2 models
@@ -2693,6 +2834,7 @@ mkdir -p .claude
    ```
 
 2. Use code review workflow:
+
    ```bash
    /code-review-ai:ai-review
    # Get feedback, then refine
@@ -2708,12 +2850,15 @@ mkdir -p .claude
 **Problem:** Generated code has security issues
 
 **Solutions:**
+
 1. Always run security scan:
+
    ```bash
    /security-scanning:security-hardening
    ```
 
 2. Use security-focused agents:
+
    ```bash
    /backend-api-security:  # For backend security
    /frontend-mobile-security:xss-scan  # For frontend security
@@ -2730,6 +2875,7 @@ mkdir -p .claude
 #### Documentation Resources
 
 1. **Framework Documentation**
+
    - README.md: Overview and quick start
    - docs/architecture.md: Design principles
    - docs/agents.md: Agent reference
@@ -2738,6 +2884,7 @@ mkdir -p .claude
    - docs/usage.md: Usage guide
 
 2. **This Manual**
+
    - Complete reference for all components
    - Integration guide
    - Best practices
@@ -2752,6 +2899,7 @@ mkdir -p .claude
 #### Community Support
 
 1. **GitHub Repository**
+
    - Issues: Report bugs, request features
    - Discussions: Ask questions, share workflows
    - Pull Requests: Contribute improvements
@@ -2849,12 +2997,12 @@ See [Command Reference](#command-reference) for full details.
 
 ### E. Keyboard Shortcuts
 
-| Shortcut | Action |
-|----------|--------|
-| `/plugin` | List plugins and commands |
-| `/plugin install <name>` | Install plugin |
-| `/plugin uninstall <name>` | Uninstall plugin |
-| `/plugin marketplace add wshobson/agents` | Add marketplace |
+| Shortcut                                  | Action                    |
+| ----------------------------------------- | ------------------------- |
+| `/plugin`                                 | List plugins and commands |
+| `/plugin install <name>`                  | Install plugin            |
+| `/plugin uninstall <name>`                | Uninstall plugin          |
+| `/plugin marketplace add wshobson/agents` | Add marketplace           |
 
 ### F. Glossary
 

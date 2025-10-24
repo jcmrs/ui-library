@@ -1,0 +1,24 @@
+/**
+ * {{COMPONENT_NAME}} Component Exports
+ *
+ * @category {{CATEGORY}}
+ * @module {{COMPONENT_NAME}}
+ *
+ * This barrel file exports the {{COMPONENT_NAME}} component and its associated types.
+ * Import from this file to use the component in your application.
+ *
+ * @example
+ * ```tsx
+ * import { {{COMPONENT_NAME}} } from "@/components/{{CATEGORY}}/{{COMPONENT_NAME_KEBAB}}";
+ * import type { {{COMPONENT_NAME}}Props } from "@/components/{{CATEGORY}}/{{COMPONENT_NAME_KEBAB}}";
+ * ```
+ *
+ * @see {@link ./{{COMPONENT_NAME_KEBAB}}.tsx} for component implementation
+ * @see {@link ./{{COMPONENT_NAME_KEBAB}}.patterns.md} for usage patterns
+ */
+
+export { {{COMPONENT_NAME}} } from "./{{COMPONENT_NAME_KEBAB}}";
+export type { {{COMPONENT_NAME}}Props } from "./{{COMPONENT_NAME_KEBAB}}";
+
+// Export styles for advanced customization (optional)
+export { styles as {{COMPONENT_NAME}}Styles } from "./{{COMPONENT_NAME_KEBAB}}";

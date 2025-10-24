@@ -58,10 +58,7 @@
       "@/shared-assets/*": ["./src/components/shared-assets/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "vite.config.ts"
-  ],
+  "include": ["src/**/*", "vite.config.ts"],
   "exclude": [
     "node_modules",
     "dist",

@@ -29,7 +29,12 @@
       "Bash(bash:*)",
       "Bash(git commit:*)",
       "mcp__github__list_pull_requests",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(git tag:*)",
+      "Bash(chmod:*)",
+      "Bash(npm run prettier:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm run lint:check:*)"
     ],
     "deny": [],
     "ask": []

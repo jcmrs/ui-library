@@ -26,10 +26,7 @@
     "message": "Phase 1.1 complete"
   },
   "progress": {
-    "tasks_completed": [
-      "1.1.1",
-      "1.1.2"
-    ],
+    "tasks_completed": ["1.1.1", "1.1.2"],
     "tasks_total": 0,
     "completion_percentage": 0
   },

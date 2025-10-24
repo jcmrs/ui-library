@@ -4,12 +4,7 @@
  * See: .docs/SESSION-STATE.md for usage details
  */
 
-import {
-  SessionState,
-  ProgressData,
-  CheckpointsData,
-  ValidationResult,
-} from './types';
+import { SessionState, ProgressData, CheckpointsData, ValidationResult } from './types';
 
 /**
  * Validate complete session state
@@ -303,7 +298,7 @@ export function validateStateConsistency(
   if (progressData) {
     // Check if current phase exists in progress data
     const currentPhase = sessionState.current.phase;
-    const phaseExists = progressData.phases.some(p => p.phase === currentPhase);
+    const phaseExists = progressData.phases.some((p) => p.phase === currentPhase);
 
     if (!phaseExists) {
       errors.push(`Current phase ${currentPhase} not found in progress data`);
