@@ -1,0 +1,180 @@
+{
+  "component": "Button",
+  "category": "base",
+  "created": "2025-10-24",
+  "version": "1.0.0",
+  "validation": {
+    "files": {
+      "required": [
+        "button.tsx - Component implementation",
+        "button.stories.tsx - Storybook stories",
+        "button.test.tsx - Component tests",
+        "button.patterns.md - Usage documentation",
+        "button.checklist.json - This validation checklist",
+        "index.ts - Barrel export file"
+      ],
+      "optional": [
+        "base-components/ - Shared sub-components (for variants)",
+        "README.md - Component group documentation"
+      ]
+    },
+    "implementation": {
+      "required": [
+        "Component exported as named export",
+        "Props interface exported (ButtonProps)",
+        "Component uses React.forwardRef for ref forwarding",
+        "Display name set (Button.displayName)",
+        "TypeScript strict mode compatible",
+        "Uses cx() utility for className merging",
+        "Supports all standard HTML attributes via ...props",
+        "Size variants: sm, md, lg, xl",
+        "Visual variants defined in styles object",
+        "Disabled state supported",
+        "Custom className prop supported",
+        "data-testid prop supported"
+      ],
+      "optional": [
+        "Additional variant props",
+        "Custom hooks for complex logic",
+        "Sub-components for composition",
+        "Animation support",
+        "Icon support"
+      ]
+    },
+    "storybook": {
+      "required": [
+        "Meta configuration with title, component, tags",
+        "Default story showing basic usage",
+        "AllSizes story showing all size variants",
+        "AllVariants story showing all visual variants",
+        "Disabled story showing disabled state",
+        "Interactive story with controls",
+        "AccessibilityTest story for a11y testing",
+        "a11y addon configured in parameters",
+        "argTypes defined for all props",
+        "Stories use CSF3 format (satisfies Meta)"
+      ],
+      "optional": [
+        "Loading state story",
+        "Error state story",
+        "Dark mode story",
+        "Responsive story",
+        "Composition examples"
+      ]
+    },
+    "testing": {
+      "required": [
+        "Rendering tests: renders without crashing",
+        "Rendering tests: renders children correctly",
+        "Rendering tests: applies custom className",
+        "Rendering tests: all size variants",
+        "Rendering tests: all visual variants",
+        "Rendering tests: forwards ref correctly",
+        "Rendering tests: spreads additional props",
+        "Accessibility tests: no a11y violations (axe)",
+        "Accessibility tests: disabled state properly communicated",
+        "Accessibility tests: keyboard navigation support",
+        "Accessibility tests: visible focus indicator",
+        "Interaction tests: disabled component behavior",
+        "Edge case tests: empty children",
+        "Edge case tests: null/undefined children",
+        "Edge case tests: long text content",
+        "Edge case tests: special characters",
+        "Edge case tests: rapid prop changes",
+        "Edge case tests: cleanup on unmount"
+      ],
+      "optional": [
+        "Visual regression tests",
+        "Performance tests",
+        "Integration tests with other components",
+        "E2E tests",
+        "Coverage threshold: 90%+"
+      ]
+    },
+    "accessibility": {
+      "required": [
+        "WCAG 2.1 AA compliant",
+        "Color contrast meets 4.5:1 for text",
+        "Focus indicator contrast meets 3:1",
+        "Keyboard navigation fully supported",
+        "Screen reader tested",
+        "ARIA attributes used correctly",
+        "Semantic HTML structure",
+        "aria-disabled for disabled state",
+        "Proper focus management",
+        "Touch target size: 44x44px minimum"
+      ],
+      "optional": [
+        "WCAG 2.1 AAA compliant",
+        "Reduced motion support",
+        "High contrast mode support",
+        "Voice control tested",
+        "Switch control tested"
+      ]
+    },
+    "documentation": {
+      "required": [
+        "patterns.md: Overview section",
+        "patterns.md: Basic Usage section with examples",
+        "patterns.md: Common Patterns section",
+        "patterns.md: Composition Examples section",
+        "patterns.md: Accessibility Guidelines section",
+        "patterns.md: AI Usage Guidance section",
+        "patterns.md: Do's and Don'ts section",
+        "patterns.md: Troubleshooting section",
+        "patterns.md: Related Components section",
+        "patterns.md: References section",
+        "patterns.md: Changelog section",
+        "JSDoc comments on component",
+        "JSDoc comments on props interface",
+        "JSDoc comments on all props",
+        "TypeScript types fully documented"
+      ],
+      "optional": [
+        "Video tutorial",
+        "Interactive playground link",
+        "Migration guide from v1",
+        "Performance optimization guide",
+        "Theming guide"
+      ]
+    },
+    "quality": {
+      "required": [
+        "TypeScript: No type errors",
+        "ESLint: No linting errors",
+        "Prettier: Code properly formatted",
+        "Tests: All tests passing",
+        "Tests: No console errors in tests",
+        "Storybook: Stories render without errors",
+        "Storybook: No a11y violations in stories",
+        "Build: Component builds successfully",
+        "Exports: Component exported from category index",
+        "Exports: Types exported from category index"
+      ],
+      "optional": [
+        "Bundle size analysis",
+        "Performance benchmarks",
+        "Visual regression baseline",
+        "Cross-browser testing",
+        "Mobile device testing"
+      ]
+    }
+  },
+  "metrics": {
+    "requiredCheckpoints": 0,
+    "optionalCheckpoints": 0,
+    "completedRequired": 0,
+    "completedOptional": 0,
+    "completionPercentage": 0
+  },
+  "status": "pending",
+  "lastValidated": null,
+  "validatedBy": null,
+  "notes": [
+    "This checklist is machine-readable and used by validation scripts",
+    "Required checkpoints must be completed before component is considered production-ready",
+    "Optional checkpoints are recommended but not mandatory",
+    "Update metrics after validation runs",
+    "Update status to 'validated' once all required checkpoints pass"
+  ]
+}

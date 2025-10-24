@@ -1,0 +1,169 @@
+"use client";
+
+/**
+ * {{COMPONENT_NAME}} Component
+ *
+ * @category base
+ * @description [Add component description - explain what this component does and when to use it]
+ *
+ * @example
+ * ```tsx
+ * <{{COMPONENT_NAME}}>
+ *   [Add usage example]
+ * </{{COMPONENT_NAME}}>
+ * ```
+ *
+ * @see {@link ./{{COMPONENT_NAME_KEBAB}}.patterns.md} for usage patterns
+ */
+
+import type { ReactNode } from "react";
+import React from "react";
+import { cx } from "@/utils/cx";
+
+/**
+ * Style definitions for {{COMPONENT_NAME}}
+ *
+ * Organized by:
+ * - common: Base styles applied to all variants
+ * - sizes: Size-specific styles (sm, md, lg, xl)
+ * - variants: Visual variant styles
+ * - states: Interactive states (hover, focus, active, disabled)
+ */
+export const styles = {
+  common: {
+    root: [
+      "relative inline-flex items-center justify-center",
+      "transition duration-100 ease-linear",
+      "outline-brand focus-visible:outline-2 focus-visible:outline-offset-2",
+      // Disabled styles
+      "disabled:cursor-not-allowed disabled:opacity-50",
+    ].join(" "),
+  },
+  sizes: {
+    sm: {
+      root: "gap-1 rounded-lg px-3 py-2 text-sm",
+    },
+    md: {
+      root: "gap-1.5 rounded-lg px-3.5 py-2.5 text-sm",
+    },
+    lg: {
+      root: "gap-1.5 rounded-lg px-4 py-2.5 text-md",
+    },
+    xl: {
+      root: "gap-2 rounded-lg px-4.5 py-3 text-md",
+    },
+  },
+  variants: {
+    primary: {
+      root: "bg-brand-600 text-white hover:bg-brand-700",
+    },
+    secondary: {
+      root: "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50",
+    },
+  },
+};
+
+/**
+ * Props for the {{COMPONENT_NAME}} component
+ *
+ * AI USAGE GUIDANCE:
+ * - All props are explicitly typed for clarity
+ * - Optional props have sensible defaults
+ * - Extend this interface for additional variants
+ * - Use discriminated unions for variant-specific props
+ */
+export interface {{COMPONENT_NAME}}Props {
+  /**
+   * Child elements to render inside the component
+   * @example <{{COMPONENT_NAME}}>Content here</{{COMPONENT_NAME}}>
+   */
+  children?: ReactNode;
+
+  /**
+   * Size variant
+   * @default "md"
+   */
+  size?: "sm" | "md" | "lg" | "xl";
+
+  /**
+   * Visual variant
+   * @default "primary"
+   */
+  variant?: "primary" | "secondary";
+
+  /**
+   * Whether the component is disabled
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * Additional CSS classes to apply
+   * @example className="custom-class"
+   */
+  className?: string;
+
+  /**
+   * Test ID for automated testing
+   * @example data-testid="my-component"
+   */
+  "data-testid"?: string;
+}
+
+/**
+ * {{COMPONENT_NAME}} component implementation
+ *
+ * IMPLEMENTATION NOTES:
+ * - Uses cx() for conditional className merging (from @/utils/cx)
+ * - Follows React Aria patterns for accessibility
+ * - Uses Tailwind CSS utility classes for styling
+ * - Provides semantic HTML structure
+ * - Supports all standard HTML attributes via ...props
+ *
+ * ACCESSIBILITY:
+ * - Proper semantic HTML elements
+ * - Keyboard navigation support
+ * - Focus management with visible indicators
+ * - Screen reader friendly
+ * - Disabled state properly communicated
+ *
+ * @param props - Component props
+ * @returns Rendered component
+ */
+export const {{COMPONENT_NAME}} = React.forwardRef<
+  HTMLDivElement,
+  {{COMPONENT_NAME}}Props
+>(
+  (
+    {
+      children,
+      size = "md",
+      variant = "primary",
+      disabled = false,
+      className,
+      "data-testid": testId,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <div
+        ref={ref}
+        className={cx(
+          styles.common.root,
+          styles.sizes[size].root,
+          styles.variants[variant].root,
+          className
+        )}
+        data-testid={testId}
+        aria-disabled={disabled}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+// Display name for React DevTools
+{{COMPONENT_NAME}}.displayName = "{{COMPONENT_NAME}}";

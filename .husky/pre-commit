@@ -1,0 +1,35 @@
+# Pre-commit Quality Gates
+# Enforces quality standards before allowing commits
+# See ADR-011 for rationale
+
+# IMPORTANT: Auto-staging is DISABLED by default
+# Uncomment the line below to enable auto-staging of modified files
+# .husky/pre-commit-auto-stage
+
+echo "🔍 Running pre-commit quality gates..."
+
+# 1. TypeScript type checking
+echo "  → TypeScript type check..."
+npm run type-check
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript errors found. Fix them before committing."
+  exit 1
+fi
+
+# 2. ESLint with auto-fix
+echo "  → ESLint validation..."
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint errors found. Fix them before committing."
+  exit 1
+fi
+
+# 3. Prettier formatting
+echo "  → Prettier formatting check..."
+npm run prettier:check
+if [ $? -ne 0 ]; then
+  echo "❌ Formatting issues found. Run 'npm run prettier' to fix."
+  exit 1
+fi
+
+echo "✅ All quality gates passed!"

@@ -1,0 +1,77 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "version": "1.0.0",
+  "description": "Production-ready UI component library with accessibility-first components",
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "npm run build:lib && npm run build-storybook",
+    "build:lib": "tsc && vite build",
+    "build-storybook": "storybook build",
+    "preview": "vite preview",
+    "test": "npm run type-check && npm run lint && npm run prettier:check",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "prettier": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "prettier:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "storybook": "storybook dev -p 6006"
+  },
+  "keywords": [
+    "react",
+    "ui-library",
+    "components",
+    "design-system",
+    "accessibility",
+    "tailwind",
+    "typescript"
+  ],
+  "author": "{{AUTHOR_NAME}}",
+  "license": "MIT",
+  "dependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-aria": "3.44.0",
+    "react-aria-components": "1.6.0",
+    "clsx": "2.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "@vitejs/plugin-react": "4.3.4",
+    "typescript": "5.7.3",
+    "vite": "6.0.11",
+    "tailwindcss": "4.1.11",
+    "@tailwindcss/vite": "4.1.11",
+    "eslint": "9.18.0",
+    "eslint-plugin-react": "7.37.2",
+    "eslint-plugin-react-hooks": "5.1.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "@typescript-eslint/eslint-plugin": "8.20.0",
+    "@typescript-eslint/parser": "8.20.0",
+    "eslint-plugin-import": "2.31.0",
+    "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "0.6.11",
+    "vitest": "3.0.8",
+    "@testing-library/react": "16.1.0",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/user-event": "14.5.2",
+    "jsdom": "25.0.1",
+    "storybook": "8.5.0",
+    "@storybook/react": "8.5.0",
+    "@storybook/react-vite": "8.5.0",
+    "@storybook/addon-essentials": "8.5.0",
+    "@storybook/addon-interactions": "8.5.0",
+    "@storybook/addon-links": "8.5.0",
+    "@storybook/addon-a11y": "8.5.0",
+    "@storybook/test": "8.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "volta": {
+    "node": "20.18.0",
+    "npm": "10.8.2"
+  }
+}
