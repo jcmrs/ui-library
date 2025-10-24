@@ -34,7 +34,8 @@
       "Bash(chmod:*)",
       "Bash(npm run prettier:*)",
       "Bash(npm run type-check:*)",
-      "Bash(npm run lint:check:*)"
+      "Bash(npm run lint:check:*)",
+      "Bash(node scripts/session-state/writer.ts:*)"
     ],
     "deny": [],
     "ask": []
