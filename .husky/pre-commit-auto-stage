@@ -1,4 +1,3 @@
-#!/usr/bin/env sh
 # Auto-staging hook
 # Automatically stages modified files before commit
 # Excludes sensitive files and lock files
