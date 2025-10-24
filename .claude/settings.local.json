@@ -43,7 +43,8 @@
       "Bash(git config:*)",
       "Read(//c/Users/jcmei/.claude/**)",
       "Bash(git ls-tree:*)",
-      "Bash(npx husky init)"
+      "Bash(npx husky init)",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []
