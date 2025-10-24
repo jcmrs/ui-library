@@ -37,7 +37,13 @@
       "Bash(npm run lint:check:*)",
       "Bash(node scripts/session-state/writer.ts:*)",
       "Bash(npm test)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git fetch:*)",
+      "Bash(git branch:*)",
+      "Bash(git config:*)",
+      "Read(//c/Users/jcmei/.claude/**)",
+      "Bash(git ls-tree:*)",
+      "Bash(npx husky init)"
     ],
     "deny": [],
     "ask": []
