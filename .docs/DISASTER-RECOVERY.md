@@ -12,6 +12,7 @@
 This document provides **step-by-step recovery procedures** for all failure scenarios in the UI library project. Procedures are optimized for Claude Code execution with minimal decision-making required.
 
 **Recovery Philosophy:**
+
 - Fast automated recovery (target: < 5 minutes)
 - Clear decision trees
 - One-command solutions when possible
@@ -54,15 +55,15 @@ This document provides **step-by-step recovery procedures** for all failure scen
 
 ### Recovery Time Objectives
 
-| Scenario | RTO (Recovery Time) | RPO (Data Loss) |
-|----------|---------------------|-----------------|
-| Lost session context | < 1 minute | None |
-| Corrupted local git | < 2 minutes | Up to last push |
-| Quality gate failures | < 5 minutes | None |
-| Wrong branch work | < 3 minutes | None |
-| Remote out of sync | < 2 minutes | None |
-| Merge conflicts | < 5 minutes | None (with abort) |
-| Unknown error | < 5 minutes | Varies |
+| Scenario              | RTO (Recovery Time) | RPO (Data Loss)   |
+| --------------------- | ------------------- | ----------------- |
+| Lost session context  | < 1 minute          | None              |
+| Corrupted local git   | < 2 minutes         | Up to last push   |
+| Quality gate failures | < 5 minutes         | None              |
+| Wrong branch work     | < 3 minutes         | None              |
+| Remote out of sync    | < 2 minutes         | None              |
+| Merge conflicts       | < 5 minutes         | None (with abort) |
+| Unknown error         | < 5 minutes         | Varies            |
 
 ---
 
@@ -73,16 +74,19 @@ This document provides **step-by-step recovery procedures** for all failure scen
 **Purpose:** Interactive recovery wizard for uncertain situations
 
 **When to Use:**
+
 - You don't know what's wrong
 - Multiple errors occurring
 - Unsure which recovery procedure to use
 
 **Usage:**
+
 ```bash
 ./scripts/recovery/panic-button.sh
 ```
 
 **What It Does:**
+
 1. Runs diagnostic checks
 2. Identifies problem type
 3. Recommends recovery procedure
@@ -90,6 +94,7 @@ This document provides **step-by-step recovery procedures** for all failure scen
 5. Validates recovery success
 
 **Example Output:**
+
 ```
 🚨 PANIC BUTTON ACTIVATED 🚨
 
@@ -123,6 +128,7 @@ Select option (1/2/3): _
 **Purpose:** Nuclear option - reset to last known-good remote state
 
 **When to Use:**
+
 - Git state is corrupted beyond repair
 - Cannot determine what went wrong
 - Need clean slate quickly
@@ -131,11 +137,13 @@ Select option (1/2/3): _
 **⚠️ WARNING:** This is destructive! All local uncommitted changes will be lost.
 
 **Usage:**
+
 ```bash
 ./scripts/recovery/emergency-recovery.sh
 ```
 
 **What It Does:**
+
 1. Backs up current state (just in case)
 2. Fetches latest from remote
 3. Hard resets to origin/develop
@@ -144,6 +152,7 @@ Select option (1/2/3): _
 6. Validates recovery
 
 **Example Output:**
+
 ```
 ⚠️  EMERGENCY RECOVERY ⚠️
 
@@ -190,17 +199,20 @@ Next steps:
 **Purpose:** Restore session context after loss or corruption
 
 **When to Use:**
+
 - Session state file is missing
 - Session state file is corrupted
 - Claude Code lost context between conversations
 - After manual git operations
 
 **Usage:**
+
 ```bash
 ./scripts/recovery/restore-session-state.sh
 ```
 
 **What It Does:**
+
 1. Checks if session state exists
 2. If corrupted, backs up old file
 3. Analyzes git state to infer context
@@ -209,6 +221,7 @@ Next steps:
 6. Validates reconstruction
 
 **Example Output:**
+
 ```
 🔄 RESTORING SESSION STATE
 
@@ -254,22 +267,26 @@ You can continue working.
 **Purpose:** Identify problems without taking action
 
 **When to Use:**
+
 - Before recovery (to understand what's wrong)
 - After recovery (to validate success)
 - Regular health checks
 
 **Usage:**
+
 ```bash
 ./scripts/recovery/diagnose-issues.sh
 ```
 
 **What It Does:**
+
 1. Runs comprehensive diagnostics
 2. Reports all findings
 3. Suggests recovery procedures
 4. Does not modify anything
 
 **Example Output:**
+
 ```
 🔍 SYSTEM DIAGNOSTICS
 
@@ -326,18 +343,18 @@ RECOMMENDED ACTIONS:
 
 ### Scenario Matrix
 
-| ID | Scenario | Likelihood | Impact | Priority |
-|----|----------|------------|--------|----------|
-| S1 | [Corrupted Local Git](#s1-corrupted-local-git) | Low | High | P1 |
-| S2 | [Lost Session Context](#s2-lost-session-context) | High | Medium | P1 |
-| S3 | [Quality Gate Failures](#s3-quality-gate-failures) | High | Low | P2 |
-| S4 | [Wrong Branch Work](#s4-wrong-branch-work) | Medium | Medium | P2 |
-| S5 | [Remote Out of Sync](#s5-remote-out-of-sync) | Medium | High | P1 |
-| S6 | [Merge Conflicts](#s6-merge-conflicts) | Low | High | P1 |
-| S7 | [Uncommitted Changes](#s7-uncommitted-changes) | High | Low | P3 |
-| S8 | [Lost Work (Accidental Delete)](#s8-lost-work-accidental-delete) | Low | High | P1 |
-| S9 | [Cannot Push to Remote](#s9-cannot-push-to-remote) | Medium | Medium | P2 |
-| S10 | [Detached HEAD State](#s10-detached-head-state) | Low | Medium | P2 |
+| ID  | Scenario                                                         | Likelihood | Impact | Priority |
+| --- | ---------------------------------------------------------------- | ---------- | ------ | -------- |
+| S1  | [Corrupted Local Git](#s1-corrupted-local-git)                   | Low        | High   | P1       |
+| S2  | [Lost Session Context](#s2-lost-session-context)                 | High       | Medium | P1       |
+| S3  | [Quality Gate Failures](#s3-quality-gate-failures)               | High       | Low    | P2       |
+| S4  | [Wrong Branch Work](#s4-wrong-branch-work)                       | Medium     | Medium | P2       |
+| S5  | [Remote Out of Sync](#s5-remote-out-of-sync)                     | Medium     | High   | P1       |
+| S6  | [Merge Conflicts](#s6-merge-conflicts)                           | Low        | High   | P1       |
+| S7  | [Uncommitted Changes](#s7-uncommitted-changes)                   | High       | Low    | P3       |
+| S8  | [Lost Work (Accidental Delete)](#s8-lost-work-accidental-delete) | Low        | High   | P1       |
+| S9  | [Cannot Push to Remote](#s9-cannot-push-to-remote)               | Medium     | Medium | P2       |
+| S10 | [Detached HEAD State](#s10-detached-head-state)                  | Low        | Medium | P2       |
 
 ---
 
@@ -346,12 +363,14 @@ RECOMMENDED ACTIONS:
 ### S1: Corrupted Local Git
 
 **Symptoms:**
+
 - Git commands fail with errors
 - `.git` directory seems corrupted
 - Cannot checkout branches
 - Strange git error messages
 
 **Diagnosis:**
+
 ```bash
 ./scripts/recovery/diagnose-issues.sh
 # Look for: "Git repository validation failed"
@@ -360,6 +379,7 @@ RECOMMENDED ACTIONS:
 **Recovery Procedure:**
 
 **Option 1: Emergency Recovery (Recommended)**
+
 ```bash
 ./scripts/recovery/emergency-recovery.sh
 # Resets to clean remote state
@@ -368,6 +388,7 @@ RECOMMENDED ACTIONS:
 ```
 
 **Option 2: Manual Git Repair**
+
 ```bash
 # Verify corruption
 git fsck
@@ -379,12 +400,14 @@ git fsck --full
 ```
 
 **Validation:**
+
 ```bash
 git status  # Should work without errors
 ./scripts/git-workflow/where-am-i.sh  # Should show state
 ```
 
 **Post-Recovery:**
+
 - Review lost work in `.git/emergency-backup/`
 - Restore session state
 - Continue from last checkpoint
@@ -394,12 +417,14 @@ git status  # Should work without errors
 ### S2: Lost Session Context
 
 **Symptoms:**
+
 - `.claude/session-state.json` missing
 - `.claude/session-state.json` corrupted
 - Claude Code doesn't know current task
 - Cannot determine what to work on next
 
 **Diagnosis:**
+
 ```bash
 cat .claude/session-state.json
 # If error or malformed JSON, state is corrupted
@@ -414,24 +439,28 @@ cat .claude/session-state.json
 **Manual Steps (if script fails):**
 
 1. **Determine Current Branch:**
+
 ```bash
 git branch --show-current
 # Should show feature/phase-N or develop
 ```
 
 2. **Find Last Checkpoint:**
+
 ```bash
 git tag -l "task-*" | tail -5
 # Shows recent task completions
 ```
 
 3. **Check Git Log:**
+
 ```bash
 git log --oneline -10
 # Review recent commit messages for context
 ```
 
 4. **Manually Create Session State:**
+
 ```bash
 cat > .claude/session-state.json << 'EOF'
 {
@@ -452,6 +481,7 @@ EOF
 ```
 
 **Validation:**
+
 ```bash
 ./scripts/git-workflow/where-am-i.sh
 # Should display current state correctly
@@ -462,6 +492,7 @@ EOF
 ### S3: Quality Gate Failures
 
 **Symptoms:**
+
 - `complete-task.sh` fails with quality gate errors
 - TypeScript errors
 - Lint errors
@@ -469,6 +500,7 @@ EOF
 - Coverage below threshold
 
 **Diagnosis:**
+
 ```bash
 ./scripts/recovery/diagnose-issues.sh
 # Shows specific quality gate failures
@@ -477,6 +509,7 @@ EOF
 **Recovery Procedure:**
 
 **For TypeScript Errors:**
+
 ```bash
 # See errors
 bun run type-check
@@ -488,6 +521,7 @@ bun run type-check
 ```
 
 **For Lint Errors:**
+
 ```bash
 # Auto-fix what's possible
 bun run lint
@@ -497,6 +531,7 @@ bun run lint
 ```
 
 **For Test Failures:**
+
 ```bash
 # Run tests to see failures
 bun run test
@@ -506,6 +541,7 @@ bun run test
 ```
 
 **For Coverage Issues:**
+
 ```bash
 # See coverage report
 bun run test -- --coverage
@@ -515,6 +551,7 @@ bun run test -- --coverage
 ```
 
 **Validation:**
+
 ```bash
 # Run full quality check
 ./scripts/quality/validate-all.sh
@@ -527,11 +564,13 @@ bun run test -- --coverage
 ### S4: Wrong Branch Work
 
 **Symptoms:**
+
 - Commits on wrong branch
 - Work meant for feature branch on develop
 - Work meant for one phase in another phase branch
 
 **Diagnosis:**
+
 ```bash
 git log --oneline -5  # Review recent commits
 git branch --show-current  # Check current branch
@@ -540,6 +579,7 @@ git branch --show-current  # Check current branch
 **Recovery Procedure:**
 
 **Scenario A: Uncommitted Work on Wrong Branch**
+
 ```bash
 # 1. Stash changes
 git stash push -m "Work intended for feature/phase-N"
@@ -554,6 +594,7 @@ git stash pop
 ```
 
 **Scenario B: Committed Work on Wrong Branch**
+
 ```bash
 # 1. Note the commit hash
 COMMIT=$(git rev-parse HEAD)
@@ -575,6 +616,7 @@ git checkout feature/phase-N
 ```
 
 **Scenario C: Multiple Commits on Wrong Branch**
+
 ```bash
 # 1. Create patch of all wrong commits
 git format-patch develop..HEAD -o /tmp/patches
@@ -594,6 +636,7 @@ rm -rf /tmp/patches
 ```
 
 **Validation:**
+
 ```bash
 ./scripts/git-workflow/where-am-i.sh
 git log --oneline --graph --all
@@ -604,12 +647,14 @@ git log --oneline --graph --all
 ### S5: Remote Out of Sync
 
 **Symptoms:**
+
 - Cannot push to remote
 - Local and remote have diverged
 - Push rejected by remote
 - Conflict warnings
 
 **Diagnosis:**
+
 ```bash
 ./scripts/git-workflow/sync-with-remote.sh
 # Shows sync status and divergence
@@ -618,12 +663,14 @@ git log --oneline --graph --all
 **Recovery Procedure:**
 
 **Scenario A: Local Ahead of Remote (Safe)**
+
 ```bash
 # Simply push
 git push origin $(git branch --show-current)
 ```
 
 **Scenario B: Remote Ahead of Local (Safe)**
+
 ```bash
 # Simply pull
 git pull origin $(git branch --show-current)
@@ -654,6 +701,7 @@ git merge origin/$(git branch --show-current)
 ```
 
 **Validation:**
+
 ```bash
 ./scripts/git-workflow/sync-with-remote.sh
 # Should show: "Local and remote are in sync"
@@ -664,12 +712,14 @@ git merge origin/$(git branch --show-current)
 ### S6: Merge Conflicts
 
 **Symptoms:**
+
 - Merge failed due to conflicts
 - Files marked with conflict markers
 - Cannot commit or checkout
 - Git status shows "both modified"
 
 **Diagnosis:**
+
 ```bash
 git status
 # Look for: "both modified" or "unmerged paths"
@@ -705,6 +755,7 @@ echo "Conflicting files: $(git diff --name-only --diff-filter=U)" >> CONFLICT.tx
 ```
 
 **Validation:**
+
 ```bash
 git status
 # Should NOT show "unmerged paths"
@@ -714,6 +765,7 @@ git diff
 ```
 
 **Post-Recovery:**
+
 - Document conflict details
 - Human must manually merge
 - Resume automation after human resolution
@@ -723,12 +775,14 @@ git diff
 ### S7: Uncommitted Changes
 
 **Symptoms:**
+
 - Working directory not clean
 - Modified or untracked files
 - Cannot switch branches
 - Scripts abort due to dirty working directory
 
 **Diagnosis:**
+
 ```bash
 git status
 # Shows modified/untracked files
@@ -740,11 +794,13 @@ git diff
 **Recovery Procedure:**
 
 **Option 1: Commit Changes (if work is complete)**
+
 ```bash
 ./scripts/git-workflow/complete-task.sh <task-id>
 ```
 
 **Option 2: Stash Changes (if work is incomplete)**
+
 ```bash
 # Stash with descriptive message
 git stash push -m "WIP: Task 1.1.2 - partial implementation"
@@ -755,6 +811,7 @@ git stash pop  # Apply and remove from stash
 ```
 
 **Option 3: Discard Changes (if work is wrong)**
+
 ```bash
 # ⚠️ DESTRUCTIVE - Cannot undo!
 
@@ -769,6 +826,7 @@ git clean -fd
 ```
 
 **Validation:**
+
 ```bash
 git status
 # Should show: "working tree clean"
@@ -779,12 +837,14 @@ git status
 ### S8: Lost Work (Accidental Delete)
 
 **Symptoms:**
+
 - Accidentally deleted code
 - Commits seem to have disappeared
 - Branch was deleted
 - File was removed
 
 **Diagnosis:**
+
 ```bash
 # Check if in git history
 git log --all --full-history -- <file-path>
@@ -799,12 +859,14 @@ git stash list
 **Recovery Procedure:**
 
 **Scenario A: File Deleted but Not Committed**
+
 ```bash
 # Restore from last commit
 git restore <file-path>
 ```
 
 **Scenario B: File Deleted and Committed**
+
 ```bash
 # Find commit that deleted file
 git log --all --full-history -- <file-path>
@@ -817,6 +879,7 @@ git checkout <commit-hash> -- <file-path>
 ```
 
 **Scenario C: Branch Deleted**
+
 ```bash
 # Find branch in reflog
 git reflog
@@ -827,6 +890,7 @@ git checkout -b <branch-name> <commit-hash>
 ```
 
 **Scenario D: Commit Lost (Reset/Rebase)**
+
 ```bash
 # Find commit in reflog
 git reflog
@@ -839,6 +903,7 @@ git reset --hard <commit-hash>
 ```
 
 **Scenario E: Everything is Lost**
+
 ```bash
 # Check emergency backup (if exists)
 ls .git/emergency-backup/
@@ -849,6 +914,7 @@ git log origin/<branch-name>
 ```
 
 **Validation:**
+
 ```bash
 # Verify file restored
 ls <file-path>
@@ -863,12 +929,14 @@ git log -- <file-path>
 ### S9: Cannot Push to Remote
 
 **Symptoms:**
+
 - `git push` fails
 - Authentication errors
 - Network errors
 - Remote rejection
 
 **Diagnosis:**
+
 ```bash
 # Test remote connection
 git fetch origin
@@ -883,6 +951,7 @@ git remote show origin
 **Recovery Procedure:**
 
 **Error Type 1: Authentication Failed**
+
 ```bash
 # Check credentials
 git credential fill
@@ -895,6 +964,7 @@ git remote set-url origin git@github.com:jcmrs/ui-library.git
 ```
 
 **Error Type 2: Network Error**
+
 ```bash
 # Test connection
 ping github.com
@@ -907,6 +977,7 @@ git push origin $(git branch --show-current)
 ```
 
 **Error Type 3: Branch Protection**
+
 ```bash
 # Cannot push directly to protected branch
 # Push to different branch
@@ -916,12 +987,14 @@ git push origin HEAD:feature/temp-branch
 ```
 
 **Error Type 4: Remote Ahead**
+
 ```bash
 # See S5: Remote Out of Sync
 ./scripts/git-workflow/sync-with-remote.sh
 ```
 
 **Validation:**
+
 ```bash
 git push origin $(git branch --show-current)
 # Should succeed without errors
@@ -935,11 +1008,13 @@ git log origin/$(git branch --show-current)
 ### S10: Detached HEAD State
 
 **Symptoms:**
+
 - Warning: "You are in 'detached HEAD' state"
 - Not on any branch
 - Commits are not saved to branch
 
 **Diagnosis:**
+
 ```bash
 git branch
 # Shows: * (HEAD detached at <commit>)
@@ -951,12 +1026,14 @@ git status
 **Recovery Procedure:**
 
 **Scenario A: No Work Done in Detached State**
+
 ```bash
 # Simply checkout a branch
 git checkout develop
 ```
 
 **Scenario B: Work Done but Not Committed**
+
 ```bash
 # Stash the work
 git stash push -m "Work from detached HEAD"
@@ -969,6 +1046,7 @@ git stash pop
 ```
 
 **Scenario C: Commits Made in Detached State**
+
 ```bash
 # Note current commit
 COMMIT=$(git rev-parse HEAD)
@@ -982,6 +1060,7 @@ git merge $COMMIT
 ```
 
 **Validation:**
+
 ```bash
 git branch
 # Should show branch with * prefix (not detached HEAD)
@@ -997,18 +1076,21 @@ git status
 ### After Any Recovery
 
 1. **Validate Recovery Success:**
+
 ```bash
 ./scripts/recovery/diagnose-issues.sh
 # Should pass all checks
 ```
 
 2. **Verify Session State:**
+
 ```bash
 ./scripts/git-workflow/where-am-i.sh
 # Should display correct state
 ```
 
 3. **Document What Happened:**
+
 ```bash
 # Create post-incident note
 cat >> .claude/incidents.log << EOF
@@ -1022,6 +1104,7 @@ EOF
 ```
 
 4. **Resume Normal Workflow:**
+
 ```bash
 # Continue with current task
 # Or start new task
@@ -1033,16 +1116,19 @@ EOF
 After significant recovery incidents:
 
 **1. Document Root Cause:**
+
 - What caused the failure?
 - Was it preventable?
 - Was it detected quickly?
 
 **2. Update Procedures:**
+
 - Did recovery procedure work?
 - What could be improved?
 - Should automation be updated?
 
 **3. Prevent Recurrence:**
+
 - Add validation checks
 - Improve error messages
 - Update documentation
@@ -1054,6 +1140,7 @@ After significant recovery incidents:
 ### When to Escalate to Human
 
 Escalate if:
+
 - Recovery procedures don't work
 - Data loss is unacceptable
 - Merge conflicts cannot be resolved
@@ -1064,6 +1151,7 @@ Escalate if:
 ### How to Escalate
 
 **1. Create Escalation Report:**
+
 ```bash
 cat > ESCALATION-REPORT.txt << 'EOF'
 ESCALATION REQUIRED
@@ -1080,6 +1168,7 @@ EOF
 ```
 
 **2. Preserve Current State:**
+
 ```bash
 # Create full state snapshot
 mkdir -p .git/escalation-snapshot
@@ -1091,6 +1180,7 @@ git remote -v > .git/escalation-snapshot/git-remotes.txt
 ```
 
 **3. Notify Human:**
+
 - Place ESCALATION-REPORT.txt in project root
 - Wait for human intervention
 - Do not attempt further automated recovery
@@ -1102,15 +1192,18 @@ git remote -v > .git/escalation-snapshot/git-remotes.txt
 ### Regular Testing Schedule
 
 **Weekly:**
+
 - Test session state restoration
 - Test sync-with-remote.sh
 
 **Monthly:**
+
 - Test emergency recovery (in test repo)
 - Test panic-button.sh workflows
 - Review and update procedures
 
 **After Any Incident:**
+
 - Test the recovery procedure used
 - Validate improvements work
 
@@ -1143,9 +1236,9 @@ rm -rf test-recovery
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | 2025-01-23 | Initial disaster recovery procedures |
+| Version | Date       | Changes                              |
+| ------- | ---------- | ------------------------------------ |
+| 1.0.0   | 2025-01-23 | Initial disaster recovery procedures |
 
 ---
 

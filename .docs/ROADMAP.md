@@ -20,6 +20,7 @@ Building a production-ready UI component library that serves as a single source 
 ## Project Phases
 
 ### Phase 1.0: Automation Infrastructure ⚡ CURRENT PHASE
+
 **Duration:** 2 days
 **Status:** In Progress - Documentation Complete
 **Goal:** Build git workflow automation and recovery infrastructure specifically for Claude Code
@@ -27,6 +28,7 @@ Building a production-ready UI component library that serves as a single source 
 **Critical Insight:** This phase was added after multi-role analysis revealed that automation is not a feature but the foundational requirement. Without automated git workflow and session state management, Claude Code cannot maintain process discipline.
 
 #### Deliverables
+
 - [x] Git workflow automation scripts (`scripts/git-workflow/`)
   - [x] start-phase.sh - Begin new phase with branch creation
   - [x] complete-task.sh - Finish task with validation and checkpointing
@@ -50,6 +52,7 @@ Building a production-ready UI component library that serves as a single source 
   - [x] Updated TASKS.md with Phase 1.0 tasks
 
 #### Success Criteria
+
 - [ ] All scripts implemented and tested
 - [ ] Session state persists across conversations
 - [ ] Recovery from any failure scenario < 5 minutes
@@ -63,16 +66,19 @@ Building a production-ready UI component library that serves as a single source 
 ---
 
 ### Phase 1.1: Project Setup Automation
+
 **Duration:** 1 day
 **Status:** Not Started
 **Goal:** Build automation infrastructure that prevents configuration failures and enforces quality
 
 #### Deliverables
+
 - [ ] Project setup automation (`scripts/setup-new-project.sh`)
 - [ ] Configuration templates (package.json, tsconfig, eslint, tailwind)
 - [ ] Setup validation script
 
 #### Success Criteria
+
 - Setup script runs successfully on fresh clone with zero errors
 - All scripts are idempotent and provide actionable error messages
 - Documentation explains each automation tool
@@ -80,16 +86,19 @@ Building a production-ready UI component library that serves as a single source 
 ---
 
 ### Phase 1.2: Component Scaffolding
+
 **Duration:** 0.5 days
 **Status:** Not Started
 **Goal:** Automate component creation with consistent structure
 
 #### Deliverables
+
 - [ ] Component scaffolding system (`scripts/create-component.sh`)
 - [ ] Component templates (tsx, test, story, types)
 - [ ] Component validation script
 
 #### Success Criteria
+
 - Component scaffold creates valid structure with all required files
 - All generated files follow established patterns
 - Component immediately passes quality gates
@@ -97,16 +106,19 @@ Building a production-ready UI component library that serves as a single source 
 ---
 
 ### Phase 1.3: Quality Validation Pipeline
+
 **Duration:** 0.5 days
 **Status:** Not Started
 **Goal:** Automated quality enforcement
 
 #### Deliverables
+
 - [ ] Quality validation pipeline (`scripts/quality/validate-all.sh`)
 - [ ] Git hooks (pre-commit validation)
 - [ ] CI/CD workflows (GitHub Actions)
 
 #### Success Criteria
+
 - Quality validation catches intentional errors (linting, type errors)
 - Pre-commit hooks prevent bad commits
 - CI/CD pipeline validates all changes
@@ -114,11 +126,13 @@ Building a production-ready UI component library that serves as a single source 
 ---
 
 ### Phase 2: Reference Component
+
 **Duration:** 3-4 days
 **Status:** Not Started
 **Goal:** Build ONE complete reference component (Button) with exhaustive documentation
 
 #### Deliverables
+
 - [ ] Button component with full inline documentation
 - [ ] All button variants (primary, secondary, tertiary, destructive, link)
 - [ ] All button sizes (sm, md, lg, xl)
@@ -130,6 +144,7 @@ Building a production-ready UI component library that serves as a single source 
 - [ ] Machine-readable validation checklist
 
 #### Success Criteria
+
 - Every line has inline comment explaining WHY
 - Every prop has JSDoc with AI usage guidance
 - Every variant renders correctly in Storybook
@@ -140,11 +155,13 @@ Building a production-ready UI component library that serves as a single source 
 ---
 
 ### Phase 3: Simple Page Template
+
 **Duration:** 2 days
 **Status:** Not Started
 **Goal:** Prove component composition works with complete page template
 
 #### Deliverables
+
 - [ ] Simple dashboard page template
 - [ ] Uses Button + basic layout components
 - [ ] Complete Storybook story showing full page
@@ -153,6 +170,7 @@ Building a production-ready UI component library that serves as a single source 
 - [ ] Visual specification with annotated screenshots
 
 #### Success Criteria
+
 - Page renders correctly in Storybook
 - All components work together without conflicts
 - Claude Code can modify template with provided instructions
@@ -162,11 +180,13 @@ Building a production-ready UI component library that serves as a single source 
 ---
 
 ### Phase 4: Validation Test
+
 **Duration:** 1 day
 **Status:** Not Started
 **Goal:** Test with fresh Claude Code instance to validate approach
 
 #### Deliverables
+
 - [ ] Claude Code validation test suite
 - [ ] Test 1: Setup project from scratch
 - [ ] Test 2: Create component variant from reference
@@ -175,24 +195,29 @@ Building a production-ready UI component library that serves as a single source 
 - [ ] Failure analysis document (if failures occur)
 
 #### Success Criteria
+
 - Fresh Claude Code instance completes all tests successfully
 - Zero manual intervention required
 - All quality gates pass automatically
 - Failures are documented with root cause analysis
 
 #### Decision Point
+
 **If Phase 4 succeeds:** Proceed to Phase 5 (Scale-up)
 **If Phase 4 fails:** Analyze failures, adjust approach, re-test
 
 ---
 
 ### Phase 5: Base Components Library
+
 **Duration:** 3-4 weeks
 **Status:** Not Started
 **Goal:** Implement all base/primitive components from UntitledUI
 
 #### Scope
+
 From UntitledUI `components/base/`:
+
 - [ ] Avatar (user profile images)
 - [ ] Badges (status indicators)
 - [ ] Button Group (related actions)
@@ -213,7 +238,9 @@ From UntitledUI `components/base/`:
 - [ ] Tooltip (contextual hints)
 
 #### Approach
+
 For each component:
+
 1. Copy UntitledUI structure as baseline
 2. Add exhaustive inline documentation
 3. Create Storybook with all variants
@@ -223,6 +250,7 @@ For each component:
 7. Validate with Claude Code
 
 #### Success Criteria
+
 - All 18 base components implemented
 - Each follows Button reference pattern
 - All quality gates pass
@@ -231,12 +259,15 @@ For each component:
 ---
 
 ### Phase 6: Application Components
+
 **Duration:** 4-5 weeks
 **Status:** Not Started
 **Goal:** Implement complex application-level components
 
 #### Scope
+
 From UntitledUI `components/application/`:
+
 - [ ] App Navigation (headers, sidebars, breadcrumbs)
 - [ ] Carousel (image/content sliders)
 - [ ] Charts (data visualizations via recharts)
@@ -251,6 +282,7 @@ From UntitledUI `components/application/`:
 - [ ] Tabs (tabbed interfaces)
 
 #### Success Criteria
+
 - All 12 application components implemented
 - Each demonstrates composition of base components
 - Complex interactions work reliably
@@ -259,11 +291,13 @@ From UntitledUI `components/application/`:
 ---
 
 ### Phase 7: Layout System
+
 **Duration:** 2 weeks
 **Status:** Not Started
 **Goal:** Pre-built layout templates for common page types
 
 #### Deliverables
+
 - [ ] Dashboard Layout (header + sidebar + content)
 - [ ] Auth Layout (centered card on branded background)
 - [ ] Settings Layout (sidebar navigation + content panels)
@@ -272,6 +306,7 @@ From UntitledUI `components/application/`:
 - [ ] Error Layout (centered error message)
 
 #### Success Criteria
+
 - Each layout has visual specification
 - Layouts are responsive (mobile, tablet, desktop)
 - Claude Code can build pages using layouts
@@ -280,11 +315,13 @@ From UntitledUI `components/application/`:
 ---
 
 ### Phase 8: Page Templates
+
 **Duration:** 3 weeks
 **Status:** Not Started
 **Goal:** Complete page templates for common UI patterns
 
 #### Deliverables
+
 - [ ] Dashboard Home (widgets + charts)
 - [ ] User List (table + filters + pagination)
 - [ ] User Detail (tabs + form + actions)
@@ -296,6 +333,7 @@ From UntitledUI `components/application/`:
 - [ ] Empty States Collection
 
 #### Success Criteria
+
 - Pages are complete and functional
 - Claude Code can modify templates reliably
 - Visual specifications match implementation
@@ -304,11 +342,13 @@ From UntitledUI `components/application/`:
 ---
 
 ### Phase 9: Design System & Theming
+
 **Duration:** 2 weeks
 **Status:** Not Started
 **Goal:** Complete design system with theming capabilities
 
 #### Deliverables
+
 - [ ] Design tokens (colors, spacing, typography)
 - [ ] Theme configuration system
 - [ ] Dark mode support
@@ -317,6 +357,7 @@ From UntitledUI `components/application/`:
 - [ ] Animation/transition standards
 
 #### Success Criteria
+
 - Theme can be customized via configuration
 - Dark mode works on all components
 - Design system is documented
@@ -325,11 +366,13 @@ From UntitledUI `components/application/`:
 ---
 
 ### Phase 10: Documentation & Polish
+
 **Duration:** 2 weeks
 **Status:** Not Started
 **Goal:** Production-ready documentation and final polish
 
 #### Deliverables
+
 - [ ] Complete API documentation
 - [ ] Usage guides for every component
 - [ ] Composition pattern cookbook
@@ -339,6 +382,7 @@ From UntitledUI `components/application/`:
 - [ ] Accessibility compliance documentation
 
 #### Success Criteria
+
 - Documentation is comprehensive
 - Examples cover common use cases
 - Guides are tested with Claude Code
@@ -378,16 +422,19 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 ### High-Risk Items
 
 1. **Phase 4 Validation Failure**
+
    - **Risk:** Approach doesn't work with Claude Code
    - **Mitigation:** Vertical slice with early validation
    - **Contingency:** Re-assess methodology, adjust scaffolding
 
 2. **Component Composition Failures**
+
    - **Risk:** Components don't work together
    - **Mitigation:** Test compositions in Phase 3
    - **Contingency:** Add explicit composition validation
 
 3. **Scope Creep**
+
    - **Risk:** Adding features indefinitely
    - **Mitigation:** Strict adherence to UntitledUI baseline
    - **Contingency:** Feature freeze after Phase 10
@@ -400,10 +447,12 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 ### Medium-Risk Items
 
 1. **Documentation Overhead**
+
    - **Risk:** Inline documentation slows development
    - **Mitigation:** Documentation templates and automation
 
 2. **Test Maintenance**
+
    - **Risk:** Tests become outdated
    - **Mitigation:** Automated visual regression testing
 
@@ -416,6 +465,7 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 ## Success Metrics
 
 ### Technical Metrics
+
 - 100% TypeScript strict mode compliance
 - 90%+ test coverage on all components
 - 0 ESLint errors or warnings
@@ -424,12 +474,14 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 - Bundle size < 500KB (minified + gzipped)
 
 ### AI Usage Metrics
+
 - Claude Code can setup project: 100% success rate
 - Claude Code can create component variant: 90%+ success rate
 - Claude Code can build page from template: 85%+ success rate
 - Claude Code follows patterns: 80%+ adherence rate
 
 ### Quality Metrics
+
 - WCAG 2.1 AA accessibility compliance: 100%
 - Cross-browser compatibility: Chrome, Firefox, Safari, Edge
 - Responsive design: Mobile, Tablet, Desktop
@@ -440,6 +492,7 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 ## Dependencies
 
 ### External Dependencies
+
 - React 19.1
 - TypeScript 5.8
 - Tailwind CSS 4.1
@@ -449,11 +502,13 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 - ESLint + Prettier (linting)
 
 ### Internal Dependencies
+
 - UntitledUI React (reference implementation in UPSTREAM/)
 - UntitledUI Icons (icon library)
 - wshobson agents framework (multi-agent orchestration)
 
 ### Infrastructure Dependencies
+
 - Node.js 20+ / Bun 1.1+
 - Git + GitHub
 - GitHub Actions (CI/CD)
@@ -463,12 +518,14 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 ## Communication Plan
 
 ### Documentation Updates
+
 - Roadmap reviewed weekly
 - Task breakdown updated daily
 - Status reports on phase completion
 - Blockers documented immediately
 
 ### Stakeholder Updates
+
 - Phase completion summaries
 - Decision point reviews
 - Risk assessment updates
@@ -477,9 +534,9 @@ Phase 10: Documentation       [Weeks 19-20]  ░░░░░░░░░░░�
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | 2025-01-23 | Initial roadmap created based on multi-role analysis |
+| Version | Date       | Changes                                              |
+| ------- | ---------- | ---------------------------------------------------- |
+| 1.0.0   | 2025-01-23 | Initial roadmap created based on multi-role analysis |
 
 ---
 

@@ -20,11 +20,13 @@ scripts/
 Initializes a new development phase.
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/start-phase.sh 1.1 "Foundation Components"
 ```
 
 **What it does:**
+
 - Creates feature branch (`feature/phase-X`)
 - Initializes session state JSON
 - Creates initial checkpoint tag
@@ -37,11 +39,13 @@ Initializes a new development phase.
 Completes a task with automated validation and checkpointing.
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/complete-task.sh 1.1.1 "Create configuration templates"
 ```
 
 **What it does:**
+
 - Runs quality gates (TypeScript, ESLint, Prettier, tests)
 - Stages all changes
 - Generates descriptive commit message
@@ -56,11 +60,13 @@ Completes a task with automated validation and checkpointing.
 Completes a phase by merging to develop.
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/complete-phase.sh 1.1
 ```
 
 **What it does:**
+
 - Validates phase completion
 - Runs final quality gates
 - Merges feature branch to develop (--no-ff)
@@ -75,11 +81,13 @@ Completes a phase by merging to develop.
 Synchronizes local repository with remote.
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/sync-with-remote.sh
 ```
 
 **What it does:**
+
 - Checks remote connectivity
 - Fetches latest changes
 - Compares local/remote branches
@@ -94,11 +102,13 @@ Synchronizes local repository with remote.
 Displays comprehensive project status.
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/where-am-i.sh
 ```
 
 **What it shows:**
+
 - Current phase and task
 - Git status and sync status
 - Last checkpoint information
@@ -114,11 +124,13 @@ Displays comprehensive project status.
 Emergency state preservation.
 
 **Usage:**
+
 ```bash
 ./scripts/recovery/panic-button.sh
 ```
 
 **What it does:**
+
 - Backs up all session state files
 - Captures complete git status
 - Stashes uncommitted changes
@@ -134,6 +146,7 @@ Emergency state preservation.
 Comprehensive recovery system.
 
 **Usage:**
+
 ```bash
 # Automatic recovery from latest backup
 ./scripts/recovery/emergency-recovery.sh --auto
@@ -146,6 +159,7 @@ Comprehensive recovery system.
 ```
 
 **What it does:**
+
 - Restores session state from backup
 - Provides recovery options
 - Lists available recovery points
@@ -158,6 +172,7 @@ Comprehensive recovery system.
 Restores session state from backup.
 
 **Usage:**
+
 ```bash
 # Restore from latest backup
 ./scripts/recovery/restore-session-state.sh
@@ -176,11 +191,13 @@ Restores session state from backup.
 Comprehensive system diagnostics.
 
 **Usage:**
+
 ```bash
 ./scripts/recovery/diagnose-issues.sh
 ```
 
 **What it checks:**
+
 - Git repository status
 - Session state validity
 - Recovery infrastructure
@@ -198,11 +215,13 @@ Comprehensive system diagnostics.
 Automated project initialization from templates.
 
 **Usage:**
+
 ```bash
 ./scripts/setup/setup-new-project.sh
 ```
 
 **What it does:**
+
 - Validates prerequisites (Node.js >= 20.0.0, git)
 - Checks for existing files (with confirmation)
 - Gathers project information
@@ -212,6 +231,7 @@ Automated project initialization from templates.
 - Runs initial validation
 
 **Interactive prompts:**
+
 - Project name
 - Author name
 - Overwrite confirmation (if files exist)
@@ -223,11 +243,13 @@ Automated project initialization from templates.
 Comprehensive validation of project setup.
 
 **Usage:**
+
 ```bash
 ./scripts/setup/validate-setup.sh
 ```
 
 **What it validates:**
+
 - Configuration files (package.json, tsconfig, etc.)
 - Project directory structure
 - Dependencies installation
@@ -239,6 +261,7 @@ Comprehensive validation of project setup.
 - Git configuration
 
 **Exit codes:**
+
 - `0` = All checks passed
 - `>0` = Number of errors found
 
@@ -251,6 +274,7 @@ TypeScript modules for reading, writing, and validating session state.
 **Location:** `scripts/session-state/`
 
 **Files:**
+
 - `types.ts` - TypeScript type definitions
 - `reader.ts` - State reading functions
 - `writer.ts` - State writing functions
@@ -258,11 +282,12 @@ TypeScript modules for reading, writing, and validating session state.
 - `index.ts` - Main entry point
 
 **Usage in TypeScript:**
+
 ```typescript
 import {
   readSessionState,
   updateSessionState,
-  validateSessionState
+  validateSessionState,
 } from './scripts/session-state';
 
 const state = readSessionState();
@@ -340,6 +365,7 @@ scripts\git-workflow\where-am-i.cmd
 ```
 
 **Requirements:**
+
 - Git for Windows (includes Git Bash)
 - OR Windows Subsystem for Linux (WSL)
 
@@ -348,11 +374,13 @@ scripts\git-workflow\where-am-i.cmd
 ## Script Conventions
 
 ### Exit Codes
+
 - `0` = Success
 - `1` = Error
 - `>1` = Number of errors (validation scripts)
 
 ### Colors
+
 - 🟢 Green = Success/OK
 - 🟡 Yellow = Warning
 - 🔴 Red = Error/Fail
@@ -360,6 +388,7 @@ scripts\git-workflow\where-am-i.cmd
 - 🔷 Cyan = Section headers
 
 ### Error Handling
+
 - All scripts use `set -e` (except diagnostics/validation)
 - Comprehensive error messages with actionable guidance
 - Safe defaults (e.g., require confirmation before overwriting)
@@ -369,6 +398,7 @@ scripts\git-workflow\where-am-i.cmd
 ## Documentation
 
 For detailed documentation, see:
+
 - `.docs/GIT-WORKFLOW.md` - Complete git workflow guide
 - `.docs/DISASTER-RECOVERY.md` - Recovery procedures and scenarios
 - `.docs/SESSION-STATE.md` - Session state management details
@@ -380,17 +410,20 @@ For detailed documentation, see:
 ## Troubleshooting
 
 ### "Permission denied" errors
+
 ```bash
 # Make scripts executable
 chmod +x scripts/**/*.sh
 ```
 
 ### "bash: command not found" on Windows
+
 - Install Git for Windows
 - OR use WSL
 - OR run via Git Bash directly
 
 ### "jq: command not found"
+
 ```bash
 # Install jq (JSON processor)
 # macOS:
@@ -404,6 +437,7 @@ npm install -g node-jq
 ```
 
 ### Script fails with "Working directory not clean"
+
 ```bash
 # Commit or stash your changes first
 git add .
@@ -420,6 +454,7 @@ git stash
 ## Contributing
 
 When adding new scripts:
+
 1. Create both `.sh` and `.cmd` versions
 2. Follow the existing color/output conventions
 3. Include comprehensive error handling

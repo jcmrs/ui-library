@@ -13,10 +13,7 @@ import path from 'path';
  * - Build optimization
  */
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [react(), tailwindcss()],
 
   resolve: {
     alias: {

@@ -1,0 +1,226 @@
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { axe, toHaveNoViolations } from "jest-axe";
+import { {{COMPONENT_NAME}} } from "./{{COMPONENT_NAME_KEBAB}}";
+
+// Extend expect with jest-axe matchers
+expect.extend(toHaveNoViolations);
+
+/**
+ * Test suite for {{COMPONENT_NAME}} component
+ *
+ * Tests are organized into the following categories:
+ * - Rendering: Basic rendering and prop handling
+ * - Accessibility: WCAG 2.1 AA compliance, keyboard navigation, screen readers
+ * - Interactions: User interactions and state changes
+ * - Edge Cases: Error conditions, empty states, boundary conditions
+ *
+ * @see {@link ./{{COMPONENT_NAME_KEBAB}}.patterns.md} for usage patterns
+ */
+
+describe("{{COMPONENT_NAME}}", () => {
+  describe("Rendering", () => {
+    it("renders without crashing", () => {
+      render(<{{COMPONENT_NAME}}>Test Content</{{COMPONENT_NAME}}>);
+      expect(screen.getByText("Test Content")).toBeInTheDocument();
+    });
+
+    it("renders children correctly", () => {
+      const testContent = "Test Children Content";
+      render(<{{COMPONENT_NAME}}>{testContent}</{{COMPONENT_NAME}}>);
+      expect(screen.getByText(testContent)).toBeInTheDocument();
+    });
+
+    it("applies custom className", () => {
+      const customClass = "custom-test-class";
+      render(
+        <{{COMPONENT_NAME}} className={customClass} data-testid="component">
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+      expect(screen.getByTestId("component")).toHaveClass(customClass);
+    });
+
+    it("renders with default size (md)", () => {
+      render(<{{COMPONENT_NAME}} data-testid="component">Content</{{COMPONENT_NAME}}>);
+      const element = screen.getByTestId("component");
+      expect(element).toBeInTheDocument();
+    });
+
+    it("renders all size variants correctly", () => {
+      const sizes = ["sm", "md", "lg", "xl"] as const;
+      sizes.forEach((size) => {
+        const { unmount } = render(
+          <{{COMPONENT_NAME}} size={size} data-testid={`component-${size}`}>
+            {size}
+          </{{COMPONENT_NAME}}>
+        );
+        expect(screen.getByTestId(`component-${size}`)).toBeInTheDocument();
+        unmount();
+      });
+    });
+
+    it("renders all visual variants correctly", () => {
+      const variants = ["primary", "secondary"] as const;
+      variants.forEach((variant) => {
+        const { unmount } = render(
+          <{{COMPONENT_NAME}} variant={variant} data-testid={`component-${variant}`}>
+            {variant}
+          </{{COMPONENT_NAME}}>
+        );
+        expect(screen.getByTestId(`component-${variant}`)).toBeInTheDocument();
+        unmount();
+      });
+    });
+
+    it("forwards ref correctly", () => {
+      const ref = { current: null };
+      render(
+        <{{COMPONENT_NAME}} ref={ref as React.RefObject<HTMLDivElement>}>
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+    });
+
+    it("spreads additional props to root element", () => {
+      render(
+        <{{COMPONENT_NAME}} data-testid="component" data-custom="test-value">
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+      expect(screen.getByTestId("component")).toHaveAttribute("data-custom", "test-value");
+    });
+  });
+
+  describe("Accessibility", () => {
+    it("has no accessibility violations", async () => {
+      const { container } = render(<{{COMPONENT_NAME}}>Content</{{COMPONENT_NAME}}>);
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it("has no accessibility violations when disabled", async () => {
+      const { container } = render(
+        <{{COMPONENT_NAME}} disabled>Content</{{COMPONENT_NAME}}>
+      );
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it("properly communicates disabled state to assistive technology", () => {
+      render(
+        <{{COMPONENT_NAME}} disabled data-testid="component">
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+      expect(screen.getByTestId("component")).toHaveAttribute("aria-disabled", "true");
+    });
+
+    it("has proper semantic structure", () => {
+      render(<{{COMPONENT_NAME}} data-testid="component">Content</{{COMPONENT_NAME}}>);
+      const element = screen.getByTestId("component");
+      expect(element).toBeInTheDocument();
+      // Add more specific semantic checks based on component type
+    });
+
+    it("supports keyboard navigation", () => {
+      render(<{{COMPONENT_NAME}} data-testid="component">Content</{{COMPONENT_NAME}}>);
+      const element = screen.getByTestId("component");
+      element.focus();
+      expect(element).toHaveFocus();
+    });
+
+    it("has visible focus indicator", () => {
+      render(<{{COMPONENT_NAME}} data-testid="component">Content</{{COMPONENT_NAME}}>);
+      const element = screen.getByTestId("component");
+      element.focus();
+      // Check for focus-visible class or outline
+      expect(element).toHaveFocus();
+    });
+  });
+
+  describe("Interactions", () => {
+    it("does not respond to interactions when disabled", async () => {
+      const user = userEvent.setup();
+      render(
+        <{{COMPONENT_NAME}} disabled data-testid="component">
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+      const element = screen.getByTestId("component");
+
+      // Try to interact with disabled component
+      await user.click(element);
+
+      // Verify no interaction occurred (adjust based on component behavior)
+      expect(element).toHaveAttribute("aria-disabled", "true");
+    });
+
+    it("handles user interactions correctly", async () => {
+      const user = userEvent.setup();
+      render(<{{COMPONENT_NAME}} data-testid="component">Content</{{COMPONENT_NAME}}>);
+      const element = screen.getByTestId("component");
+
+      // Test appropriate user interactions based on component type
+      await user.click(element);
+      // Add assertions based on expected behavior
+    });
+  });
+
+  describe("Edge Cases", () => {
+    it("handles empty children gracefully", () => {
+      render(<{{COMPONENT_NAME}} data-testid="component" />);
+      expect(screen.getByTestId("component")).toBeInTheDocument();
+    });
+
+    it("handles null children gracefully", () => {
+      render(
+        <{{COMPONENT_NAME}} data-testid="component">{null}</{{COMPONENT_NAME}}>
+      );
+      expect(screen.getByTestId("component")).toBeInTheDocument();
+    });
+
+    it("handles undefined children gracefully", () => {
+      render(
+        <{{COMPONENT_NAME}} data-testid="component">{undefined}</{{COMPONENT_NAME}}>
+      );
+      expect(screen.getByTestId("component")).toBeInTheDocument();
+    });
+
+    it("handles very long text content", () => {
+      const longText = "A".repeat(1000);
+      render(<{{COMPONENT_NAME}} data-testid="component">{longText}</{{COMPONENT_NAME}}>);
+      expect(screen.getByTestId("component")).toHaveTextContent(longText);
+    });
+
+    it("handles special characters in content", () => {
+      const specialText = '<script>alert("test")</script>';
+      render(<{{COMPONENT_NAME}} data-testid="component">{specialText}</{{COMPONENT_NAME}}>);
+      // Should render as text, not execute script
+      expect(screen.getByTestId("component")).toHaveTextContent(specialText);
+    });
+
+    it("handles rapid prop changes", () => {
+      const { rerender } = render(
+        <{{COMPONENT_NAME}} size="sm" data-testid="component">
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+
+      rerender(
+        <{{COMPONENT_NAME}} size="lg" data-testid="component">
+          Content
+        </{{COMPONENT_NAME}}>
+      );
+
+      expect(screen.getByTestId("component")).toBeInTheDocument();
+    });
+
+    it("cleans up properly on unmount", () => {
+      const { unmount } = render(<{{COMPONENT_NAME}}>Content</{{COMPONENT_NAME}}>);
+      expect(() => unmount()).not.toThrow();
+    });
+  });
+});

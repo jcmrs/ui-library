@@ -33,7 +33,9 @@ export function readSessionState(filePath: string = SESSION_STATE_FILE): Session
     const content = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(content) as SessionState;
   } catch (error) {
-    throw new Error(`Failed to read session state: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `Failed to read session state: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
@@ -92,7 +94,9 @@ export function readProgressData(filePath: string = PROGRESS_FILE): ProgressData
     const content = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(content) as ProgressData;
   } catch (error) {
-    throw new Error(`Failed to read progress data: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `Failed to read progress data: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
@@ -111,7 +115,9 @@ export function readCheckpointsData(filePath: string = CHECKPOINTS_FILE): Checkp
     const content = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(content) as CheckpointsData;
   } catch (error) {
-    throw new Error(`Failed to read checkpoints data: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `Failed to read checkpoints data: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
@@ -244,7 +250,9 @@ export function safeReadProgressData(filePath: string = PROGRESS_FILE): Progress
 /**
  * Safe read checkpoints with fallback
  */
-export function safeReadCheckpointsData(filePath: string = CHECKPOINTS_FILE): CheckpointsData | null {
+export function safeReadCheckpointsData(
+  filePath: string = CHECKPOINTS_FILE
+): CheckpointsData | null {
   try {
     return readCheckpointsData(filePath);
   } catch {

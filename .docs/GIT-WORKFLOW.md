@@ -39,6 +39,7 @@ This document defines the **automated git workflow** specifically designed for C
 ### Automated Git Operations
 
 **Traditional Workflow (NEVER USE):**
+
 ```bash
 # ❌ Claude Code cannot reliably do this
 git checkout -b feature/phase-1
@@ -49,6 +50,7 @@ git push origin feature/phase-1
 ```
 
 **Automated Workflow (USE THIS):**
+
 ```bash
 # ✅ One command handles everything
 ./scripts/git-workflow/start-phase.sh 1
@@ -61,12 +63,14 @@ git push origin feature/phase-1
 ### Why Automation is Required
 
 Claude Code has specific limitations:
+
 - **No Mental Model**: Cannot visualize branch topology
 - **No Persistent State**: Forgets context between sessions
 - **Pattern Matching Only**: Cannot reason about git concepts
 - **No Error Recovery**: Gets stuck in failure loops
 
 Automation compensates by:
+
 - Eliminating all git decisions
 - Maintaining session state in JSON
 - Providing one-command recovery
@@ -90,24 +94,28 @@ main (protected)
 ### Branch Rules
 
 **Main Branch:**
+
 - Protected (no direct commits)
 - Only accepts merges from develop
 - Tagged with version numbers (v1.0.0, v2.0.0)
 - Represents production-ready code
 
 **Develop Branch:**
+
 - Integration branch
 - Accepts merges from feature branches
 - Tagged with phase checkpoints (phase-1-complete, phase-2-complete)
 - Current working baseline
 
 **Feature Branches:**
+
 - Created automatically by `start-phase.sh`
 - Named `feature/phase-N` where N is phase number
 - Deleted after merge to develop
 - Short-lived (lifetime of one phase)
 
 **Hotfix Branches:**
+
 - Created manually for critical bugs
 - Named `hotfix/description`
 - Merged to both main and develop
@@ -143,16 +151,19 @@ All scripts located in `scripts/git-workflow/`
 **Purpose:** Begin a new project phase with automated branch creation
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/start-phase.sh <phase-number>
 ```
 
 **Example:**
+
 ```bash
 ./scripts/git-workflow/start-phase.sh 1
 ```
 
 **What It Does:**
+
 1. Validates current branch is develop
 2. Validates working directory is clean
 3. Creates feature branch `feature/phase-<N>`
@@ -162,6 +173,7 @@ All scripts located in `scripts/git-workflow/`
 7. Creates initial checkpoint tag
 
 **Output:**
+
 ```
 ✓ Current branch: develop
 ✓ Working directory clean
@@ -181,6 +193,7 @@ See TASKS.md for details.
 ```
 
 **Error Handling:**
+
 - If working directory not clean → prompts to commit or stash
 - If branch already exists → offers to checkout existing or abort
 - If not on develop → prompts to switch to develop first
@@ -192,16 +205,19 @@ See TASKS.md for details.
 **Purpose:** Complete a task with quality validation, commit, and checkpoint
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/complete-task.sh <phase>.<section>.<task>
 ```
 
 **Example:**
+
 ```bash
 ./scripts/git-workflow/complete-task.sh 1.1.1
 ```
 
 **What It Does:**
+
 1. Validates quality gates (tests, lint, typecheck)
 2. Stages all changes
 3. Generates descriptive commit message
@@ -212,6 +228,7 @@ See TASKS.md for details.
 8. Updates progress tracking
 
 **Commit Message Format:**
+
 ```
 feat(phase-1): Complete Task 1.1.1 - Create Configuration Templates
 
@@ -228,6 +245,7 @@ Coverage: 95%
 ```
 
 **Quality Gates:**
+
 ```bash
 # All must pass before commit allowed:
 ✓ TypeScript type-check (bun run type-check)
@@ -238,6 +256,7 @@ Coverage: 95%
 ```
 
 **Output:**
+
 ```
 Running quality gates...
 ✓ TypeScript check passed
@@ -262,6 +281,7 @@ Next task: 1.1.2
 ```
 
 **Error Handling:**
+
 - If quality gates fail → shows errors, aborts commit
 - If no changes → warns and aborts
 - If remote push fails → shows error, commit still created locally
@@ -273,16 +293,19 @@ Next task: 1.1.2
 **Purpose:** Complete a phase by merging to develop and creating release checkpoint
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/complete-phase.sh <phase-number>
 ```
 
 **Example:**
+
 ```bash
 ./scripts/git-workflow/complete-phase.sh 1
 ```
 
 **What It Does:**
+
 1. Validates all phase tasks are complete
 2. Runs full quality validation
 3. Switches to develop branch
@@ -294,6 +317,7 @@ Next task: 1.1.2
 9. Updates roadmap progress
 
 **Output:**
+
 ```
 Validating Phase 1 completion...
 ✓ All tasks marked complete
@@ -317,12 +341,14 @@ Next phase: Phase 2
 ```
 
 **Pre-Merge Validation:**
+
 - All tasks in phase must be marked complete
 - Quality gates must pass
 - Remote must be in sync
 - Working directory must be clean
 
 **Error Handling:**
+
 - If tasks incomplete → lists missing tasks, aborts
 - If quality gates fail → shows errors, aborts
 - If merge conflicts → aborts, provides recovery instructions
@@ -334,11 +360,13 @@ Next phase: Phase 2
 **Purpose:** Synchronize local repository with remote
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/sync-with-remote.sh
 ```
 
 **What It Does:**
+
 1. Fetches from remote
 2. Compares local and remote state
 3. Pushes or pulls as needed
@@ -348,12 +376,14 @@ Next phase: Phase 2
 **Scenarios:**
 
 **Scenario 1: Local and Remote in Sync**
+
 ```
 ✓ Local and remote are in sync
 Nothing to do.
 ```
 
 **Scenario 2: Local Ahead of Remote**
+
 ```
 → Local is ahead by 3 commits
 → Pushing to remote...
@@ -361,6 +391,7 @@ Nothing to do.
 ```
 
 **Scenario 3: Remote Ahead of Local**
+
 ```
 → Remote is ahead by 2 commits
 → Pulling from remote...
@@ -368,6 +399,7 @@ Nothing to do.
 ```
 
 **Scenario 4: Diverged (Conflict)**
+
 ```
 ✗ Local and remote have diverged!
 
@@ -393,11 +425,13 @@ Recommendation: Use emergency recovery if uncertain
 **Purpose:** Display current project state
 
 **Usage:**
+
 ```bash
 ./scripts/git-workflow/where-am-i.sh
 ```
 
 **Output:**
+
 ```
 ═══════════════════════════════════════
     UI LIBRARY PROJECT STATUS
@@ -439,6 +473,7 @@ Next Steps:
 **Location:** `.claude/session-state.json`
 
 **Schema:**
+
 ```json
 {
   "project": "ui-library",
@@ -453,12 +488,7 @@ Next Steps:
     "commit": "a3f8d9c",
     "timestamp": "2025-01-23T14:32:15Z"
   },
-  "tasks_completed": [
-    "1.0.1",
-    "1.0.2",
-    "1.0.3",
-    "1.0.4"
-  ],
+  "tasks_completed": ["1.0.1", "1.0.2", "1.0.3", "1.0.4"],
   "remote_url": "https://github.com/jcmrs/ui-library.git",
   "last_sync": "2025-01-23T14:35:00Z"
 }
@@ -469,6 +499,7 @@ Next Steps:
 **Location:** `.claude/progress.json`
 
 **Schema:**
+
 ```json
 {
   "phases": {
@@ -519,24 +550,28 @@ If session state is lost or corrupted:
 ### Checkpoint Types
 
 **1. Task Checkpoints**
+
 - Created by `complete-task.sh`
 - Format: `task-<phase>.<section>.<task>-complete`
 - Example: `task-1.1.1-complete`
 - Frequency: After every task completion
 
 **2. Phase Checkpoints**
+
 - Created by `complete-phase.sh`
 - Format: `phase-<N>-complete`
 - Example: `phase-1-complete`
 - Frequency: After phase completion
 
 **3. Emergency Checkpoints**
+
 - Created manually or by panic-button.sh
 - Format: `emergency-<timestamp>`
 - Example: `emergency-20250123-143015`
 - Frequency: Before risky operations
 
 **4. Automatic Checkpoints**
+
 - Created by automated monitoring
 - Format: `auto-checkpoint-<timestamp>`
 - Example: `auto-checkpoint-20250123-150000`
@@ -545,23 +580,27 @@ If session state is lost or corrupted:
 ### Checkpoint Operations
 
 **Create Checkpoint:**
+
 ```bash
 git tag -a "task-1.1.1-complete" -m "Task 1.1.1: Configuration templates"
 git push origin --tags
 ```
 
 **List Checkpoints:**
+
 ```bash
 git tag -l "task-*"
 git tag -l "phase-*"
 ```
 
 **View Checkpoint Details:**
+
 ```bash
 git show task-1.1.1-complete
 ```
 
 **Restore from Checkpoint:**
+
 ```bash
 # Soft restore (keep working changes)
 git reset --soft task-1.1.1-complete
@@ -623,14 +662,14 @@ If push fails due to conflicts:
 
 ### Quick Recovery Reference
 
-| Scenario | Command | Time |
-|----------|---------|------|
-| Lost context | `./scripts/recovery/restore-session-state.sh` | 1 min |
-| Corrupted git state | `./scripts/recovery/emergency-recovery.sh` | 2 min |
-| Wrong branch | `./scripts/git-workflow/where-am-i.sh` then switch | 30 sec |
-| Need to undo task | `git reset --hard <checkpoint-tag>` | 30 sec |
-| Remote out of sync | `./scripts/git-workflow/sync-with-remote.sh` | 1-3 min |
-| Don't know what's wrong | `./scripts/recovery/panic-button.sh` | 2-5 min |
+| Scenario                | Command                                            | Time    |
+| ----------------------- | -------------------------------------------------- | ------- |
+| Lost context            | `./scripts/recovery/restore-session-state.sh`      | 1 min   |
+| Corrupted git state     | `./scripts/recovery/emergency-recovery.sh`         | 2 min   |
+| Wrong branch            | `./scripts/git-workflow/where-am-i.sh` then switch | 30 sec  |
+| Need to undo task       | `git reset --hard <checkpoint-tag>`                | 30 sec  |
+| Remote out of sync      | `./scripts/git-workflow/sync-with-remote.sh`       | 1-3 min |
+| Don't know what's wrong | `./scripts/recovery/panic-button.sh`               | 2-5 min |
 
 See [DISASTER-RECOVERY.md](DISASTER-RECOVERY.md) for detailed procedures.
 
@@ -704,21 +743,21 @@ After manual intervention:
 
 ## Script Reference Summary
 
-| Script | Purpose | Usage |
-|--------|---------|-------|
-| `start-phase.sh` | Begin new phase | `./scripts/git-workflow/start-phase.sh <N>` |
-| `complete-task.sh` | Finish task with validation | `./scripts/git-workflow/complete-task.sh <X.Y.Z>` |
-| `complete-phase.sh` | Merge phase to develop | `./scripts/git-workflow/complete-phase.sh <N>` |
-| `sync-with-remote.sh` | Sync with GitHub | `./scripts/git-workflow/sync-with-remote.sh` |
-| `where-am-i.sh` | Show current state | `./scripts/git-workflow/where-am-i.sh` |
+| Script                | Purpose                     | Usage                                             |
+| --------------------- | --------------------------- | ------------------------------------------------- |
+| `start-phase.sh`      | Begin new phase             | `./scripts/git-workflow/start-phase.sh <N>`       |
+| `complete-task.sh`    | Finish task with validation | `./scripts/git-workflow/complete-task.sh <X.Y.Z>` |
+| `complete-phase.sh`   | Merge phase to develop      | `./scripts/git-workflow/complete-phase.sh <N>`    |
+| `sync-with-remote.sh` | Sync with GitHub            | `./scripts/git-workflow/sync-with-remote.sh`      |
+| `where-am-i.sh`       | Show current state          | `./scripts/git-workflow/where-am-i.sh`            |
 
 ---
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | 2025-01-23 | Initial git workflow documentation |
+| Version | Date       | Changes                            |
+| ------- | ---------- | ---------------------------------- |
+| 1.0.0   | 2025-01-23 | Initial git workflow documentation |
 
 ---
 

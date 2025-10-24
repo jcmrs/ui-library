@@ -1,0 +1,15 @@
+# Ignore UPSTREAM reference directories
+UPSTREAM/
+
+# Ignore Storybook config with JSX in .ts file (known issue)
+.storybook/preview.ts
+
+# Ignore build outputs
+dist/
+storybook-static/
+node_modules/
+
+# Ignore generated files
+*.min.js
+*.bundle.js
+package-lock.json

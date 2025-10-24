@@ -18,10 +18,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.0.1 Git Workflow Scripts
 
 #### Task 1.0.1a: Create start-phase.sh
+
 **Estimate:** 1 hour
 **Dependencies:** None
 
 **Implementation:**
+
 - Create `scripts/git-workflow/start-phase.sh`
 - Validates current branch is develop
 - Validates working directory clean
@@ -32,6 +34,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Creates initial checkpoint tag
 
 **Acceptance Criteria:**
+
 - Script runs without errors
 - Feature branch created correctly
 - Session state file populated
@@ -39,6 +42,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Clear error messages on failure
 
 **Test Cases:**
+
 - Run from develop branch (success)
 - Run from wrong branch (error)
 - Run with dirty working directory (error)
@@ -47,10 +51,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.1b: Create complete-task.sh
+
 **Estimate:** 1.5 hours
 **Dependencies:** 1.0.1a
 
 **Implementation:**
+
 - Create `scripts/git-workflow/complete-task.sh`
 - Validates quality gates (typecheck, lint, prettier, tests)
 - Stages all changes
@@ -61,6 +67,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Updates progress tracking
 
 **Acceptance Criteria:**
+
 - Quality gates must pass before commit
 - Commit message follows format
 - Checkpoint tag created
@@ -68,6 +75,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Progress.json updated
 
 **Test Cases:**
+
 - Complete task with passing quality gates (success)
 - Attempt with failing tests (blocked)
 - Attempt with TypeScript errors (blocked)
@@ -76,10 +84,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.1c: Create complete-phase.sh
+
 **Estimate:** 1 hour
 **Dependencies:** 1.0.1b
 
 **Implementation:**
+
 - Create `scripts/git-workflow/complete-phase.sh`
 - Validates all tasks complete
 - Switches to develop branch
@@ -90,6 +100,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Updates session state
 
 **Acceptance Criteria:**
+
 - All tasks must be marked complete
 - Quality gates pass
 - Merge successful
@@ -97,6 +108,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Feature branch deleted
 
 **Test Cases:**
+
 - Complete phase with all tasks done (success)
 - Attempt with incomplete tasks (blocked)
 - Attempt with merge conflicts (abort + guidance)
@@ -104,10 +116,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.1d: Create sync-with-remote.sh
+
 **Estimate:** 45 minutes
 **Dependencies:** None
 
 **Implementation:**
+
 - Create `scripts/git-workflow/sync-with-remote.sh`
 - Fetches from remote
 - Compares local/remote state
@@ -117,12 +131,14 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Provides recovery guidance
 
 **Acceptance Criteria:**
+
 - Correctly identifies sync state
 - Handles all scenarios safely
 - Provides clear guidance on conflicts
 - Non-destructive by default
 
 **Test Cases:**
+
 - Local ahead (pushes)
 - Remote ahead (pulls)
 - In sync (no action)
@@ -131,10 +147,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.1e: Create where-am-i.sh
+
 **Estimate:** 30 minutes
 **Dependencies:** 1.0.2a (session state schema)
 
 **Implementation:**
+
 - Create `scripts/git-workflow/where-am-i.sh`
 - Reads session state JSON
 - Displays current phase/task
@@ -144,6 +162,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Shows next steps
 
 **Acceptance Criteria:**
+
 - Displays all relevant state
 - Formatted for readability
 - Works even with missing state (graceful degradation)
@@ -154,10 +173,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.0.2 Session State Management
 
 #### Task 1.0.2a: Define Session State Schema
+
 **Estimate:** 30 minutes
 **Dependencies:** None
 
 **Implementation:**
+
 - Define session-state.json schema (see SESSION-STATE.md)
 - Define progress.json schema
 - Define checkpoints.json schema
@@ -165,6 +186,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Document all fields
 
 **Acceptance Criteria:**
+
 - Schemas are well-defined
 - All required fields identified
 - TypeScript types created
@@ -173,10 +195,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.2b: Implement State Management Functions
+
 **Estimate:** 1 hour
 **Dependencies:** 1.0.2a
 
 **Implementation:**
+
 - Create state reading functions
 - Create state update functions
 - Create state validation functions
@@ -184,6 +208,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Implement state backups
 
 **Acceptance Criteria:**
+
 - Functions are idempotent
 - Atomic writes prevent corruption
 - Validation catches malformed state
@@ -192,16 +217,19 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.2c: Implement State Snapshot System
+
 **Estimate:** 45 minutes
 **Dependencies:** 1.0.2b
 
 **Implementation:**
+
 - Create `.claude/session-history/` directory
 - Implement hourly snapshot creation
 - Implement snapshot cleanup (30 day retention)
 - Add snapshot restoration capability
 
 **Acceptance Criteria:**
+
 - Snapshots created hourly
 - Old snapshots pruned automatically
 - Restoration works correctly
@@ -211,10 +239,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.0.3 Recovery Infrastructure
 
 #### Task 1.0.3a: Create panic-button.sh
+
 **Estimate:** 1.5 hours
 **Dependencies:** 1.0.1d, 1.0.4a (diagnose-issues.sh)
 
 **Implementation:**
+
 - Create `scripts/recovery/panic-button.sh`
 - Interactive recovery wizard
 - Runs diagnostics
@@ -223,12 +253,14 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Executes with confirmation
 
 **Acceptance Criteria:**
+
 - Handles all major failure scenarios
 - Provides clear options
 - Executes safely with confirmation
 - Validates recovery success
 
 **Test Cases:**
+
 - Uncommitted changes (offers commit/stash/discard)
 - Quality gate failures (shows errors + guidance)
 - Remote out of sync (diagnoses + offers resolution)
@@ -237,10 +269,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.3b: Create emergency-recovery.sh
+
 **Estimate:** 45 minutes
 **Dependencies:** 1.0.2b
 
 **Implementation:**
+
 - Create `scripts/recovery/emergency-recovery.sh`
 - Backs up current state
 - Fetches from remote
@@ -249,12 +283,14 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Restores session state
 
 **Acceptance Criteria:**
+
 - Creates backup before reset
 - Confirmation required
 - Complete reset to clean state
 - Session state restored
 
 **Test Cases:**
+
 - Run with corrupted local git (recovery succeeds)
 - Run with uncommitted work (backup preserved)
 - Validate post-recovery state
@@ -262,10 +298,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.3c: Create restore-session-state.sh
+
 **Estimate:** 1 hour
 **Dependencies:** 1.0.2b
 
 **Implementation:**
+
 - Create `scripts/recovery/restore-session-state.sh`
 - Detects missing/corrupted state
 - Backs up corrupted file
@@ -275,12 +313,14 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Validates reconstruction
 
 **Acceptance Criteria:**
+
 - Handles missing state file
 - Handles corrupted JSON
 - Infers state from git when possible
 - Validates reconstruction
 
 **Test Cases:**
+
 - Missing state file (reconstruction from git)
 - Corrupted JSON (backup + rebuild)
 - Partial state (prompts for missing fields)
@@ -288,10 +328,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.0.3d: Create diagnose-issues.sh
+
 **Estimate:** 1 hour
 **Dependencies:** None
 
 **Implementation:**
+
 - Create `scripts/recovery/diagnose-issues.sh`
 - Check git repository health
 - Check branch state
@@ -302,6 +344,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Generate diagnostic report
 
 **Acceptance Criteria:**
+
 - Comprehensive diagnostics
 - Clear reporting
 - Actionable recommendations
@@ -312,10 +355,12 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.0.4 Documentation
 
 #### Task 1.0.4a: Complete Documentation Suite
+
 **Estimate:** 30 minutes (verification only)
 **Dependencies:** All 1.0.x tasks
 
 **Verification:**
+
 - [x] GIT-WORKFLOW.md complete
 - [x] DISASTER-RECOVERY.md complete
 - [x] SESSION-STATE.md complete
@@ -323,6 +368,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - [x] TASKS.md updated (this file)
 
 **Acceptance Criteria:**
+
 - All documents created
 - All procedures documented
 - All scripts documented
@@ -341,11 +387,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.1 Project Setup Automation
 
 #### Task 1.1.1: Create Configuration Templates
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** None
 
 **Subtasks:**
+
 - [ ] Create `config-templates/package.json.template` with locked dependency versions
   - React 19.1.1
   - TypeScript 5.8+
@@ -377,6 +425,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Tailwind CSS support
 
 **Acceptance Criteria:**
+
 - All templates are valid and functional
 - Templates use exact versions (no `^` or `~` ranges for critical deps)
 - Templates include inline comments explaining each configuration choice
@@ -384,11 +433,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.1.2: Create Setup Script
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** Task 1.1.1
 
 **Subtasks:**
+
 - [ ] Create `scripts/setup-new-project.sh`
 - [ ] Implement validation checks
   - Node.js version check (>= 20.0.0)
@@ -411,6 +462,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - [ ] Create `scripts/README.md` documenting all scripts
 
 **Acceptance Criteria:**
+
 - Script runs successfully on fresh clone
 - Script is idempotent (can run multiple times)
 - All error cases have helpful messages
@@ -418,6 +470,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Documentation explains usage
 
 **Test Cases:**
+
 - Fresh repository (no existing files)
 - Existing repository with conflicts
 - Missing Node.js or wrong version
@@ -427,11 +480,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.1.3: Create Setup Validation Script
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** Task 1.1.2
 
 **Subtasks:**
+
 - [ ] Create `scripts/validate-setup.sh`
 - [ ] Check all configuration files exist
   - package.json
@@ -455,6 +510,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - List all issues found
 
 **Acceptance Criteria:**
+
 - Validates complete setup
 - Catches common configuration errors
 - Provides actionable fix suggestions
@@ -465,11 +521,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.2 Component Scaffolding System
 
 #### Task 1.2.1: Create Component Templates
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** None
 
 **Subtasks:**
+
 - [ ] Create `scripts/templates/component.tsx.template`
   - TypeScript React component structure
   - Inline documentation placeholders
@@ -500,6 +558,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Documentation requirements
 
 **Acceptance Criteria:**
+
 - All templates are valid TypeScript/Markdown
 - Templates include comprehensive inline comments
 - Templates follow established patterns
@@ -508,11 +567,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.2.2: Create Component Scaffolding Script
+
 **Estimate:** 4 hours
 **Assignee:** TBD
 **Dependencies:** Task 1.2.1
 
 **Subtasks:**
+
 - [ ] Create `scripts/create-component.sh`
 - [ ] Implement argument parsing
   - Component name (required)
@@ -537,6 +598,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Create index if doesn't exist
 
 **Acceptance Criteria:**
+
 - Script creates complete component structure
 - All files are valid and lint-free
 - Component can be imported immediately
@@ -544,6 +606,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - Documentation updated automatically
 
 **Test Cases:**
+
 - Valid component creation
 - Invalid component name
 - Existing component (conflict)
@@ -553,11 +616,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.2.3: Create Component Validation Script
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** Task 1.2.2
 
 **Subtasks:**
+
 - [ ] Create `scripts/validate-component.sh`
 - [ ] Implement file structure validation
   - Check all required files exist
@@ -589,6 +654,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Summary statistics
 
 **Acceptance Criteria:**
+
 - Validates component completeness
 - Catches common errors
 - Provides specific fix guidance
@@ -600,11 +666,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.3 Quality Validation Pipeline
 
 #### Task 1.3.1: Create Quality Check Scripts
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** Task 1.1.1
 
 **Subtasks:**
+
 - [ ] Create `scripts/quality/lint.sh`
   - Run ESLint on all TypeScript files
   - Check for errors and warnings
@@ -631,6 +699,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Exit with error code if any check fails
 
 **Acceptance Criteria:**
+
 - Each script validates one quality aspect
 - Scripts provide actionable output
 - Scripts are fast (<30 seconds each)
@@ -640,11 +709,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.3.2: Create Git Hooks
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** Task 1.3.1
 
 **Subtasks:**
+
 - [ ] Create `.git/hooks/pre-commit` script
   - Run quality validation on staged files only
   - Use `lint-staged` or similar for efficiency
@@ -661,6 +732,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Document bypass usage (discouraged)
 
 **Acceptance Criteria:**
+
 - Pre-commit hook runs automatically
 - Hook validates only changed files (fast)
 - Hook prevents bad code from being committed
@@ -670,11 +742,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 1.3.3: Create CI/CD Workflows
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** Task 1.3.1
 
 **Subtasks:**
+
 - [ ] Create `.github/workflows/validate-pr.yml`
   - Trigger on pull request
   - Check out code
@@ -698,6 +772,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Verify workflow succeeds on clean code
 
 **Acceptance Criteria:**
+
 - Workflows run automatically on PRs and commits
 - Workflows catch quality issues
 - Workflows provide clear feedback
@@ -709,11 +784,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 1.4 Documentation
 
 #### Task 1.4.1: Create Phase 1 Documentation
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** All Phase 1 tasks
 
 **Subtasks:**
+
 - [ ] Create `scripts/README.md`
   - Explain each script's purpose
   - Provide usage examples
@@ -736,6 +813,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Update timeline if needed
 
 **Acceptance Criteria:**
+
 - All scripts are documented
 - Documentation is accurate and tested
 - New contributors can follow docs successfully
@@ -753,11 +831,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 2.1 Button Component Implementation
 
 #### Task 2.1.1: Analyze UntitledUI Button
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** None
 
 **Subtasks:**
+
 - [ ] Read and understand `UPSTREAM/react/components/base/buttons/button.tsx`
 - [ ] Document all variants (primary, secondary, tertiary, link, destructive)
 - [ ] Document all sizes (sm, md, lg, xl)
@@ -768,17 +848,20 @@ This document provides detailed task breakdowns for each project phase, suitable
 - [ ] Identify gaps for AI usage
 
 **Deliverables:**
+
 - Analysis document with findings
 - List of required enhancements for AI
 
 ---
 
 #### Task 2.1.2: Create Button Component with Enhanced Documentation
+
 **Estimate:** 6 hours
 **Assignee:** TBD
 **Dependencies:** Task 2.1.1
 
 **Subtasks:**
+
 - [ ] Copy UntitledUI button.tsx as starting point
 - [ ] Add comprehensive inline documentation
   - Document every line's purpose
@@ -804,6 +887,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - ButtonGroup composition (if needed in Phase 2)
 
 **Acceptance Criteria:**
+
 - Every line has explanatory comment
 - All props have JSDoc with examples
 - No implicit patterns or conventions
@@ -814,11 +898,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 2.1.3: Create Button Storybook Stories
+
 **Estimate:** 4 hours
 **Assignee:** TBD
 **Dependencies:** Task 2.1.2
 
 **Subtasks:**
+
 - [ ] Create `button.story.tsx` with CSF3 format
 - [ ] Create default story
 - [ ] Create stories for all variants
@@ -846,6 +932,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Document screen reader behavior
 
 **Acceptance Criteria:**
+
 - All variants render correctly
 - All combinations render correctly
 - Args table is comprehensive
@@ -856,11 +943,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 2.1.4: Create Button Tests
+
 **Estimate:** 4 hours
 **Assignee:** TBD
 **Dependencies:** Task 2.1.2
 
 **Subtasks:**
+
 - [ ] Create `button.test.tsx` with Vitest + Testing Library
 - [ ] Write basic render tests
   - Renders without crashing
@@ -891,6 +980,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - [ ] Achieve 90%+ code coverage
 
 **Acceptance Criteria:**
+
 - All tests pass
 - Coverage >= 90%
 - Tests are clear and maintainable
@@ -900,11 +990,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 2.1.5: Create Button Usage Patterns Document
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** Task 2.1.2, Task 2.1.3
 
 **Subtasks:**
+
 - [ ] Create `button.patterns.md`
 - [ ] Document when to use each variant
   - Primary: Main CTAs, form submissions
@@ -935,6 +1027,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Explanations for each
 
 **Acceptance Criteria:**
+
 - Covers all common use cases
 - Provides actionable guidance
 - Includes copy-paste examples
@@ -944,11 +1037,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 2.1.6: Create Button Composition Examples
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** Task 2.1.2
 
 **Subtasks:**
+
 - [ ] Create `button.compositions.tsx`
 - [ ] Create ButtonWithIcon example
   - Pre-composed button with common icon
@@ -969,6 +1064,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - [ ] Add tests for compositions
 
 **Acceptance Criteria:**
+
 - All compositions are functional
 - Compositions demonstrate best practices
 - Compositions are tested
@@ -977,11 +1073,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 2.1.7: Create Button Validation Checklist
+
 **Estimate:** 1 hour
 **Assignee:** TBD
 **Dependencies:** All Task 2.1.x
 
 **Subtasks:**
+
 - [ ] Create `button.checklist.json` (machine-readable)
 - [ ] Define required files checklist
   - button.tsx exists
@@ -1011,6 +1109,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Args table complete
 
 **Acceptance Criteria:**
+
 - Checklist is comprehensive
 - Checklist is machine-readable
 - Validation script can use checklist
@@ -1021,11 +1120,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 2.2 Button Documentation
 
 #### Task 2.2.1: Create Button README
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** All Task 2.1.x
 
 **Subtasks:**
+
 - [ ] Create `components/base/button/README.md`
 - [ ] Add component overview
   - Purpose and use cases
@@ -1050,6 +1151,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Solutions
 
 **Acceptance Criteria:**
+
 - README is comprehensive
 - README is accessible to humans and AI
 - Examples are tested
@@ -1067,11 +1169,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 3.1 Dashboard Page Template
 
 #### Task 3.1.1: Design Dashboard Layout
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** None
 
 **Subtasks:**
+
 - [ ] Create visual specification
   - Annotated screenshot/mockup
   - Exact dimensions
@@ -1089,6 +1193,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Content padding
 
 **Deliverables:**
+
 - Visual specification document
 - Layout structure diagram
 - Responsive behavior documentation
@@ -1096,11 +1201,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 3.1.2: Implement Dashboard Layout Component
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** Task 3.1.1
 
 **Subtasks:**
+
 - [ ] Create `components/layouts/dashboard-layout.tsx`
 - [ ] Implement grid structure
   - CSS Grid with exact specifications
@@ -1123,6 +1230,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Responsive behavior works
 
 **Acceptance Criteria:**
+
 - Layout matches visual specification
 - Layout is responsive
 - Documentation is comprehensive
@@ -1131,11 +1239,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 3.1.3: Implement Dashboard Page Template
+
 **Estimate:** 4 hours
 **Assignee:** TBD
 **Dependencies:** Task 3.1.2, Phase 2 complete
 
 **Subtasks:**
+
 - [ ] Create `components/page-templates/simple-dashboard.template.tsx`
 - [ ] Implement header section
   - Logo component
@@ -1159,6 +1269,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Common modifications
 
 **Acceptance Criteria:**
+
 - Template is complete and functional
 - Template uses Button component correctly
 - Template matches layout specification
@@ -1167,11 +1278,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 3.1.4: Create Dashboard Page Stories and Tests
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** Task 3.1.3
 
 **Subtasks:**
+
 - [ ] Create Storybook story
   - Default dashboard
   - Customized dashboard examples
@@ -1187,6 +1300,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - User menu interactions
 
 **Acceptance Criteria:**
+
 - Stories show all variations
 - Tests cover all features
 - E2E test validates full workflow
@@ -1194,11 +1308,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 3.1.5: Create Dashboard Template Documentation
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** Task 3.1.4
 
 **Subtasks:**
+
 - [ ] Create `components/page-templates/simple-dashboard.template.md`
 - [ ] Document template purpose
   - When to use
@@ -1221,6 +1337,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - [ ] Create troubleshooting section
 
 **Acceptance Criteria:**
+
 - Documentation is complete
 - Guide is tested with Claude Code
 - Examples are copy-paste ready
@@ -1237,11 +1354,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ### 4.1 Claude Code Validation Tests
 
 #### Task 4.1.1: Create Validation Test Suite
+
 **Estimate:** 3 hours
 **Assignee:** TBD
 **Dependencies:** None
 
 **Subtasks:**
+
 - [ ] Create `tests/claude-code-validation.md`
 - [ ] Define Test 1: Project Setup
   - Prompt for Claude Code
@@ -1267,6 +1386,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 - [ ] Create failure analysis template
 
 **Deliverables:**
+
 - Complete validation test suite
 - Test execution checklist
 - Failure analysis template
@@ -1274,11 +1394,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 4.1.2: Execute Validation Tests
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** Task 4.1.1
 
 **Subtasks:**
+
 - [ ] Create fresh Claude Code session
 - [ ] Execute Test 1: Project Setup
   - Record actions taken
@@ -1302,6 +1424,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Root causes
 
 **Deliverables:**
+
 - Test execution results
 - Failure analysis (if applicable)
 - Success confirmation (if all pass)
@@ -1309,11 +1432,13 @@ This document provides detailed task breakdowns for each project phase, suitable
 ---
 
 #### Task 4.1.3: Analyze Results and Make Decision
+
 **Estimate:** 2 hours
 **Assignee:** TBD
 **Dependencies:** Task 4.1.2
 
 **Subtasks:**
+
 - [ ] Analyze test results
   - Calculate success rate
   - Identify failure patterns
@@ -1335,6 +1460,7 @@ This document provides detailed task breakdowns for each project phase, suitable
   - Re-test plan
 
 **Deliverables:**
+
 - Phase decision document
 - Updated roadmap
 - Remediation plan (if needed)
@@ -1344,6 +1470,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 ## Task Tracking
 
 ### Status Definitions
+
 - **Not Started:** Task not yet begun
 - **In Progress:** Task actively being worked on
 - **Blocked:** Task cannot proceed due to dependency or issue
@@ -1351,12 +1478,14 @@ This document provides detailed task breakdowns for each project phase, suitable
 - **Complete:** Task finished and reviewed
 
 ### Priority Levels
+
 - **Critical Path:** Must complete for project to proceed
 - **High:** Important for quality, should complete soon
 - **Medium:** Valuable but can be deferred
 - **Low:** Nice-to-have, can be deferred indefinitely
 
 ### Estimation Guidelines
+
 - 1 hour: Simple, well-defined task
 - 2 hours: Straightforward task with clear steps
 - 3-4 hours: Complex task requiring research/planning
@@ -1369,6 +1498,7 @@ This document provides detailed task breakdowns for each project phase, suitable
 **Note:** Detailed task breakdowns for Phases 5-10 will be created after successful completion of Phase 4 validation. High-level scope is defined in ROADMAP.md.
 
 **Planned Activities:**
+
 - Phase 5: Break down all 18 base components
 - Phase 6: Break down all 12 application components
 - Phase 7: Break down all 6 layouts

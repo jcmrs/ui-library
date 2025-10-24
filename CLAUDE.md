@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Production-ready UI component library built as a single source of truth for AI-assisted UI development. This library eliminates AI implementation failures by providing complete, unambiguous materials with accessibility-first components.
 
 **Technology Stack:**
+
 - React 19.1
 - TypeScript 5.8
 - Tailwind CSS 4.1
@@ -14,6 +15,7 @@ Production-ready UI component library built as a single source of truth for AI-a
 - Storybook (for component documentation)
 
 **Quality Standards:**
+
 - WCAG 2.1 AA accessibility compliance
 - Mobile-first responsive design
 - Full TypeScript type safety
@@ -22,12 +24,14 @@ Production-ready UI component library built as a single source of truth for AI-a
 ## Development Commands
 
 ### Storybook Development
+
 ```bash
 bun run storybook          # Start Storybook dev server on port 6006
 bun run build-storybook    # Build static Storybook
 ```
 
 ### Code Quality
+
 ```bash
 bun run test               # Run full test suite (type-check + lint + prettier)
 bun run type-check         # TypeScript type checking only
@@ -42,6 +46,7 @@ bun run prettier:check     # Check formatting without changes
 ### Component Structure
 
 Components organized in domain-specific directories:
+
 - `components/base/` - Foundational primitives (buttons, inputs, etc.)
 - `components/foundations/` - Design system foundations (colors, typography, spacing)
 - `components/application/` - Complex application UI patterns
@@ -51,6 +56,7 @@ Components organized in domain-specific directories:
 ### Reference Materials (UPSTREAM/)
 
 Local clones of upstream repositories for reference and documentation:
+
 - `UPSTREAM/agents/` - wshobson agent framework (orchestration patterns, TDD workflows)
 - `UPSTREAM/react/` - UntitledUI React components (golden standard reference)
 - `UPSTREAM/icons/` - UntitledUI Icons library
@@ -63,6 +69,7 @@ Local clones of upstream repositories for reference and documentation:
 ## Component Development Guidelines
 
 ### Design Principles (from UPSTREAM/react)
+
 1. **Accessibility First** - WCAG 2.1 AA compliance required
 2. **Mobile-First** - Responsive by default
 3. **Composable** - Components work together seamlessly
@@ -70,12 +77,14 @@ Local clones of upstream repositories for reference and documentation:
 5. **Minimal** - Avoid unnecessary complexity
 
 ### TypeScript Requirements
+
 - Export all component prop interfaces
 - Use strict type checking
 - Provide JSDoc comments for complex props
 - Leverage React Aria types for accessibility
 
 ### Component Checklist
+
 - [ ] Fully typed with exported interfaces
 - [ ] Semantic HTML with proper ARIA attributes
 - [ ] Mobile-first responsive design
@@ -89,6 +98,7 @@ Local clones of upstream repositories for reference and documentation:
 This project uses the wshobson agent framework for multi-agent coordination.
 
 ### Available Specialized Agents
+
 - `frontend-developer` - React 19, TypeScript, Tailwind CSS expertise
 - `tdd-orchestrator` - Test-driven development coordination
 - `test-automator` - AI-powered test generation and validation
@@ -98,11 +108,13 @@ This project uses the wshobson agent framework for multi-agent coordination.
 - `accessibility-compliance:ui-visual-validator` - Visual UI validation
 
 ### Workflow Pattern
+
 ```
 Sonnet (planning) → Haiku (execution) → Sonnet (review)
 ```
 
 Use multi-agent coordination for:
+
 - Complex component implementation (frontend-developer + architect-review)
 - Test-driven development (tdd-orchestrator + test-automator)
 - Accessibility validation (frontend-developer + ui-visual-validator)
@@ -111,12 +123,14 @@ Use multi-agent coordination for:
 ## Context Management
 
 ### Token Efficiency Strategy
+
 - Read UPSTREAM/ references only when needed for specific patterns
 - Use symbolic tools for targeted code exploration
 - Leverage agent skills for progressive disclosure
 - Avoid reading entire files unnecessarily
 
 ### Session Continuity
+
 - Use TodoWrite tool for tracking multi-step tasks
 - Mark todos as completed immediately after finishing
 - Document architectural decisions in memory
@@ -132,6 +146,7 @@ Use multi-agent coordination for:
 ## AI Development Context
 
 This library is designed specifically for AI-assisted development:
+
 - Components follow predictable, consistent patterns
 - Complete TypeScript types eliminate ambiguity
 - Storybook provides visual reference for all states
