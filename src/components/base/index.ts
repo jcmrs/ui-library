@@ -22,4 +22,4 @@
 // Example: export * from './avatar';
 
 // Empty export to make this a valid module
-export {};
+export * from './button';
