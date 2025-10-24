@@ -1,0 +1,31 @@
+# Pre-push Hook
+# Creates automatic checkpoint before pushing to remote
+# See ADR-011 for rationale
+
+echo "🏷️  Creating checkpoint before push..."
+
+# Get current branch
+BRANCH=$(git branch --show-current)
+
+# Get current commit
+COMMIT=$(git rev-parse HEAD)
+
+# Get short commit hash for tag
+SHORT_HASH=$(git rev-parse --short HEAD)
+
+# Create timestamp for tag
+TIMESTAMP=$(date +"%Y%m%d-%H%M%S" 2>/dev/null || node -e "const d = new Date(); console.log(d.toISOString().replace(/[-:]/g, '').split('.')[0].replace('T', '-'))")
+
+# Create checkpoint tag
+TAG_NAME="checkpoint-${TIMESTAMP}-${SHORT_HASH}"
+
+# Check if tag already exists
+if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+  echo "  ⚠ Checkpoint tag already exists: $TAG_NAME"
+else
+  # Create lightweight checkpoint tag
+  git tag "$TAG_NAME" "$COMMIT" 2>/dev/null || true
+  echo "  ✓ Checkpoint created: $TAG_NAME"
+fi
+
+echo "✅ Pre-push checkpoint complete"

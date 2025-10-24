@@ -1,0 +1,64 @@
+# Post-commit Hook
+# Automatically updates session state after each commit
+# See ADR-011 for rationale
+
+echo "📝 Updating session state..."
+
+# Get current timestamp in ISO 8601 format
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || node -e "console.log(new Date().toISOString())")
+
+# Get current commit hash
+COMMIT_HASH=$(git rev-parse HEAD)
+
+# Get commits ahead of remote
+COMMITS_AHEAD=$(git rev-list --count @{u}..HEAD 2>/dev/null || echo "0")
+
+# Get file counts
+MODIFIED_COUNT=$(git diff --name-only | wc -l)
+UNTRACKED_COUNT=$(git ls-files --others --exclude-standard | wc -l)
+STAGED_COUNT=$(git diff --cached --name-only | wc -l)
+
+# Check if working directory is clean
+if [ "$MODIFIED_COUNT" -eq 0 ] && [ "$UNTRACKED_COUNT" -eq 0 ] && [ "$STAGED_COUNT" -eq 0 ]; then
+  WORKING_CLEAN="true"
+else
+  WORKING_CLEAN="false"
+fi
+
+# Update session state using Node.js script
+node -e "
+const fs = require('fs');
+const path = '.claude/session-state.json';
+
+try {
+  // Read current session state
+  const state = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+  // Update timing
+  state.timing.last_activity = '$TIMESTAMP';
+
+  // Update git state
+  state.git_state.local_commits_ahead = parseInt('$COMMITS_AHEAD');
+  state.git_state.modified_files = parseInt('$MODIFIED_COUNT');
+  state.git_state.untracked_files = parseInt('$UNTRACKED_COUNT');
+  state.git_state.staged_files = parseInt('$STAGED_COUNT');
+  state.git_state.working_directory_clean = $WORKING_CLEAN;
+
+  // Update checkpoint info
+  state.checkpoint.commit = '$COMMIT_HASH';
+  state.checkpoint.timestamp = '$TIMESTAMP';
+
+  // Update metadata
+  state.metadata.last_updated_by = 'post-commit hook';
+  state.metadata.last_updated_at = '$TIMESTAMP';
+
+  // Write back
+  fs.writeFileSync(path, JSON.stringify(state, null, 2));
+
+  console.log('  ✓ Session state updated');
+} catch (error) {
+  console.log('  ⚠ Session state update failed (non-critical):', error.message);
+}
+"
+
+echo "✅ Post-commit complete"

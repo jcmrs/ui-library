@@ -79,20 +79,109 @@ Usage:
 
 ---
 
-### 4. Session State Tracking (AUTOMATIC)
+### 4. Session State Tracking (FULLY AUTOMATIC ✅)
 
-**Status:** Tracks state when scripts run
+**Status:** ✅ Fully automated via post-commit hook
+**Hook:** `.husky/post-commit`
 **Location:** `.claude/session-state.json`
 **Documentation:** `.docs/SESSION-STATE.md`
+**ADR:** ADR-014
 
-Automatically updated by workflow scripts:
+Automatically updated after EVERY commit:
 
-- Current phase and task
-- Timestamps and progress
-- Git state and checkpoints
-- Last activity
+- `timing.last_activity` - ISO 8601 timestamp
+- `git_state.local_commits_ahead` - Commits ahead of remote
+- `git_state.modified_files` - Count of modified files
+- `git_state.untracked_files` - Count of untracked files
+- `git_state.staged_files` - Count of staged files
+- `git_state.working_directory_clean` - Boolean clean status
+- `checkpoint.commit` - Latest commit hash
+- `checkpoint.timestamp` - Latest commit timestamp
+- `metadata.last_updated_by` - "post-commit hook"
+- `metadata.last_updated_at` - ISO 8601 timestamp
 
-**Note:** Only updates when workflow scripts are run, not on direct git operations.
+**How it works:**
+
+```bash
+# After every git commit, the post-commit hook runs automatically
+git commit -m "Your message"
+# → Pre-commit quality gates run
+# → Commit is created
+# → Post-commit hook updates session-state.json
+# → Session state is always current
+```
+
+**Failure handling:** Non-blocking - commit always succeeds even if state update fails
+
+---
+
+### 5. Automatic Checkpoint Creation (FULLY AUTOMATIC ✅)
+
+**Status:** ✅ Fully automated via pre-push hook
+**Hook:** `.husky/pre-push`
+**ADR:** ADR-015
+
+Automatically creates checkpoint git tags before EVERY push:
+
+- Tag format: `checkpoint-YYYYMMDD-HHMMSS-<hash>`
+- Example: `checkpoint-20250124-143022-a1b2c3d`
+- Lightweight tags (no annotation)
+- Non-blocking (push continues even if tag creation fails)
+
+**How it works:**
+
+```bash
+# Before every git push, the pre-push hook runs automatically
+git push origin develop
+# → Pre-push hook creates checkpoint tag
+# → Push proceeds to remote
+# → Checkpoint preserved locally
+```
+
+**Benefits:**
+- Every push creates a recovery point
+- Easy rollback to any pushed state
+- Timestamped for chronological tracking
+- Zero manual effort
+
+---
+
+### 6. CI/CD Quality Validation (FULLY AUTOMATIC ✅)
+
+**Status:** ✅ Fully automated via GitHub Actions
+**Workflows:** `.github/workflows/validate-pr.yml`, `.github/workflows/validate-push.yml`
+**ADR:** ADR-013
+
+Automatically validates quality on GitHub:
+
+**On Pull Request:**
+- Triggers when PR opened/updated to main/develop
+- Runs TypeScript, ESLint, Prettier, Tests
+- Blocks merge if quality gates fail
+- Shows status in GitHub PR UI
+
+**On Push:**
+- Triggers on push to main/develop/feature branches
+- Same quality gates as local pre-commit
+- Provides immediate feedback
+- Validates all contributors' code
+
+**How it works:**
+
+```bash
+# Push code to GitHub
+git push origin feature/my-feature
+# → GitHub Actions workflow triggered
+# → Quality gates run in cloud
+# → Status appears in GitHub UI
+# → PR can/cannot merge based on result
+```
+
+**Benefits:**
+- Consistent quality enforcement
+- Validates code from all team members
+- No manual quality review needed
+- CI/CD status badges available
 
 ---
 

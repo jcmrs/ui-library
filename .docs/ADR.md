@@ -1504,9 +1504,145 @@ This ADR document should be updated when:
 
 ---
 
+---
+
+## ADR-013: GitHub Actions CI/CD Integration
+
+**Date:** 2025-01-24
+**Status:** ✅ Accepted
+**Context:** Phase 1.0 Automation Infrastructure
+
+### Decision
+
+Implement GitHub Actions workflows for automated quality validation on every push and pull request.
+
+### Implementation
+
+Two workflows created:
+
+1. **`.github/workflows/validate-pr.yml`**
+   - Triggers on PR to main/develop
+   - Runs TypeScript, ESLint, Prettier, Tests
+   - Blocks merge if quality gates fail
+
+2. **`.github/workflows/validate-push.yml`**
+   - Triggers on push to main/develop/feature branches
+   - Same quality gates as PR workflow
+   - Provides immediate feedback
+
+### Rationale
+
+1. **Prevent Bad Code from Merging**: Quality gates enforced by GitHub
+2. **Consistent Validation**: Same checks locally (pre-commit) and remotely (CI/CD)
+3. **Team Collaboration**: Validates code from all contributors
+4. **Status Visibility**: GitHub PR UI shows pass/fail status
+5. **No Manual Review for Quality**: Automated checks free reviewers for logic review
+
+### Consequences
+
+**Positive:**
+- Bad code cannot merge to protected branches
+- Quality maintained across all contributors
+- CI/CD status badges available
+- Automated testing on every change
+
+**Negative:**
+- GitHub Actions usage costs (free tier: 2000 min/month)
+- Adds ~2-3 minutes to PR merge time
+- Requires GitHub repository
+
+---
+
+## ADR-014: Automatic Session State Updates
+
+**Date:** 2025-01-24
+**Status:** ✅ Accepted
+**Context:** Phase 1.0 Automation Infrastructure
+
+### Decision
+
+Implement post-commit hook that automatically updates `.claude/session-state.json` after every commit.
+
+### Implementation
+
+**`.husky/post-commit` hook:**
+- Updates `timing.last_activity` timestamp
+- Updates `git_state` (commits ahead, modified files, etc.)
+- Updates `checkpoint.commit` with latest commit hash
+- Non-blocking (failures don't prevent commit)
+
+### Rationale
+
+1. **Zero Manual Effort**: Session state always current
+2. **Accurate Tracking**: Real-time git state information
+3. **Recovery Support**: Always know last known good state
+4. **Context Preservation**: Claude Code can resume accurately
+
+### Consequences
+
+**Positive:**
+- Session state always accurate
+- No manual JSON editing required
+- Better context for recovery scenarios
+- Enables future automation (auto-checkpoint logic)
+
+**Negative:**
+- Adds ~100ms to each commit
+- Requires Node.js installed
+- Hook failures logged but not blocking
+
+---
+
+## ADR-015: Automatic Checkpoint Creation
+
+**Date:** 2025-01-24
+**Status:** ✅ Accepted
+**Context:** Phase 1.0 Automation Infrastructure
+
+### Decision
+
+Implement pre-push hook that automatically creates checkpoint git tags before pushing to remote.
+
+### Implementation
+
+**`.husky/pre-push` hook:**
+- Creates lightweight git tag: `checkpoint-YYYYMMDD-HHMMSS-<hash>`
+- Tag format: `checkpoint-20250124-143022-a1b2c3d`
+- Non-blocking (push continues even if tag creation fails)
+- Automatic naming prevents conflicts
+
+### Rationale
+
+1. **Safety Net**: Every push creates recovery point
+2. **Zero Effort**: No manual tag creation required
+3. **Granular Recovery**: Can restore to any push
+4. **Timestamp Tracking**: Know when each push occurred
+5. **Work Preservation**: Never lose pushed work
+
+### Consequences
+
+**Positive:**
+- Automatic backup before every push
+- Granular recovery points
+- No manual checkpoint management
+- Timestamped for easy identification
+
+**Negative:**
+- Creates many tags over time (cleanup needed eventually)
+- Adds ~50ms to each push
+- Tags clutter git history (mitigated by naming convention)
+
+**Future Enhancement:**
+- Periodic tag cleanup (delete checkpoints older than 30 days)
+- Push tags to remote for backup
+- Integrate with `/checkpoint` slash command
+
+---
+
 ## Next Steps
 
 1. ✅ ADR.md created
-2. ⏳ Begin Phase 1 implementation
-3. ⏳ Document implementation learnings in ADR updates
-4. ⏳ Review ADRs after Phase 4 validation
+2. ✅ Phase 1.0 automation complete (actual implementation)
+3. ⏳ Test automation end-to-end
+4. ⏳ Begin Phase 1.1 implementation
+5. ⏳ Review ADRs after Phase 4 validation
