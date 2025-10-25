@@ -111,6 +111,8 @@ git commit -m "Your message"
 # → Session state is always current
 ```
 
+**Prettier Integration:** After updating JSON, hook runs `npx prettier --write .claude/session-state.json` to prevent pre-commit hook failures on next commit.
+
 **Failure handling:** Non-blocking - commit always succeeds even if state update fails
 
 ---

@@ -58,7 +58,11 @@ try {
   console.log('  ✓ Session state updated');
 } catch (error) {
   console.log('  ⚠ Session state update failed (non-critical):', error.message);
+  process.exit(0); // Non-blocking
 }
 "
+
+# Format session state with Prettier to prevent pre-commit hook failures
+npx prettier --write .claude/session-state.json --log-level=silent 2>/dev/null || true
 
 echo "✅ Post-commit complete"
