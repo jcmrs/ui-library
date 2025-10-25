@@ -66,7 +66,9 @@
       "Bash(node scripts/monitor-git-status.cjs:*)",
       "Bash(git rm:*)",
       "Bash(node -e:*)",
-      "Bash(/dev/null)"
+      "Bash(/dev/null)",
+      "Bash(tee:*)",
+      "Bash(git show:*)"
     ],
     "deny": [],
     "ask": []
