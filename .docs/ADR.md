@@ -120,100 +120,182 @@ Phase 1 deliverables:
 
 ---
 
-## ADR-002: Button as Reference Component
+## ADR-002: Multi-Category Component Architecture
 
-**Status:** Accepted
-**Date:** 2025-01-23
-**Decision Makers:** Multi-role analysis (Frontend Architect, AI Systems Engineer)
+**Status:** ✅ Accepted (Revised 2025-10-25)
+**Date:** 2025-01-23 (Original), 2025-10-25 (Revision)
+**Decision Makers:** Multi-role analysis (Frontend Architect, AI Systems Engineer, Information Architect)
 
 ### Context
 
-Need to choose ONE component to serve as the gold standard reference that all other components will follow. This component must:
+**Original Decision (2025-01-23):** Build Button as single reference component for entire library
 
-- Be fundamental (used everywhere in UIs)
-- Have clear accessibility requirements
-- Support multiple variants and states
-- Be complex enough to demonstrate patterns
-- Be simple enough to understand quickly
+**Why This Was Wrong:**
 
-Candidates considered:
+Phase 0 system study (complete analysis of 208 UntitledUI components) revealed:
 
-- Button
-- Input
-- Select
-- Card
-- Modal
+- Component complexity varies dramatically (Modal: 42 lines → Table: 301 lines)
+- Patterns have different scopes (universal vs category-specific vs component-specific)
+- Categories serve different purposes (base primitives vs application UI vs marketing sections)
+- Cannot derive system architecture from single component
 
-### Decision
+**Critical Lessons from Phase 0:**
 
-**Build Button component as the complete reference implementation (Phase 2).**
+1. **Button is ONE approach for ONE type** - Base/primitive components
+2. **Application components are MORE complex** - Deep composition, Context API, state management
+3. **Marketing components have DIFFERENT patterns** - Full-width sections, content-heavy, responsive
+4. **Page templates are COMPOSITIONS** - Multiple sections, not scaled-up components
 
-Button will include:
+**Attempting to use Button patterns for entire library = architectural failure**
 
-- All variants (primary, secondary, tertiary, destructive, link)
-- All sizes (sm, md, lg, xl)
-- All states (default, hover, active, disabled, loading)
-- Icon compositions (leading, trailing, icon-only)
-- Exhaustive inline documentation
-- Complete Storybook with all combinations
-- 90%+ test coverage
-- Usage patterns document
-- Pre-built composition examples
+### Revised Decision
 
-### Rationale
+**Build component library using multi-category architecture approach:**
 
-1. **Universal Usage**: Every UI needs buttons, making it the most referenced component
-2. **Clear Accessibility Requirements**: Button semantics are well-defined in WCAG
-3. **Multiple Variants**: Demonstrates how to handle variant systems
-4. **State Management**: Shows loading, disabled, and interaction states
-5. **Composition Patterns**: Icon + text combinations demonstrate composition
-6. **Simple Core Concept**: Not too complex for initial implementation
-7. **Rich Examples in UPSTREAM**: UntitledUI has comprehensive button implementation
+1. **Study component category FIRST** before implementing any component
+2. **Identify category-specific patterns** by analyzing 2-3 similar components in UPSTREAM/
+3. **Document universal vs category-specific patterns** for each component type
+4. **Never assume patterns from one category apply to another**
+
+### Component Categories and Architectures
+
+**1. base/ - Primitive UI Components**
+
+- **Architecture:** Single responsibility, minimal composition, highly reusable
+- **Examples:** Button (272 lines), Modal (42 lines), Input (272 lines with composition)
+- **Patterns:** React Aria integration, size systems vary by component, variant systems component-specific
+- **Reference Component:** Button (represents medium-complexity base component)
+
+**2. application/ - Complex Application Patterns**
+
+- **Architecture:** Deep composition, Context API, complex state management
+- **Examples:** Table (301 lines), Modals (46 variants), Navigation systems
+- **Patterns:** Composition (Table.Row, Table.Cell), integration with base components, responsive patterns
+- **Cannot use Button patterns** - Requires studying application component architecture
+
+**3. marketing/ - Marketing Website Components**
+
+- **Architecture:** Full-width sections, content-driven, SEO-focused
+- **Examples:** Hero sections (44 variants), Features, Pricing, Testimonials
+- **Patterns:** Full-width layouts, responsive breakpoints, content composition
+- **Cannot use Button patterns** - Completely different architecture
+
+**4. pages/ - Page Templates**
+
+- **Architecture:** Complete page compositions, multiple sections, routing integration
+- **Examples:** Login pages (16 variants), Landing pages, Dashboard pages
+- **Patterns:** Layout composition, section coordination, responsive structure
+- **Cannot use Button patterns** - Composition architecture, not component architecture
+
+### Universal Patterns (ALL components)
+
+**Identified in Phase 0 analysis:**
+
+1. **React Aria for Interactivity** - ALL interactive components (23% of total)
+2. **Design Token System** - 100% of components use semantic tokens
+3. **cx() Utility** - 100% of components for class merging
+4. **TypeScript Type Safety** - Full typing with exported interfaces
+
+**These patterns WILL be consistent across all categories**
+
+### Category-Specific Patterns (DO NOT assume universal)
+
+**Examples from Phase 0:**
+
+- **Context API:** Only complex/composed components (13 files, 6%)
+- **Polymorphic Rendering:** Button-specific (3 files, button/link variants)
+- **Color Variant System:** Button-specific (primary/secondary/tertiary)
+- **Size Systems:** Each component defines its own (Button: 4, Input: 2, Avatar: 5, Modal: 0)
+
+**Must study EACH category before implementing**
+
+### Implementation Approach
+
+**For Each New Component:**
+
+1. **Identify Category** - Which category does this belong to?
+2. **Study Similar Components** - Find 2-3 similar components in UPSTREAM/react
+3. **Identify Patterns:**
+   - Universal patterns (apply to all)
+   - Category patterns (apply to this type)
+   - Component patterns (unique to this one)
+4. **Document Findings** - Create architecture notes for component
+5. **Implement Component** - Following identified patterns
+6. **Validate Against Category** - Does it match category architecture?
+
+### Rationale for Multi-Category Approach
+
+1. **Prevents Button Fixation** - Different components need different architectures
+2. **Reduces Architectural Errors** - Study before assuming patterns
+3. **Enables Correct Complexity** - Match architecture to component needs
+4. **Future-Proof** - Can add new categories with different patterns
+5. **Evidence-Based** - Based on quantitative analysis of 208 components
 
 ### Consequences
 
 **Positive:**
 
-- Establishes patterns for all future components
-- Button is most frequently used, maximizing reference value
-- Clear success criteria (if Button works, pattern is validated)
-- Simple enough to complete in 3-4 days
-- Complex enough to demonstrate key patterns
+- Correct architecture for each component category
+- Prevents applying inappropriate patterns
+- Enables proper complexity matching
+- Scalable to all component types
+- Evidence-based approach
 
 **Negative:**
 
-- Button might not reveal all component complexity patterns
-- May need to refine patterns when building more complex components
-- Investment in single component before validating approach
+- More upfront study required per component
+- Cannot blindly copy Button patterns
+- Requires category-specific documentation
+- Longer ramp-up for new component categories
 
 **Risks:**
 
-- Button patterns might not scale to application components
-- Over-documenting Button could slow future development
+- Could slow initial development (mitigated by documentation)
+- Requires discipline to study before implementing
+- May discover new categories requiring new patterns
 
 ### Alternatives Considered
 
-1. **Input Component**
+1. **Keep Button as Universal Reference**
 
-   - Rejected: Form validation patterns add complexity
-   - Risk: Might take longer to complete initial reference
+   - Rejected: Phase 0 proved this approach fundamentally flawed
+   - Risk: Repeating architectural mistakes
 
-2. **Card Component**
+2. **No Reference Components**
 
-   - Rejected: Less universal than Button
-   - Risk: Composition patterns more complex
+   - Rejected: Some guidance needed for consistency
+   - Risk: Inconsistency across components
 
-3. **Multiple Simple Components**
-   - Rejected: Dilutes focus, harder to validate pattern
-   - Risk: Inconsistency across multiple references
+3. **One Reference Per Category**
+   - Accepted as part of multi-category approach
+   - Button = reference for base/ primitives
+   - Table = reference for application/ complexity
+   - Hero = reference for marketing/ sections
+   - Dashboard = reference for pages/ templates
+
+### References
+
+- **PHASE-0-SYSTEM-STUDY.md** - Complete system analysis (208 components)
+- **SYSTEM-ARCHITECTURE-ANALYSIS.md** - Quantitative pattern analysis
+- **COMPONENT-TAXONOMY.md** - Component categorization
+- **PATTERN-LIBRARY.md** - Universal vs specific patterns
 
 ### Implementation Notes
 
-- Button implementation follows UntitledUI structure
-- Enhanced with AI-native inline documentation (every line explained)
-- JSDoc on all props with usage guidance
-- Explicit composition helpers (no implicit patterns)
-- Machine-readable validation checklist
+**When Building Button (Phase 2):**
+
+- ✅ Follow as reference for base/ primitives ONLY
+- ✅ Document which patterns are Button-specific
+- ✅ Document which patterns are universal
+- ❌ DO NOT assume patterns apply to other categories
+- ❌ DO NOT use as template for application/marketing/pages components
+
+**For Future Components:**
+
+- Study component category first
+- Reference appropriate category documentation
+- Validate against category patterns
+- Document deviations with rationale
 
 ---
 

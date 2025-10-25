@@ -236,16 +236,27 @@ Automatically stages modified files before commit, excluding:
 
 ## What's NOT Automated (Yet)
 
-### Status Monitor
+### Status Monitor (MANUAL INVOCATION)
 
-**Documented In:** Global CLAUDE.md
-**Status:** NOT IMPLEMENTED
+**Status:** Implemented via `/status` command
+**Script:** `scripts/monitor-git-status.js`
 
-Global settings mention:
+**How It Works:**
 
-> "Status monitor shows git status every ~5 tool uses"
+- Manual invocation via `/status` slash command
+- Displays comprehensive git status with context
+- Shows commits ahead/behind remote
+- Lists uncommitted changes
+- Provides actionable recommendations
 
-**Reality:** No status monitoring exists. Use `/commit` or `git status` manually.
+**Usage:**
+
+```
+User: /status
+Claude: [Executes monitor-git-status.js check]
+```
+
+**Note:** Automatic monitoring every ~5 tool uses requires MCP server integration (future enhancement). For now, use `/status` command manually when needed.
 
 ---
 
@@ -271,21 +282,24 @@ Run by `complete-phase.sh` script:
 
 ---
 
-## Future Automation (Planned but Not Implemented)
+## Automation Status Summary
 
-### From ADR-001:
+### Fully Implemented ✅
 
-- ❌ CI/CD workflows (GitHub Actions)
-- ❌ Auto-staging hook
-- ❌ Status monitoring
-- ❌ Slash commands (/commit, /checkpoint)
+- **Pre-commit Quality Gates** - TypeScript, ESLint, Prettier validation
+- **Post-commit Session State Updates** - Automatic after every commit
+- **Pre-push Checkpoint Creation** - Automatic tags before every push
+- **Checkpoint Tag Tracking** - Tags recorded in session-state.json
+- **CI/CD Quality Validation** - GitHub Actions workflows
+- **Git Status Monitoring** - Manual `/status` command with comprehensive display
+- **Slash Commands** - `/commit`, `/checkpoint`, `/status`
 
-### From Phase 1.0 Requirements:
+### Requires MCP Server Integration (Future)
 
-- ❌ Automatic checkpointing after each task
-- ❌ Remote repository synchronized automatically
-- ❌ Claude Code never uses git commands directly (still does)
-- ❌ Session state persists across conversations (manual updates only)
+- [ ] **Automatic Git Status Display** - Show every ~5 tool uses (requires MCP server hooks)
+- [ ] **Per-Task Checkpointing** - Automatic checkpoints after each completed task
+- [ ] **Remote repository synchronized automatically** - Auto-push after commits
+- [ ] **Session state persists across conversations** - Cross-session context preservation
 
 ---
 

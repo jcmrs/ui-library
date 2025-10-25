@@ -55,7 +55,13 @@
       "mcp__serena__find_symbol",
       "Bash(find:*)",
       "mcp__serena__think_about_collected_information",
-      "SlashCommand(/commit)"
+      "SlashCommand(/commit)",
+      "Bash(for hook in .husky/*)",
+      "Bash(do if [ -f \"$hook\" ])",
+      "Bash([ ! \"$hook\" = \".husky/_\" ])",
+      "Bash(then echo \"=== $hook ===\")",
+      "Bash(fi)",
+      "Bash(npm run test:*)"
     ],
     "deny": [],
     "ask": []

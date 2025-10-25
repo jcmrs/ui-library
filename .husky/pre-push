@@ -26,6 +26,35 @@ else
   # Create lightweight checkpoint tag
   git tag "$TAG_NAME" "$COMMIT" 2>/dev/null || true
   echo "  ✓ Checkpoint created: $TAG_NAME"
+
+  # Update session state with checkpoint tag
+  node -e "
+  const fs = require('fs');
+  const path = '.claude/session-state.json';
+
+  try {
+    if (fs.existsSync(path)) {
+      const state = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+      // Update checkpoint tag
+      if (state.checkpoint) {
+        state.checkpoint.tag = '$TAG_NAME';
+      }
+
+      // Update metadata
+      if (state.metadata) {
+        state.metadata.last_updated_by = 'pre-push hook';
+        state.metadata.last_updated_at = new Date().toISOString();
+      }
+
+      fs.writeFileSync(path, JSON.stringify(state, null, 2));
+      console.log('  ✓ Session state updated with checkpoint tag');
+    }
+  } catch (err) {
+    // Non-blocking - hook continues even if update fails
+    console.log('  ⚠ Could not update session state:', err.message);
+  }
+  " 2>/dev/null || echo "  ⚠ Session state update skipped"
 fi
 
 echo "✅ Pre-push checkpoint complete"
