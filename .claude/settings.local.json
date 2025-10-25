@@ -64,7 +64,9 @@
       "Bash(npm run test:*)",
       "Bash(node scripts/monitor-git-status.js:*)",
       "Bash(node scripts/monitor-git-status.cjs:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(node -e:*)",
+      "Bash(/dev/null)"
     ],
     "deny": [],
     "ask": []
