@@ -68,7 +68,9 @@
       "Bash(node -e:*)",
       "Bash(/dev/null)",
       "Bash(tee:*)",
-      "Bash(git show:*)"
+      "Bash(git show:*)",
+      "Bash(npm run storybook:*)",
+      "Bash(npx prettier:*)"
     ],
     "deny": [],
     "ask": []
