@@ -61,7 +61,10 @@
       "Bash([ ! \"$hook\" = \".husky/_\" ])",
       "Bash(then echo \"=== $hook ===\")",
       "Bash(fi)",
-      "Bash(npm run test:*)"
+      "Bash(npm run test:*)",
+      "Bash(node scripts/monitor-git-status.js:*)",
+      "Bash(node scripts/monitor-git-status.cjs:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []

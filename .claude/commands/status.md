@@ -12,7 +12,7 @@ Check current git status and reset monitoring counter.
 ## Implementation
 
 ```bash
-node scripts/monitor-git-status.js check
+node scripts/monitor-git-status.cjs check
 ```
 
 ## When to Use
