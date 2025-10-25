@@ -46,7 +46,16 @@
       "Bash(npx husky init)",
       "Bash(git reset:*)",
       "Bash(git checkout:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(awk:*)",
+      "mcp__serena__read_memory",
+      "mcp__serena__list_dir",
+      "Bash(git restore:*)",
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__find_symbol",
+      "Bash(find:*)",
+      "mcp__serena__think_about_collected_information",
+      "SlashCommand(/commit)"
     ],
     "deny": [],
     "ask": []

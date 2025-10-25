@@ -1521,6 +1521,7 @@ Implement GitHub Actions workflows for automated quality validation on every pus
 Two workflows created:
 
 1. **`.github/workflows/validate-pr.yml`**
+
    - Triggers on PR to main/develop
    - Runs TypeScript, ESLint, Prettier, Tests
    - Blocks merge if quality gates fail
@@ -1541,12 +1542,14 @@ Two workflows created:
 ### Consequences
 
 **Positive:**
+
 - Bad code cannot merge to protected branches
 - Quality maintained across all contributors
 - CI/CD status badges available
 - Automated testing on every change
 
 **Negative:**
+
 - GitHub Actions usage costs (free tier: 2000 min/month)
 - Adds ~2-3 minutes to PR merge time
 - Requires GitHub repository
@@ -1566,6 +1569,7 @@ Implement post-commit hook that automatically updates `.claude/session-state.jso
 ### Implementation
 
 **`.husky/post-commit` hook:**
+
 - Updates `timing.last_activity` timestamp
 - Updates `git_state` (commits ahead, modified files, etc.)
 - Updates `checkpoint.commit` with latest commit hash
@@ -1581,12 +1585,14 @@ Implement post-commit hook that automatically updates `.claude/session-state.jso
 ### Consequences
 
 **Positive:**
+
 - Session state always accurate
 - No manual JSON editing required
 - Better context for recovery scenarios
 - Enables future automation (auto-checkpoint logic)
 
 **Negative:**
+
 - Adds ~100ms to each commit
 - Requires Node.js installed
 - Hook failures logged but not blocking
@@ -1606,6 +1612,7 @@ Implement pre-push hook that automatically creates checkpoint git tags before pu
 ### Implementation
 
 **`.husky/pre-push` hook:**
+
 - Creates lightweight git tag: `checkpoint-YYYYMMDD-HHMMSS-<hash>`
 - Tag format: `checkpoint-20250124-143022-a1b2c3d`
 - Non-blocking (push continues even if tag creation fails)
@@ -1622,17 +1629,20 @@ Implement pre-push hook that automatically creates checkpoint git tags before pu
 ### Consequences
 
 **Positive:**
+
 - Automatic backup before every push
 - Granular recovery points
 - No manual checkpoint management
 - Timestamped for easy identification
 
 **Negative:**
+
 - Creates many tags over time (cleanup needed eventually)
 - Adds ~50ms to each push
 - Tags clutter git history (mitigated by naming convention)
 
 **Future Enhancement:**
+
 - Periodic tag cleanup (delete checkpoints older than 30 days)
 - Push tags to remote for backup
 - Integrate with `/checkpoint` slash command

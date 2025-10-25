@@ -139,6 +139,7 @@ git push origin develop
 ```
 
 **Benefits:**
+
 - Every push creates a recovery point
 - Easy rollback to any pushed state
 - Timestamped for chronological tracking
@@ -155,12 +156,14 @@ git push origin develop
 Automatically validates quality on GitHub:
 
 **On Pull Request:**
+
 - Triggers when PR opened/updated to main/develop
 - Runs TypeScript, ESLint, Prettier, Tests
 - Blocks merge if quality gates fail
 - Shows status in GitHub PR UI
 
 **On Push:**
+
 - Triggers on push to main/develop/feature branches
 - Same quality gates as local pre-commit
 - Provides immediate feedback
@@ -178,6 +181,7 @@ git push origin feature/my-feature
 ```
 
 **Benefits:**
+
 - Consistent quality enforcement
 - Validates code from all team members
 - No manual quality review needed

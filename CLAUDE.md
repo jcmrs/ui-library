@@ -2,6 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Documentation Imports
+
+Core project documentation and protocols:
+
+- Product vision and strategy: @.docs/PRODUCT-VISION.md
+- Agent orchestration protocol: @.docs/AGENT-ORCHESTRATION-PROTOCOL.md
+- Component development guide: @.docs/COMPONENT-DEVELOPMENT.md
+- TDD methodology: @.docs/TDD-METHODOLOGY.md
+- Architecture and design: @.docs/ARCHITECTURE-REDESIGN.md
+- Project roadmap: @.docs/ROADMAP.md
+- Automation infrastructure: @.claude/AUTOMATION.md
+- Available npm commands: @package.json
+
 ## Project Overview
 
 Production-ready UI component library built as a single source of truth for AI-assisted UI development. This library eliminates AI implementation failures by providing complete, unambiguous materials with accessibility-first components.
